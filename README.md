@@ -6,7 +6,9 @@ Site institucional da Eletrotyme construído sobre o design de referência `puls
 
 - `index.html` — o site (herói, plataforma, por que agora, como funciona, benefícios, projetos, campanhas, modelos, FAQ, CTA, rodapé).
 - `simulador.html` + `assets/js/simulador.js` — aba de simulação de investimento (parceria, posto pronto, investidor) com as premissas da proposta Posto Natureza.
-- `assets/brand/estacoes/` — seção "Nossos eletropostos": e1 e e2 vêm do Instagram @eletrotyme (estação inaugurada no Posto Natureza Cohab; carro recarregando); e3 a e5 ainda são frames do Reels e recorte de arte, trocar por fotos reais quando houver. `hero-recarga.jpg` (herói) também é do Instagram.
+- Dados das estações (nomes, potência, conectores, coordenadas) vêm do app Station (station2p.app, tenant Eletrotyme) em 22/09/2026: Olho d'Água 01 (80 kW CCS2), Calhau 02 (80 kW CCS2), Cohab 03 · Posto Natureza (60 kW CCS2); em breve Tiririca l 04 e Araçagy 05. Atualizar aqui e na seção `#eletropostos` + painel do herói quando mudar.
+- Contatos: WhatsApp (98) 99165-3290 com mensagens por interesse (eletropostos, locação, hubs); Instagram @eletrotyme.
+- `assets/brand/estacoes/` — seção "Onde estamos": e1 e e2 vêm do Instagram @eletrotyme (estação inaugurada no Posto Natureza Cohab; carro recarregando); e3 a e5 ainda são frames do Reels e recorte de arte, trocar por fotos reais quando houver. `hero-recarga.jpg` (herói) também é do Instagram.
 - `design-system.html` — pattern library: herói clonado, tipografia, cores e superfícies, componentes, layout, motion, ícones e marca.
 - `assets/brand/` — símbolo do logo (recortado das artes, PNG transparente), 7 criativos da Semana do Cliente e o Reels do Posto Natureza.
 - `assets/js/webgl-background.js` — fundo Three.js do herói; cores das trilhas em `config.color1..4`.

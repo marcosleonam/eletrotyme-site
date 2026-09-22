@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="5000" name="preview-ready-after-ms"/>
+<title>Eletrotyme — Eletropostos que viram ativos de receita</title>
+<meta name="description" content="A Eletrotyme instala, opera e monitora carregadores rápidos para veículos elétricos em postos, comércios e hubs urbanos da Grande São Luís. Você entra com a área; o resto é por nossa conta."/>
+<link rel="icon" type="image/png" href="assets/brand/logo-symbol.png"/>
+
+<!-- fonts: Geist (corpo) e Plus Jakarta Sans (títulos) -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- css -->
+<!-- classes utilitárias .font-geist / .font-jakarta -->
+<link rel="stylesheet" href="assets/css/fonts.css"/>
+<!-- keyframes animationIn (entrada) e progress-shimmer (barras de progresso) -->
+<link rel="stylesheet" href="assets/css/animations.css"/>
+
+<!-- head-only js: runtime do Tailwind (gera as classes utilitárias em tempo de execução) -->
+<script src="assets/tailwind-3.4.17.js"></script>
+<!-- brand: laranja Eletrotyme (#f26522) substitui o orange-500 padrão do Tailwind -->
+<script>tailwind.config = { theme: { extend: { colors: { orange: { 500: '#f26522' } } } } };</script>
+<!-- head-only js: runtime do Iconify (renderiza os <iconify-icon>) -->
+<script src="assets/iconify-icon.min.js"></script>
+
+<!-- importmap: resolve os imports de three.js usados pelo fundo WebGL -->
+<script type="importmap">
+{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}
+</script>
+</head>
+<body class="min-h-screen overflow-x-hidden antialiased selection:bg-orange-300/20 selection:text-orange-100 text-slate-100 font-sans bg-[#080c14]" style="font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
+
+<!-- background-layers -->
+<div class="pointer-events-none fixed inset-0 -z-50" style="background: radial-gradient(circle at 50% -10%, rgba(242, 101, 34, 0.14), transparent 36%), radial-gradient(circle at 82% 18%, rgba(34, 197, 94, 0.07), transparent 28%), linear-gradient(180deg, #0b1020 0%, #080c14 42%, #0a0d13 100%);"></div>
+<div class="pointer-events-none fixed inset-0 -z-40 opacity-[0.035]" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 256 256%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.75%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+
+<div class="mx-auto min-h-screen w-full max-w-[1360px] border-x border-white/[0.06]">
+<div class="pointer-events-none fixed left-1/2 top-0 -z-30 hidden h-full w-full max-w-[1360px] -translate-x-1/2 grid-cols-4 md:grid">
+<div class="border-r border-white/[0.045]"></div>
+<div class="border-r border-white/[0.045]"></div>
+<div class="border-r border-white/[0.045]"></div>
+<div></div>
+</div>
+
+<!-- header -->
+<header class="sticky border-white/[0.06] [animation:animationIn_0.8s_ease-out_0.1s_both] z-50 bg-[#080c14]/70 border-b top-0 backdrop-blur-2xl">
+<nav class="mx-auto flex h-16 w-full max-w-[1280px] items-center justify-between px-5 sm:px-8 lg:px-10">
+<a class="group flex items-center gap-3" href="#">
+<img alt="Eletrotyme" class="h-8 w-auto" src="assets/brand/logo-symbol.png"/>
+<span class="text-base font-semibold text-white tracking-[-0.035em] font-geist">ELETRO<span class="font-normal text-slate-300 font-geist">TYME</span></span>
+</a>
+<div class="hidden items-center gap-8 md:flex">
+<a class="relative text-sm text-slate-400 transition duration-300 ease-out hover:text-white font-geist" href="#problem">Por que agora<span class="absolute -bottom-2 left-0 h-px w-0 bg-orange-300/70 transition-all duration-300 ease-out hover:w-full"></span></a>
+<a class="relative text-sm text-slate-400 transition duration-300 ease-out hover:text-white font-geist" href="#how">Como funciona<span class="absolute -bottom-2 left-0 h-px w-0 bg-orange-300/70 transition-all duration-300 ease-out hover:w-full"></span></a>
+<a class="relative text-sm text-slate-400 transition duration-300 ease-out hover:text-white font-geist" href="#projetos">Projetos<span class="absolute -bottom-2 left-0 h-px w-0 bg-orange-300/70 transition-all duration-300 ease-out hover:w-full"></span></a>
+<a class="relative text-sm text-slate-400 transition duration-300 ease-out hover:text-white font-geist" href="#eletropostos">Eletropostos<span class="absolute -bottom-2 left-0 h-px w-0 bg-orange-300/70 transition-all duration-300 ease-out hover:w-full"></span></a>
+<a class="relative text-sm text-slate-400 transition duration-300 ease-out hover:text-white font-geist" href="#modelos">Modelos<span class="absolute -bottom-2 left-0 h-px w-0 bg-orange-300/70 transition-all duration-300 ease-out hover:w-full"></span></a>
+<a class="relative text-sm text-orange-200 transition duration-300 ease-out hover:text-white font-geist" href="simulador.html">Simulador<span class="absolute -bottom-2 left-0 h-px w-0 bg-orange-300/70 transition-all duration-300 ease-out hover:w-full"></span></a>
+</div>
+<a class="hidden rounded-full border border-orange-300/20 bg-orange-500 px-4 py-2 text-sm font-medium text-white shadow-lg shadow-orange-950/20 transition duration-300 ease-out hover:scale-[1.03] hover:border-orange-300/35 hover:bg-orange-400 hover:shadow-orange-900/25 sm:inline-flex font-geist" href="#cta">Solicitar proposta</a>
+<button aria-label="Abrir menu" class="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-slate-300 md:hidden">
+<iconify-icon height="20" icon="solar:hamburger-menu-linear" width="20"></iconify-icon>
+</button>
+</nav>
+</header>
+
+<main>
+
+<!-- hero -->
+<section class="overflow-hidden sm:px-8 sm:pb-28 sm:pt-28 lg:px-10 lg:pt-24 lg:pb-24 pt-20 pr-5 pb-24 pl-5 relative" id="blueprint">
+<canvas class="absolute inset-0 z-0 pointer-events-none opacity-60 mix-blend-screen w-full h-full" id="webgl-canvas"></canvas>
+<div class="pointer-events-none absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full bg-orange-300/10 blur-3xl"></div>
+<div class="grid gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12 w-full max-w-[1280px] mr-auto ml-auto gap-x-14 gap-y-14 items-center">
+<div class="reveal [animation:animationIn_0.8s_ease-out_0.1s_both] z-10 relative">
+<div class="mb-6 inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.04] px-3 py-1.5 text-xs text-slate-300 shadow-2xl shadow-black/20 backdrop-blur-xl font-geist">
+<span class="h-1.5 w-1.5 rounded-full bg-orange-400 shadow-lg shadow-orange-400/40"></span>
+Infraestrutura de recarga para eletromobilidade · Grande São Luís
+</div>
+<h1 class="sm:text-6xl lg:text-7xl text-5xl font-medium text-white tracking-tighter font-jakarta max-w-4xl">Eletropostos que viram ativos de receita.</h1>
+<p class="mt-7 max-w-2xl text-base leading-7 text-slate-400 sm:text-lg font-geist">A Eletrotyme instala, opera e monitora carregadores rápidos em postos, comércios e hubs urbanos. Você entra com a área; equipamento, energia, manutenção e cobrança pelo aplicativo ficam por nossa conta.</p>
+<div class="mt-9 flex flex-col gap-3 sm:flex-row">
+<a class="group inline-flex items-center justify-center gap-2 shadow-orange-950/30 transition duration-300 ease-out hover:scale-[1.03] hover:bg-orange-400 hover:shadow-orange-300/10 text-sm font-semibold text-white bg-orange-500 rounded-full pt-3 pr-5 pb-3 pl-5 shadow-2xl font-geist" href="#cta">
+Solicitar proposta
+<iconify-icon class="transition duration-300 ease-out group-hover:translate-x-0.5" height="18" icon="solar:arrow-right-linear" width="18"></iconify-icon>
+</a>
+<a class="inline-flex items-center justify-center gap-2 rounded-full border border-white/[0.1] bg-white/[0.04] px-5 py-3 text-sm font-medium text-slate-200 shadow-2xl shadow-black/20 backdrop-blur-xl transition duration-300 ease-out hover:scale-[1.02] hover:border-white/[0.18] hover:bg-white/[0.07] font-geist" href="#projetos">
+Ver projetos
+<iconify-icon height="18" icon="solar:bolt-linear" width="18"></iconify-icon>
+</a>
+</div>
+</div>
+<div class="reveal transition-all duration-700 ease-out lg:h-[43rem] group [animation:animationIn_0.8s_ease-out_0.1s_both] w-full h-[34rem] max-w-[42rem] mr-auto ml-auto relative" id="heroObject" style="perspective: 1200px;">
+<div aria-hidden="true" class="absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-400/[0.08] blur-[100px] transition-all duration-500 group-hover:bg-orange-400/[0.12]"></div>
+<div aria-hidden="true" class="absolute left-[62%] top-[22%] h-44 w-44 -translate-x-1/2 rounded-full bg-emerald-400/[0.06] blur-[80px]"></div>
+<div aria-hidden="true" class="absolute left-1/2 top-[68%] h-48 w-[88%] -translate-x-1/2 rounded-full bg-black/60 blur-3xl"></div>
+<div aria-hidden="true" class="absolute left-1/2 top-[69%] h-28 w-[78%] -translate-x-1/2 rounded-full bg-orange-950/30 blur-2xl transition-all duration-700 group-hover:w-[82%]" style="transform-style: preserve-3d;"></div>
+<div class="absolute left-1/2 top-1/2 w-[98%] -translate-x-1/2 -translate-y-1/2 transition-transform duration-700 ease-out" style="transform-style: preserve-3d;">
+<div class="animate-float-3d floating-panel rounded-[2rem] border border-white/[0.15] bg-slate-950/70 p-3 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.1)] backdrop-blur-3xl transition duration-500 ease-out hover:border-orange-300/30">
+<div class="overflow-hidden rounded-[1.55rem] border border-white/[0.08] bg-[#0b1220]/95 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+<div class="flex items-center justify-between border-b border-white/[0.07] bg-white/[0.02] px-5 py-4">
+<div class="flex items-center gap-3">
+<div>
+<p class="text-xs text-slate-400 font-geist">NOC Eletrotyme · monitoramento 24h</p>
+<p class="mt-0.5 text-sm font-medium text-slate-100 font-geist">Hub Posto Natureza · Maiobão</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="hidden items-center gap-1.5 rounded-full border border-white/[0.1] bg-white/[0.04] px-3 py-1.5 text-xs text-slate-300 sm:flex transition-colors hover:bg-white/[0.08] font-geist">
+<span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>Ao vivo
+</div>
+<div class="flex -space-x-2 transition-transform hover:-space-x-1">
+<span class="h-7 w-7 rounded-full border-2 border-[#0b1220] bg-orange-400 shadow-sm"></span>
+<span class="h-7 w-7 rounded-full border-2 border-[#0b1220] bg-slate-300 shadow-sm"></span>
+<span class="h-7 w-7 rounded-full border-2 border-[#0b1220] bg-emerald-300 shadow-sm"></span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-[0.28fr_1fr]">
+<aside class="hidden border-r border-white/[0.07] bg-white/[0.01] p-4 sm:block">
+<div class="space-y-1">
+<div class="flex items-center gap-2 rounded-xl bg-orange-400/[0.1] px-3 py-2.5 text-xs font-medium text-orange-200 cursor-pointer transition-colors hover:bg-orange-400/[0.15] font-geist">
+<span class="h-1.5 w-1.5 rounded-full bg-orange-300 shadow-[0_0_8px_rgba(253,186,116,0.8)]"></span>Visão geral
+</div>
+<div class="flex items-center gap-2 rounded-xl px-3 py-2.5 text-xs text-slate-400 cursor-pointer transition-colors hover:bg-white/[0.05] hover:text-slate-200 font-geist">
+<span class="h-1.5 w-1.5 rounded-full bg-white/20"></span>Estações
+</div>
+<div class="flex items-center gap-2 rounded-xl px-3 py-2.5 text-xs text-slate-400 cursor-pointer transition-colors hover:bg-white/[0.05] hover:text-slate-200 font-geist">
+<span class="h-1.5 w-1.5 rounded-full bg-white/20"></span>Recargas
+</div>
+<div class="flex items-center gap-2 rounded-xl px-3 py-2.5 text-xs text-slate-400 cursor-pointer transition-colors hover:bg-white/[0.05] hover:text-slate-200 font-geist">
+<span class="h-1.5 w-1.5 rounded-full bg-white/20"></span>Repasses
+</div>
+</div>
+<div class="mt-8 rounded-2xl border border-white/[0.05] bg-white/[0.02] p-4 backdrop-blur-sm">
+<p class="text-[10px] uppercase tracking-[0.16em] text-slate-500 font-semibold font-geist">Saúde da operação</p>
+<div class="mt-4 space-y-3">
+<div class="group/progress">
+<div class="mb-1.5 flex justify-between text-[10px] text-slate-400 group-hover/progress:text-slate-300 transition-colors">
+<span class="font-geist">Uptime</span><span class="text-orange-200 font-geist">98%</span>
+</div>
+<div class="h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
+<div class="h-full w-[98%] rounded-full bg-orange-300/70 transition-all duration-1000 group-hover/progress:bg-orange-300"></div>
+</div>
+</div>
+<div class="group/progress">
+<div class="mb-1.5 flex justify-between text-[10px] text-slate-400 group-hover/progress:text-slate-300 transition-colors">
+<span class="font-geist">Ocupação</span><span class="text-emerald-200 font-geist">62%</span>
+</div>
+<div class="h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
+<div class="h-full w-[62%] rounded-full bg-emerald-300/60 transition-all duration-1000 group-hover/progress:bg-emerald-300"></div>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<main class="p-5">
+<div class="grid gap-3 sm:grid-cols-3">
+<div class="group/stat rounded-2xl border border-orange-200/20 bg-orange-400/[0.05] p-4 transition-all hover:bg-orange-400/[0.08] hover:border-orange-200/30 cursor-pointer">
+<p class="text-[10px] uppercase tracking-[0.16em] text-orange-200/80 font-semibold font-geist">Recargas hoje</p>
+<p class="mt-2 text-2xl text-white tracking-tighter transition-transform group-hover/stat:-translate-y-0.5 font-jakarta font-medium">8</p>
+<p class="mt-1 text-xs text-slate-400 font-geist">2 em andamento</p>
+</div>
+<div class="group/stat rounded-2xl border border-white/[0.07] bg-white/[0.02] p-4 transition-all hover:bg-white/[0.05] cursor-pointer">
+<p class="text-[10px] uppercase tracking-[0.16em] text-slate-500 font-semibold font-geist">kWh entregues</p>
+<p class="mt-2 text-2xl text-white tracking-tighter transition-transform group-hover/stat:-translate-y-0.5 font-jakarta font-medium">240</p>
+<p class="mt-1 text-xs text-emerald-300/80 font-geist">+18% esta semana</p>
+</div>
+<div class="group/stat rounded-2xl border border-white/[0.07] bg-white/[0.02] p-4 transition-all hover:bg-white/[0.05] cursor-pointer">
+<p class="text-[10px] uppercase tracking-[0.16em] text-slate-500 font-semibold font-geist">Uptime</p>
+<p class="mt-2 text-2xl text-white tracking-tighter transition-transform group-hover/stat:-translate-y-0.5 font-jakarta font-medium">98,4%</p>
+<p class="mt-1 text-xs text-orange-200/80 font-geist">Acima da meta</p>
+</div>
+</div>
+<div class="mt-4 grid gap-3 lg:grid-cols-[1fr_0.42fr]">
+<div class="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-4">
+<div class="mb-4 flex items-center justify-between">
+<div>
+<p class="text-xs font-medium text-white font-geist">Sessões de recarga</p>
+<p class="mt-1 text-[11px] text-slate-400 font-geist">O que está acontecendo na estação agora</p>
+</div>
+<span class="rounded-full bg-white/[0.08] px-2.5 py-1 text-[10px] text-slate-300 font-medium font-geist">2 vagas</span>
+</div>
+<div class="space-y-2.5">
+<div class="group/task rounded-xl border border-orange-200/15 bg-orange-400/[0.05] p-3 transition-colors hover:bg-orange-400/[0.08] cursor-pointer">
+<div class="flex items-center justify-between gap-3">
+<div>
+<p class="text-xs font-medium text-white group-hover/task:text-orange-100 transition-colors font-geist">Vaga 01 · DC 60 kW</p>
+<p class="mt-1 text-[10px] text-slate-400 font-geist">34 kWh · 18 min · pagamento pelo app</p>
+</div>
+<span class="rounded-full bg-orange-400/[0.15] px-2 py-1 text-[10px] font-semibold text-orange-200 shadow-[0_0_10px_rgba(242,101,34,0.15)] font-geist">Carregando</span>
+</div>
+</div>
+<div class="group/task rounded-xl border border-white/[0.06] bg-white/[0.03] p-3 transition-colors hover:bg-white/[0.06] cursor-pointer">
+<div class="flex items-center justify-between gap-3">
+<div>
+<p class="text-xs font-medium text-slate-200 group-hover/task:text-white transition-colors font-geist">Vaga 02 · DC 60 kW</p>
+<p class="mt-1 text-[10px] text-slate-500 font-geist">Livre · última recarga há 12 min</p>
+</div>
+<span class="rounded-full bg-white/[0.08] px-2 py-1 text-[10px] text-slate-300 font-geist">Disponível</span>
+</div>
+</div>
+<div class="group/task rounded-xl border border-white/[0.06] bg-white/[0.03] p-3 transition-colors hover:bg-white/[0.06] cursor-pointer">
+<div class="flex items-center justify-between gap-3">
+<div>
+<p class="text-xs font-medium text-slate-200 group-hover/task:text-white transition-colors font-geist">Manutenção preditiva</p>
+<p class="mt-1 text-[10px] text-slate-500 font-geist">Sensores · nenhuma anomalia</p>
+</div>
+<span class="rounded-full bg-emerald-400/[0.12] px-2 py-1 text-[10px] font-semibold text-emerald-300 font-geist">OK</span>
+</div>
+</div>
+</div>
+</div>
+<div class="hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] p-4 lg:flex lg:flex-col lg:justify-between">
+<div>
+<div class="mb-4 flex items-center justify-between">
+<p class="text-xs font-medium text-white font-geist">Recargas por dia</p>
+<p class="text-xs font-semibold text-orange-300 font-geist">8/dia</p>
+</div>
+<div class="flex h-24 items-end gap-1.5">
+<span class="h-8 flex-1 rounded-t-md bg-orange-400/20 transition-all hover:bg-orange-400/40 cursor-crosshair"></span>
+<span class="h-12 flex-1 rounded-t-md bg-orange-400/30 transition-all hover:bg-orange-400/50 cursor-crosshair"></span>
+<span class="h-10 flex-1 rounded-t-md bg-orange-400/25 transition-all hover:bg-orange-400/45 cursor-crosshair"></span>
+<span class="h-16 flex-1 rounded-t-md bg-orange-400/50 transition-all hover:bg-orange-400/70 cursor-crosshair shadow-[0_0_15px_rgba(242,101,34,0.2)]"></span>
+<span class="h-14 flex-1 rounded-t-md bg-emerald-400/40 transition-all hover:bg-emerald-400/60 cursor-crosshair"></span>
+<span class="h-20 flex-1 rounded-t-md bg-orange-400/60 transition-all hover:bg-orange-400/80 cursor-crosshair"></span>
+</div>
+</div>
+<div class="mt-4 space-y-2">
+<div class="flex items-center justify-between text-[10px] text-slate-400">
+<span class="font-geist">Repasse do mês</span><span class="font-geist">Em dia</span>
+</div>
+<div class="h-1.5 overflow-hidden rounded-full bg-white/[0.08]">
+<div class="h-full w-3/4 rounded-full bg-orange-300/80"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</div>
+</div>
+<div class="animate-float-3d absolute right-[2%] top-[10%] hidden w-44 rounded-2xl border border-orange-200/20 bg-[#0b1220]/80 p-4 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] backdrop-blur-xl sm:block transition-transform hover:-translate-y-2 cursor-pointer" style="animation-delay: -1s;">
+<div class="flex items-center justify-between">
+<p class="text-[10px] font-medium uppercase tracking-[0.16em] text-orange-200/80 font-geist">Ocupação</p>
+<span class="h-2 w-2 rounded-full bg-orange-300 shadow-[0_0_12px_rgba(253,186,116,0.8)] animate-pulse"></span>
+</div>
+<p class="mt-3 text-2xl tracking-tighter text-white font-jakarta font-medium">62%</p>
+<div class="mt-3 h-1.5 overflow-hidden rounded-full bg-white/[0.08]">
+<div class="h-full w-[62%] rounded-full bg-orange-300/80 shadow-[0_0_10px_rgba(253,186,116,0.5)]"></div>
+</div>
+</div>
+<div class="animate-float-3d absolute left-[-2%] bottom-[10%] hidden w-52 rounded-2xl border border-emerald-300/20 bg-[#0b1220]/80 p-4 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] backdrop-blur-xl md:block transition-transform hover:-translate-y-2 cursor-pointer" style="animation-delay: -3s;">
+<div class="flex items-center gap-3">
+<span class="flex h-9 w-9 items-center justify-center rounded-xl border border-emerald-300/20 bg-emerald-400/[0.1] text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.15)]">
+<svg fill="none" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="17" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg>
+</span>
+<div>
+<p class="text-xs font-medium text-white font-geist">Repasse enviado</p>
+<p class="mt-0.5 text-[10px] text-slate-400 font-geist">Parceiro recebe todo mês</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- product-preview -->
+<section class="border-white/[0.06] sm:px-8 lg:px-10 border-t pt-24 pr-5 pb-24 pl-5" id="product">
+<div class="w-full max-w-[1280px] mr-auto ml-auto">
+<div class="reveal grid gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-end w-full max-w-[1280px] gap-x-8 gap-y-8" style="perspective: 90rem;">
+<div class="max-w-3xl">
+<p class="text-sm font-medium text-orange-200 font-geist">01 · Plataforma de gestão</p>
+<h2 class="mt-4 text-4xl text-white sm:text-5xl lg:text-6xl tracking-tighter leading-[0.95] font-jakarta font-medium">Cada recarga, cada kWh e cada repasse em um único painel.</h2>
+</div>
+<div class="lg:ml-auto lg:max-w-md">
+<p class="text-base leading-7 text-slate-400 font-geist">O motorista libera e paga pelo app. O parceiro acompanha estações, sessões, DRE e repasses em tempo real. A Eletrotyme monitora tudo do NOC, 24 horas por dia, sem equipe local.</p>
+<div class="mt-7 flex flex-wrap gap-3">
+<a class="inline-flex items-center justify-center transition hover:bg-orange-400 text-sm font-medium text-white font-geist bg-orange-500 h-11 rounded-full px-5 shadow-[0_0_0_1px_rgba(255,255,255,0.12),0_18px_50px_rgba(0,0,0,0.35)]" href="#cta">Solicitar proposta</a>
+<a class="inline-flex h-11 items-center justify-center rounded-full border border-white/[0.12] bg-white/[0.04] px-5 text-sm font-medium text-white backdrop-blur-xl transition hover:bg-white/[0.08] font-geist" href="#how">Saiba mais</a>
+</div>
+</div>
+</div>
+<div class="w-full h-auto pt-12 pb-12 relative" style="perspective: 90rem">
+<div class="absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-300/10 blur-3xl"></div>
+<div class="absolute bottom-10 left-1/2 h-40 w-[84%] -translate-x-1/2 rounded-full bg-emerald-500/20 blur-3xl"></div>
+<div class="relative origin-center rounded-[2rem] border border-orange-100/20 bg-slate-950/65 p-3 shadow-2xl shadow-black/60 backdrop-blur-2xl transition duration-500 hover:border-orange-200/30" style="box-shadow: rgba(0, 0, 0, 0.55) 0 2rem 6rem, rgba(242, 101, 34, 0.12) 0 0 4rem;">
+<div class="overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#08111f]/95">
+<div class="grid grid-cols-1 sm:grid-cols-[0.23fr_1fr]">
+<aside class="hidden border-r border-white/10 bg-white/[0.025] p-4 sm:block">
+<div class="mb-6 flex items-center gap-2">
+<img alt="" class="h-5 w-auto" src="assets/brand/logo-symbol.png"/>
+<span class="text-sm font-medium text-white font-geist">Eletrotyme</span>
+</div>
+<div class="space-y-2">
+<div class="flex items-center gap-2 rounded-xl bg-orange-300/10 px-3 py-2 text-xs font-medium text-orange-100 font-geist">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect height="9" rx="1" width="7" x="3" y="3"></rect><rect height="5" rx="1" width="7" x="14" y="3"></rect><rect height="9" rx="1" width="7" x="14" y="12"></rect><rect height="5" rx="1" width="7" x="3" y="16"></rect></svg>Dashboard
+</div>
+<div class="flex items-center gap-2 rounded-xl px-3 py-2 text-xs text-slate-400 font-geist">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"></path></svg>Estações
+</div>
+<div class="flex items-center gap-2 rounded-xl px-3 py-2 text-xs text-slate-400 font-geist">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>Clientes
+</div>
+<div class="flex items-center gap-2 rounded-xl px-3 py-2 text-xs text-slate-400 font-geist">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3v18h18"></path><path d="m7 15 4-4 4 4 5-6"></path></svg>DRE
+</div>
+<div class="flex items-center gap-2 rounded-xl px-3 py-2 text-xs text-slate-400 font-geist">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"></path></svg>Novo ponto
+</div>
+</div>
+<div class="mt-24 rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+<div class="mb-3 flex h-8 w-8 items-center justify-center rounded-lg bg-orange-300/10 text-orange-300">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path></svg>
+</div>
+<p class="text-xs font-medium text-white font-geist">Station AI</p>
+<p class="mt-1 text-xs leading-5 text-slate-500 font-geist">Insights de concorrência e piso de preço.</p>
+</div>
+</aside>
+<div class="overflow-hidden p-5">
+<div class="mb-5 flex items-start justify-between gap-5">
+<div>
+<h2 class="text-xl text-white tracking-tighter font-jakarta font-medium">Bem-vindo de volta, Posto Natureza 👋</h2>
+<p class="mt-1 text-xs text-slate-500 font-geist">Veja como sua estação está performando hoje.</p>
+</div>
+<div class="hidden items-center gap-3 md:flex">
+<div class="flex w-48 items-center gap-2 rounded-xl border border-white/10 bg-black/20 px-3 py-2 text-xs text-slate-500 font-geist">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>Buscar...
+</div>
+<span class="flex h-9 w-9 items-center justify-center rounded-full bg-orange-500 text-white">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>
+</span>
+</div>
+</div>
+<div class="grid gap-3 sm:grid-cols-4">
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+<p class="text-xs font-medium uppercase tracking-[0.14rem] text-slate-500 font-geist">Recargas no mês</p>
+<p class="mt-2 text-2xl text-white tracking-tighter font-jakarta font-medium">248</p>
+<p class="mt-1 text-xs text-emerald-300 font-geist">+12% vs mês passado</p>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+<p class="text-xs font-medium uppercase tracking-[0.14rem] text-orange-300 font-geist">kWh entregues</p>
+<p class="mt-2 text-2xl text-white tracking-tighter font-jakarta font-medium">7.440</p>
+<p class="mt-1 text-xs text-emerald-300 font-geist">+8% vs mês passado</p>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+<p class="text-xs font-medium uppercase tracking-[0.14rem] text-slate-500 font-geist">Faturamento</p>
+<p class="mt-2 text-2xl text-white tracking-tighter font-jakarta font-medium">R$ 21,5k</p>
+<p class="mt-1 text-xs text-emerald-300 font-geist">+18% vs mês passado</p>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+<p class="text-xs font-medium uppercase tracking-[0.14rem] text-rose-300 font-geist">Ocorrências</p>
+<p class="mt-2 text-2xl text-white tracking-tighter font-jakarta font-medium">0</p>
+<p class="mt-1 text-xs text-rose-300 font-geist">-2 vs mês passado</p>
+</div>
+</div>
+<div class="mt-3 grid gap-3 xl:grid-cols-[1fr_0.33fr]">
+<div class="grid gap-3 sm:grid-cols-4">
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+<div class="mb-3 flex items-center justify-between">
+<p class="text-xs font-medium text-white font-geist">Aguardando</p>
+<span class="rounded-full bg-white/10 px-2 py-1 text-xs text-slate-400 font-geist">3</span>
+</div>
+<div class="space-y-2">
+<div class="rounded-xl bg-white/[0.05] p-3">
+<p class="text-xs font-medium text-white font-geist">BYD Dolphin · vaga 02</p>
+<div class="mt-3 flex items-center justify-between">
+<span class="rounded-full bg-orange-300/10 px-2 py-1 text-xs text-orange-200 font-geist">App</span>
+<span class="text-xs text-rose-300 font-geist">Fila</span>
+</div>
+</div>
+<div class="rounded-xl bg-white/[0.04] p-3">
+<p class="text-xs font-medium text-white font-geist">GWM Ora · reserva 14h</p>
+<div class="mt-3 h-1.5 rounded-full bg-amber-200/40"></div>
+</div>
+<div class="rounded-xl bg-white/[0.035] p-3">
+<p class="text-xs font-medium text-white font-geist">Frota app · turno noite</p>
+<div class="mt-3 h-1.5 rounded-full bg-emerald-200/35"></div>
+</div>
+</div>
+</div>
+<div class="rounded-2xl border border-orange-300/15 bg-orange-300/[0.04] p-3">
+<div class="mb-3 flex items-center justify-between">
+<p class="text-xs font-medium text-orange-100 font-geist">Carregando</p>
+<span class="rounded-full bg-orange-300/10 px-2 py-1 text-xs text-orange-100 font-geist">2</span>
+</div>
+<div class="space-y-2">
+<div class="rounded-xl border border-orange-300/10 bg-orange-300/[0.055] p-3">
+<p class="text-xs font-medium text-white font-geist">BYD Song · vaga 01 · 60 kW</p>
+<div class="mt-3 flex items-center gap-1">
+<span class="h-5 w-5 rounded-full bg-orange-300/70"></span>
+<span class="h-5 w-5 rounded-full bg-white/20"></span>
+</div>
+</div>
+<div class="rounded-xl bg-white/[0.04] p-3">
+<p class="text-xs font-medium text-white font-geist">Volvo EX30 · 22 kWh</p>
+<div class="mt-3 h-1.5 rounded-full bg-rose-300/35"></div>
+</div>
+<div class="rounded-xl bg-white/[0.035] p-3">
+<p class="text-xs font-medium text-white font-geist">Sessão média · 24 min</p>
+<div class="mt-3 h-1.5 rounded-full bg-amber-200/35"></div>
+</div>
+</div>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+<div class="mb-3 flex items-center justify-between">
+<p class="text-xs font-medium text-white font-geist">Finalizadas</p>
+<span class="rounded-full bg-white/10 px-2 py-1 text-xs text-slate-400 font-geist">6</span>
+</div>
+<div class="space-y-2">
+<div class="rounded-xl bg-white/[0.05] p-3">
+<p class="text-xs font-medium text-white font-geist">31 kWh · R$ 89,90</p>
+<div class="mt-3 h-1.5 rounded-full bg-amber-200/35"></div>
+</div>
+<div class="rounded-xl bg-white/[0.04] p-3">
+<p class="text-xs font-medium text-white font-geist">28 kWh · R$ 81,20</p>
+<div class="mt-3 h-1.5 rounded-full bg-rose-300/35"></div>
+</div>
+<div class="rounded-xl bg-white/[0.035] p-3">
+<div class="h-2 w-20 rounded-full bg-white/15"></div>
+<div class="mt-3 h-2 w-14 rounded-full bg-white/10"></div>
+</div>
+</div>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+<div class="mb-3 flex items-center justify-between">
+<p class="text-xs font-medium text-white font-geist">Repassadas</p>
+<span class="rounded-full bg-white/10 px-2 py-1 text-xs text-slate-400 font-geist">18</span>
+</div>
+<div class="space-y-2">
+<div class="rounded-xl bg-white/[0.05] p-3">
+<div class="flex items-center justify-between">
+<p class="text-xs font-medium text-white font-geist">Repasse agosto</p>
+<span class="text-emerald-300">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg>
+</span>
+</div>
+</div>
+<div class="rounded-xl bg-white/[0.04] p-3">
+<div class="flex items-center justify-between">
+<p class="text-xs font-medium text-white font-geist">Repasse julho</p>
+<span class="text-emerald-300">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg>
+</span>
+</div>
+</div>
+<div class="rounded-xl bg-white/[0.035] p-3">
+<div class="h-2 w-24 rounded-full bg-white/15"></div>
+<div class="mt-3 h-2 w-16 rounded-full bg-emerald-200/35"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="hidden space-y-3 xl:block">
+<div class="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+<p class="mb-4 text-xs font-medium text-white font-geist">Recargas por dia da semana</p>
+<div class="flex h-24 items-end gap-2">
+<span class="h-12 flex-1 rounded-t-lg bg-orange-400/80"></span>
+<span class="h-20 flex-1 rounded-t-lg bg-orange-400"></span>
+<span class="h-14 flex-1 rounded-t-lg bg-orange-400/70"></span>
+<span class="h-20 flex-1 rounded-t-lg bg-orange-400/90"></span>
+<span class="h-[3.25rem] flex-1 rounded-t-lg bg-orange-400/60"></span>
+<span class="h-16 flex-1 rounded-t-lg bg-orange-400/70"></span>
+</div>
+<div class="mt-3 flex justify-between text-xs text-slate-500">
+<span class="font-geist">S</span><span class="font-geist">T</span><span class="font-geist">Q</span><span class="font-geist">Q</span><span class="font-geist">S</span><span class="font-geist">S</span>
+</div>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+<p class="mb-3 text-xs font-medium text-white font-geist">Atividade recente</p>
+<div class="space-y-3">
+<div class="flex gap-2">
+<span class="mt-1 h-2 w-2 rounded-full bg-orange-300"></span>
+<p class="text-xs leading-5 text-slate-300 font-geist">Sessão finalizada na vaga 01</p>
+</div>
+<div class="flex gap-2">
+<span class="mt-1 h-2 w-2 rounded-full bg-emerald-300"></span>
+<p class="text-xs leading-5 text-slate-300 font-geist">Repasse de agosto confirmado</p>
+</div>
+<div class="flex gap-2">
+<span class="mt-1 h-2 w-2 rounded-full bg-amber-200"></span>
+<p class="text-xs leading-5 text-slate-300 font-geist">Preço da concorrência atualizado</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-3 grid gap-3 md:grid-cols-[0.35fr_0.65fr]">
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+<div class="mb-3 flex items-center justify-between">
+<p class="text-xs font-medium text-white font-geist">Implantação</p>
+<p class="text-xs text-orange-200 font-geist">78%</p>
+</div>
+<div class="space-y-3">
+<div>
+<div class="mb-1 flex justify-between text-xs text-slate-400">
+<span class="font-geist">Hub Maiobão</span><span class="font-geist">78%</span>
+</div>
+<div class="h-1.5 overflow-hidden rounded-full bg-white/10">
+<div class="h-full w-[78%] rounded-full bg-orange-300 relative overflow-hidden">
+<div class="absolute inset-0 h-full w-full bg-gradient-to-r from-transparent via-white/50 to-transparent" style="animation: progress-shimmer 2s infinite linear;"></div>
+</div>
+</div>
+</div>
+<div>
+<div class="mb-1 flex justify-between text-xs text-slate-400">
+<span class="font-geist">Ponto 02 · Cohama</span><span class="font-geist">62%</span>
+</div>
+<div class="h-1.5 overflow-hidden rounded-full bg-white/10">
+<div class="h-full w-[62%] rounded-full bg-emerald-400 relative overflow-hidden">
+<div class="absolute inset-0 h-full w-full bg-gradient-to-r from-transparent via-white/50 to-transparent" style="animation: progress-shimmer 2s infinite linear 1s;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+<p class="mb-5 text-xs font-medium text-white font-geist">Linha do tempo da implantação</p>
+<div class="relative flex items-center justify-between">
+<div class="absolute left-4 right-4 top-3 h-px bg-white/15"></div>
+<div class="relative z-10 flex flex-col items-center gap-2">
+<span class="h-6 w-6 rounded-full border-2 border-emerald-300 bg-[#08111f]"></span>
+<span class="text-xs text-slate-400 font-geist">Projeto</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-2">
+<span class="h-6 w-6 rounded-full border-2 border-emerald-300 bg-[#08111f]"></span>
+<span class="text-xs text-slate-400 font-geist">Obra</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-2">
+<span class="h-6 w-6 rounded-full border-2 border-emerald-200 bg-emerald-200 shadow-lg shadow-emerald-300/30"></span>
+<span class="text-xs text-slate-400 font-geist">Comissionamento</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-2">
+<span class="h-6 w-6 rounded-full border-2 border-slate-600 bg-[#08111f]"></span>
+<span class="text-xs text-slate-400 font-geist">Go-live</span>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-2">
+<span class="h-6 w-6 rounded-full border-2 border-slate-600 bg-[#08111f]"></span>
+<span class="text-xs text-slate-400 font-geist">Operação</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- problem -->
+<section class="overflow-hidden border-white/[0.06] sm:px-8 lg:px-10 border-t pt-24 pr-5 pb-24 pl-5 relative" id="problem">
+<div class="pointer-events-none absolute inset-0 -z-10" style="background: radial-gradient(circle at 50% 12%, rgba(242, 101, 34, 0.1), transparent 34%), linear-gradient(180deg, rgba(8, 12, 20, 0.16), rgba(8, 12, 20, 0.56));"></div>
+<div class="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(255,255,255,0.055)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:30rem_30rem]"></div>
+<div class="w-full max-w-[1280px] mr-auto ml-auto">
+<div class="reveal grid gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-end w-full max-w-[1280px] gap-x-8 gap-y-8" style="perspective: 90rem;">
+<div class="max-w-4xl">
+<p class="text-base font-medium text-orange-300 font-geist">02 · Por que agora</p>
+<h2 class="mt-5 text-5xl text-white sm:text-6xl tracking-tighter leading-tight font-jakarta font-medium">Quem está no mapa primeiro vira o ponto padrão do motorista.</h2>
+</div>
+<div class="lg:ml-auto lg:max-w-md">
+<p class="text-lg leading-8 text-slate-400 font-geist">O Brasil vendeu 215 mil veículos eletrificados só no primeiro semestre de 2026. No Maranhão já são mais de 6 mil carros elétricos e híbridos plug-in para cerca de 115 pontos de recarga. Motorista de elétrico não passa e vê: ele abre o app e decide onde parar.</p>
+<div class="mt-7 flex flex-wrap gap-3">
+<a class="inline-flex h-11 items-center justify-center rounded-full bg-orange-500 px-5 text-sm font-medium text-white shadow-[0_0_0_1px_rgba(255,255,255,0.12),0_18px_50px_rgba(0,0,0,0.35)] transition hover:bg-orange-400 font-geist" href="#how">Ver a solução</a>
+<a class="inline-flex h-11 items-center justify-center rounded-full border border-white/[0.12] bg-white/[0.04] px-5 text-sm font-medium text-white backdrop-blur-xl transition hover:bg-white/[0.08] font-geist" href="#projetos">Ver projetos</a>
+</div>
+</div>
+</div>
+<div class="grid gap-6 lg:grid-cols-3 mt-12 gap-x-6 gap-y-6">
+
+<article class="group reveal relative overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.035] p-8 shadow-2xl shadow-black/50 backdrop-blur-xl transition duration-300 ease-out hover:-translate-y-1 hover:border-emerald-400/30 hover:bg-white/[0.055]">
+<div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-500/[0.10] via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100"></div>
+<div class="pointer-events-none absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<div class="relative z-10 h-64 overflow-hidden rounded-2xl border border-orange-100/10 bg-[#071323]/90 p-4 shadow-inner">
+<div class="absolute -bottom-12 left-1/2 h-32 w-80 -translate-x-1/2 rounded-full bg-orange-400/10 blur-3xl"></div>
+<div class="relative flex h-full overflow-hidden rounded-xl border border-white/[0.06] bg-[#0b1626] shadow-xl shadow-black/30">
+<div class="flex w-10 flex-col items-center gap-3 border-r border-white/[0.06] bg-white/[0.025] py-3">
+<span class="flex h-6 w-6 items-center justify-center rounded-lg border border-orange-400/20 bg-orange-400/10 text-orange-300">
+<svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+</span>
+<span class="h-6 w-6 rounded-lg bg-white/[0.04]"></span>
+<span class="h-6 w-6 rounded-lg bg-white/[0.04]"></span>
+<span class="h-6 w-6 rounded-lg bg-white/[0.04]"></span>
+<span class="h-6 w-6 rounded-lg bg-white/[0.04]"></span>
+</div>
+<div class="relative flex-1 bg-[#0b1626]">
+<div class="flex items-center justify-between border-b border-white/[0.06] bg-white/[0.015] px-3 py-2">
+<div class="flex items-center gap-2 rounded-lg border border-white/[0.07] bg-black/15 px-2 py-1">
+<svg class="h-3 w-3 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
+<span class="text-[9px] text-slate-500 font-geist">Recarga perto de mim</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="h-2 w-2 rounded-full bg-slate-600"></span>
+<span class="h-2 w-2 rounded-full bg-slate-600"></span>
+<span class="h-2 w-2 rounded-full bg-orange-300/70"></span>
+</div>
+</div>
+<div class="absolute left-3 top-11 z-10 w-36 rounded-xl border border-white/[0.08] bg-[#121e31]/95 p-2.5 shadow-lg shadow-black/25">
+<div class="mb-2 flex items-center justify-between">
+<span class="text-[9px] font-semibold text-slate-200 font-geist">MA-201 · Maiobão</span>
+<span class="h-1.5 w-1.5 rounded-full bg-orange-300/70"></span>
+</div>
+<div class="space-y-2">
+<div class="flex items-center gap-1.5">
+<span class="h-1.5 w-1.5 rounded-full bg-orange-400"></span>
+<div class="h-1.5 w-20 rounded-full bg-orange-400/35"></div>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="h-1.5 w-1.5 rounded-full bg-slate-500"></span>
+<div class="h-1.5 w-14 rounded-full bg-slate-600"></div>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="h-1.5 w-1.5 rounded-full bg-slate-500"></span>
+<div class="h-1.5 w-24 rounded-full bg-slate-700"></div>
+</div>
+</div>
+</div>
+<div class="absolute right-3 top-10 z-30 w-24 rounded-xl border border-white/[0.08] bg-[#121e31]/95 p-2.5 shadow-lg shadow-black/25">
+<span class="mb-2 block text-[9px] font-semibold text-slate-200 font-geist">Filtros</span>
+<div class="space-y-1.5 text-[8px] text-slate-400">
+<div class="flex items-center gap-1.5 font-geist">
+<span class="h-2 w-2 rounded bg-orange-400"></span>DC rápido
+</div>
+<div class="flex items-center gap-1.5 font-geist">
+<span class="h-2 w-2 rounded border border-slate-600"></span>Disponível
+</div>
+<div class="flex items-center gap-1.5 font-geist">
+<span class="h-2 w-2 rounded border border-slate-600"></span>No caminho
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<h3 class="relative z-10 mt-8 text-2xl text-white tracking-tight font-jakarta font-medium">Vagas paradas não rendem</h3>
+<p class="relative z-10 mt-4 text-sm sm:text-base leading-relaxed text-slate-400 font-geist">O motorista elétrico passa pela sua porta todo dia e recarrega em outro lugar. As vagas que seriam usadas para recarga hoje geram R$ 0,00.</p>
+</article>
+
+<article class="group reveal relative overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.035] p-8 shadow-2xl shadow-black/50 backdrop-blur-xl transition duration-300 ease-out hover:-translate-y-1 hover:border-emerald-400/30 hover:bg-white/[0.055]">
+<div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-orange-500/[0.10] via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100"></div>
+<div class="pointer-events-none absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<div class="relative z-10 h-64 overflow-hidden rounded-2xl border border-orange-100/10 bg-[#071323]/90 p-4 shadow-inner">
+<div class="absolute -bottom-12 left-1/2 h-32 w-80 -translate-x-1/2 rounded-full bg-orange-400/10 blur-3xl"></div>
+<div class="relative flex h-full gap-2">
+<div class="w-28 rounded-xl border border-white/5 bg-[#0f1b2d] p-3 shadow-xl">
+<div class="mb-3 space-y-2">
+<div class="flex items-center gap-2 px-2 py-1">
+<span class="flex h-4 w-4 items-center justify-center rounded-full bg-orange-400 text-[9px] font-bold text-slate-900 font-geist">1</span>
+<span class="text-[10px] text-slate-200 font-geist">Projeto</span>
+</div>
+<div class="flex items-center gap-2 px-2 py-1">
+<span class="flex h-4 w-4 items-center justify-center rounded-full bg-white/10 text-[9px] font-medium text-slate-400 font-geist">2</span>
+<span class="text-[10px] text-slate-400 font-geist">Equipamento</span>
+</div>
+<div class="flex items-center gap-2 px-2 py-1">
+<span class="flex h-4 w-4 items-center justify-center rounded-full bg-white/10 text-[9px] font-medium text-slate-400 font-geist">3</span>
+<span class="text-[10px] text-slate-400 font-geist">Obra elétrica</span>
+</div>
+<div class="flex items-center gap-2 px-2 py-1">
+<span class="flex h-4 w-4 items-center justify-center rounded-full bg-white/10 text-[9px] font-medium text-slate-400 font-geist">4</span>
+<span class="text-[10px] text-slate-400 font-geist">Homologação</span>
+</div>
+<div class="flex items-center gap-2 px-2 py-1">
+<span class="flex h-4 w-4 items-center justify-center rounded-full bg-white/10 text-[9px] font-medium text-slate-400 font-geist">5</span>
+<span class="text-[10px] text-slate-400 font-geist">Operação</span>
+</div>
+</div>
+</div>
+<div class="relative -ml-2 flex-1 rounded-2xl border border-white/10 bg-[#121f33] p-5 shadow-2xl shadow-black/80 z-10">
+<div class="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-b from-orange-400/5 to-transparent"></div>
+<div class="relative flex flex-col items-center text-center">
+<h4 class="text-sm font-medium text-white font-geist">Seu investimento</h4>
+<div class="mt-4 flex items-center justify-center">
+<div class="h-8 w-8 rounded-full border-2 border-[#121f33] bg-gradient-to-br from-slate-300 to-slate-500 shadow-sm"></div>
+<div class="-ml-2 h-8 w-8 rounded-full border-2 border-[#121f33] bg-gradient-to-br from-amber-200 to-orange-400 shadow-sm"></div>
+<div class="-ml-2 h-8 w-8 rounded-full border-2 border-[#121f33] bg-gradient-to-br from-emerald-200 to-teal-500 shadow-sm"></div>
+<div class="-ml-2 h-8 w-8 rounded-full border-2 border-[#121f33] bg-gradient-to-br from-rose-200 to-red-400 shadow-sm"></div>
+<div class="-ml-2 flex h-8 w-8 items-center justify-center rounded-full border-2 border-[#121f33] bg-slate-800 text-slate-300 shadow-sm">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+</div>
+<button class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-orange-400/30 bg-orange-400/10 px-3 py-2 text-xs font-medium text-orange-50 shadow-[0_0_15px_rgba(242,101,34,0.15)] transition hover:bg-orange-400/20 font-geist">
+<span class="flex h-5 w-5 items-center justify-center rounded-full bg-orange-400 text-slate-900">
+<svg class="h-3 w-3" fill="currentColor" viewbox="0 0 24 24"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l10.42-6.86a1 1 0 0 0 0-1.72L9.5 4.28A1 1 0 0 0 8 5.14Z"></path></svg>
+</span>R$ 0,00
+</button>
+</div>
+</div>
+<div class="ml-3 w-28 rounded-xl border border-white/5 bg-[#0f1b2d] p-3 shadow-xl">
+<div class="mb-3 flex items-center justify-between">
+<span class="text-[9px] font-medium text-white font-geist">90 dias</span>
+<span class="text-[9px] text-slate-500 font-geist">1/5</span>
+</div>
+<div class="mb-3 h-1 w-full overflow-hidden rounded-full bg-slate-800">
+<div class="h-full w-1/5 rounded-full bg-orange-400 shadow-[0_0_5px_#f26522]"></div>
+</div>
+<div class="space-y-2.5">
+<div class="flex items-center gap-2">
+<div class="flex h-3.5 w-3.5 items-center justify-center rounded-full bg-orange-400 text-slate-900">
+<svg class="h-2 w-2" fill="none" stroke="currentColor" stroke-width="3" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<div class="h-1.5 w-14 rounded-full bg-slate-700"></div>
+</div>
+<div class="flex items-center gap-2">
+<div class="h-3.5 w-3.5 rounded-full border border-slate-600"></div>
+<div class="h-1.5 w-16 rounded-full bg-slate-700"></div>
+</div>
+<div class="flex items-center gap-2">
+<div class="h-3.5 w-3.5 rounded-full border border-slate-600"></div>
+<div class="h-1.5 w-12 rounded-full bg-slate-700"></div>
+</div>
+<div class="flex items-center gap-2">
+<div class="h-3.5 w-3.5 rounded-full border border-slate-600"></div>
+<div class="h-1.5 w-14 rounded-full bg-slate-700"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<h3 class="relative z-10 mt-8 text-2xl text-white tracking-tight font-jakarta font-medium">CAPEX alto e disperso</h3>
+<p class="relative z-10 mt-4 text-sm sm:text-base leading-relaxed text-slate-400 font-geist">Eletropostos isolados exigem investimento próprio, projeto, obra e homologação. Sem escala, a conta não fecha para o operador individual.</p>
+</article>
+
+<article class="group reveal relative overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.035] p-8 shadow-2xl shadow-black/50 backdrop-blur-xl transition duration-300 ease-out hover:-translate-y-1 hover:border-emerald-400/30 hover:bg-white/[0.055]">
+<div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-500/[0.10] via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100"></div>
+<div class="pointer-events-none absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<div class="relative z-10 h-64 overflow-hidden rounded-2xl border border-orange-100/10 bg-[#071323]/90 p-4 shadow-inner">
+<div class="absolute bottom-0 right-0 h-40 w-40 rounded-full bg-orange-400/10 blur-3xl"></div>
+<svg class="absolute inset-0 h-full w-full pointer-events-none" preserveaspectratio="none" viewbox="0 0 350 220"><path d="M70 60 Q 120 100 175 110" fill="none" opacity="0.6" stroke="#fb923c" stroke-dasharray="4 4" stroke-linecap="round" stroke-width="1.5"></path><circle cx="175" cy="110" fill="#fb923c" r="3"></circle><path d="M280 60 Q 230 80 175 110" fill="none" opacity="0.6" stroke="#fb923c" stroke-dasharray="4 4" stroke-linecap="round" stroke-width="1.5"></path><path d="M70 160 Q 120 130 175 110" fill="none" opacity="0.6" stroke="#fb923c" stroke-dasharray="4 4" stroke-linecap="round" stroke-width="1.5"></path><path d="M280 160 Q 230 140 175 110" fill="none" opacity="0.6" stroke="#fb923c" stroke-dasharray="4 4" stroke-linecap="round" stroke-width="1.5"></path><circle cx="70" cy="60" fill="#fb923c" r="3"></circle><circle cx="280" cy="60" fill="#fb923c" r="3"></circle><circle cx="70" cy="160" fill="#fb923c" r="3"></circle><circle cx="280" cy="160" fill="#fb923c" r="3"></circle></svg>
+<div class="absolute left-2 top-2 w-28 rounded-xl border border-white/10 bg-[#121f33]/95 p-3 shadow-xl z-10">
+<p class="text-[10px] font-medium text-slate-200 mb-2 font-geist">Energia</p>
+<div class="space-y-1.5">
+<div class="h-1.5 w-full rounded-full bg-slate-700"></div>
+<div class="h-1.5 w-3/4 rounded-full bg-slate-700"></div>
+</div>
+</div>
+<div class="absolute right-2 top-2 w-28 rounded-xl border border-white/10 bg-[#121f33]/95 p-3 shadow-xl z-10">
+<p class="text-[10px] font-medium text-slate-200 mb-2 font-geist">Pagamento</p>
+<div class="space-y-1.5">
+<div class="h-1.5 w-full rounded-full bg-slate-700"></div>
+<div class="h-1.5 w-2/3 rounded-full bg-slate-700"></div>
+</div>
+</div>
+<div class="absolute left-2 bottom-2 w-28 rounded-xl border border-white/10 bg-[#121f33]/95 p-3 shadow-xl z-10">
+<p class="text-[10px] font-medium text-slate-200 mb-2 font-geist">Manutenção</p>
+<div class="space-y-1.5">
+<div class="h-1.5 w-full rounded-full bg-slate-700"></div>
+<div class="h-1.5 w-1/2 rounded-full bg-slate-700"></div>
+</div>
+</div>
+<div class="absolute right-2 bottom-2 w-28 rounded-xl border border-white/10 bg-[#121f33]/95 p-3 shadow-xl z-10">
+<p class="text-[10px] font-medium text-slate-200 mb-2 font-geist">Suporte</p>
+<div class="space-y-1.5">
+<div class="h-1.5 w-full rounded-full bg-slate-700"></div>
+<div class="h-1.5 w-3/4 rounded-full bg-slate-700"></div>
+</div>
+</div>
+<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-24 rounded-xl border border-orange-400/30 bg-[#121f33] p-3 shadow-2xl shadow-black/60 z-20">
+<p class="text-[10px] font-semibold text-orange-100 text-center font-geist">Eletrotyme</p>
+</div>
+</div>
+<h3 class="relative z-10 mt-8 text-2xl text-white tracking-tight font-jakarta font-medium">Operação manual e espalhada</h3>
+<p class="relative z-10 mt-4 text-sm sm:text-base leading-relaxed text-slate-400 font-geist">Energia, cobrança, manutenção e suporte em mãos diferentes viram custo e dor de cabeça. Em um hub integrado, tudo passa por um só operador.</p>
+</article>
+
+</div>
+</div>
+</section>
+
+<!-- how-it-works -->
+<section class="relative overflow-hidden border-t border-white/[0.06] px-5 pt-24 pb-24 sm:px-8 lg:px-10" id="how">
+<div class="mx-auto w-full max-w-[1280px]">
+<div class="reveal grid w-full max-w-[1280px] gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-end">
+<div class="max-w-3xl">
+<p class="text-sm font-medium text-orange-200 font-geist">03 · Como funciona</p>
+<h2 class="mt-4 max-w-2xl text-4xl tracking-tighter text-white sm:text-5xl lg:text-6xl font-jakarta font-medium">Do diagnóstico ao go-live em até 90 dias.</h2>
+</div>
+<div class="lg:ml-auto lg:max-w-md">
+<p class="text-base leading-7 text-slate-400 font-geist">A Eletrotyme cuida de projeto, equipamento, obra elétrica, homologação e comissionamento. Depois do go-live, quem opera continua sendo a gente: monitoramento 24 horas, manutenção e cobrança pelo app.</p>
+<div class="mt-7 flex flex-wrap gap-3">
+<a class="inline-flex h-11 items-center justify-center rounded-full bg-orange-500 px-5 text-sm font-medium text-white shadow-[0_0_0_1px_rgba(255,255,255,0.12),0_18px_50px_rgba(0,0,0,0.35)] transition hover:bg-orange-400 font-geist" href="#cta">Começar agora</a>
+<a class="inline-flex h-11 items-center justify-center rounded-full border border-white/[0.12] bg-white/[0.04] px-5 text-sm font-medium text-white backdrop-blur-xl transition hover:bg-white/[0.08] font-geist" href="#modelos">Ver modelos</a>
+</div>
+</div>
+</div>
+<div class="reveal mt-14 p-0">
+<div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4 gap-x-4 gap-y-4">
+
+<div class="group relative min-h-[280px] overflow-hidden rounded-3xl border border-emerald-300/20 bg-white/[0.035] p-5 shadow-[0_0_0_1px_rgba(110,231,183,0.08),0_18px_55px_rgba(15,23,42,0.22),inset_0_1px_0_rgba(255,255,255,0.08)] transition duration-300 hover:-translate-y-1 hover:border-emerald-300/40 hover:bg-white/[0.055] hover:shadow-[0_0_0_1px_rgba(110,231,183,0.18),0_0_46px_rgba(16,185,129,0.16),0_22px_70px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.12)]">
+<div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-500/[0.10] via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100"></div>
+<div class="pointer-events-none absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/60 to-transparent"></div>
+<div class="pointer-events-none absolute inset-x-8 -top-px h-px bg-gradient-to-r from-transparent via-white/35 to-transparent opacity-70"></div>
+<div class="relative z-10 flex h-full flex-col">
+<p class="inline-flex w-fit rounded-full border border-emerald-400/20 bg-emerald-500/10 px-3 py-1 text-[0.68rem] font-medium uppercase tracking-[0.16em] text-emerald-200 font-geist">Passo 01</p>
+<h3 class="mt-5 text-lg font-semibold text-white font-geist">Diagnóstico do ponto</h3>
+<p class="mt-2 text-sm leading-6 text-slate-300 font-geist">Analisamos fluxo, frota elétrica da região, concorrência e potência disponível na área.</p>
+<div class="mt-auto rounded-2xl border border-white/[0.08] bg-[#070d18]/70 p-3 shadow-xl shadow-black/30">
+<div class="mb-3 flex items-center justify-between">
+<p class="text-xs font-medium text-white font-geist">Novo ponto</p>
+<span class="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_16px_rgba(52,211,153,0.8)]"></span>
+</div>
+<div class="rounded-xl border border-white/[0.08] bg-white/[0.04] px-3 py-2">
+<p class="text-xs text-slate-500 font-geist">Posto Natureza · MA-201, km 7</p>
+</div>
+<div class="mt-3 grid grid-cols-3 gap-2">
+<div class="flex h-9 items-center justify-center rounded-xl border border-white/[0.07] bg-white/[0.04]">
+<svg class="h-4 w-4 text-slate-400" fill="none" viewbox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" stroke="currentColor" stroke-width="1.5"></path><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.5"></circle></svg>
+</div>
+<div class="flex h-9 items-center justify-center rounded-xl border border-white/[0.07] bg-white/[0.04]">
+<svg class="h-4 w-4 text-slate-400" fill="none" viewbox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+</div>
+<div class="flex h-9 items-center justify-center rounded-xl border border-white/[0.07] bg-white/[0.04]">
+<svg class="h-4 w-4 text-slate-400" fill="none" viewbox="0 0 24 24"><path d="M3 3v18h18" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"></path><path d="m7 15 4-4 4 4 5-6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+</div>
+</div>
+<button class="mt-3 flex w-full items-center justify-between rounded-xl bg-orange-500 px-3 py-2 text-xs font-medium text-white shadow-lg shadow-orange-500/20 font-geist">
+Simular viabilidade
+<span class="text-base leading-none font-geist">+</span>
+</button>
+</div>
+</div>
+</div>
+
+<div class="group relative min-h-[280px] overflow-hidden rounded-3xl border border-emerald-300/20 bg-white/[0.035] p-5 shadow-[0_0_0_1px_rgba(110,231,183,0.08),0_18px_55px_rgba(15,23,42,0.22),inset_0_1px_0_rgba(255,255,255,0.08)] transition duration-300 hover:-translate-y-1 hover:border-emerald-300/40 hover:bg-white/[0.055] hover:shadow-[0_0_0_1px_rgba(110,231,183,0.18),0_0_46px_rgba(16,185,129,0.16),0_22px_70px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.12)]">
+<div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-orange-500/[0.10] via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100"></div>
+<div class="pointer-events-none absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/60 to-transparent"></div>
+<div class="pointer-events-none absolute inset-x-8 -top-px h-px bg-gradient-to-r from-transparent via-white/35 to-transparent opacity-70"></div>
+<div class="relative z-10 flex h-full flex-col">
+<p class="inline-flex w-fit rounded-full border border-emerald-400/20 bg-emerald-500/10 px-3 py-1 text-[0.68rem] font-medium uppercase tracking-[0.16em] text-emerald-200 font-geist">Passo 02 · Mês 1</p>
+<h3 class="mt-5 text-lg font-semibold text-white font-geist">Projeto e legal</h3>
+<p class="mt-2 text-sm leading-6 text-slate-300 font-geist">Projetos executivos, compra do equipamento e licenciamento simplificado.</p>
+<div class="mt-auto rounded-2xl border border-white/[0.08] bg-[#070d18]/70 p-3 shadow-xl shadow-black/30">
+<div class="mb-3 flex items-center justify-between">
+<p class="text-xs font-medium text-white font-geist">Mês 1</p>
+<div class="flex gap-1">
+<span class="h-1.5 w-1.5 rounded-full bg-slate-500"></span>
+<span class="h-1.5 w-1.5 rounded-full bg-slate-600"></span>
+</div>
+</div>
+<div class="grid grid-cols-7 gap-1 text-center text-[0.62rem] text-slate-500 font-geist">
+<span class="font-geist">S</span><span class="font-geist">T</span><span class="font-geist">Q</span><span class="font-geist">Q</span><span class="font-geist">S</span><span class="font-geist">S</span><span class="font-geist">D</span>
+<span class="py-1 font-geist">12</span>
+<span class="py-1 font-geist">13</span>
+<span class="py-1 font-geist">14</span>
+<span class="rounded-full bg-orange-500 py-1 text-white shadow-lg shadow-orange-500/30 font-geist">15</span>
+<span class="py-1 text-slate-300 font-geist">16</span>
+<span class="py-1 font-geist">17</span>
+<span class="py-1 font-geist">18</span>
+</div>
+<div class="mt-4 flex items-center justify-between rounded-xl border border-white/[0.08] bg-white/[0.04] px-3 py-2">
+<div class="flex items-center gap-2">
+<span class="h-2 w-2 rounded-full bg-amber-400"></span>
+<p class="text-xs text-slate-300 font-geist">Carregador DC 60 kW</p>
+</div>
+<svg class="h-3.5 w-3.5 text-slate-500" fill="none" viewbox="0 0 24 24"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
+</div>
+</div>
+</div>
+</div>
+
+<div class="group relative min-h-[280px] overflow-hidden rounded-3xl border border-emerald-300/20 bg-white/[0.035] p-5 shadow-[0_0_0_1px_rgba(110,231,183,0.08),0_18px_55px_rgba(15,23,42,0.22),inset_0_1px_0_rgba(255,255,255,0.08)] transition duration-300 hover:-translate-y-1 hover:border-emerald-300/40 hover:bg-white/[0.055] hover:shadow-[0_0_0_1px_rgba(110,231,183,0.18),0_0_46px_rgba(16,185,129,0.16),0_22px_70px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.12)]">
+<div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-500/[0.10] via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100"></div>
+<div class="pointer-events-none absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/60 to-transparent"></div>
+<div class="pointer-events-none absolute inset-x-8 -top-px h-px bg-gradient-to-r from-transparent via-white/35 to-transparent opacity-70"></div>
+<div class="relative z-10 flex h-full flex-col">
+<p class="inline-flex w-fit rounded-full border border-emerald-400/20 bg-emerald-500/10 px-3 py-1 text-[0.68rem] font-medium uppercase tracking-[0.16em] text-emerald-200 font-geist">Passo 03 · Mês 2</p>
+<h3 class="mt-5 text-lg font-semibold text-white font-geist">Obra e instalação</h3>
+<p class="mt-2 text-sm leading-6 text-slate-300 font-geist">Adequação civil, instalação elétrica, sinalização das vagas e chegada dos carregadores.</p>
+<div class="mt-auto grid grid-cols-3 gap-2 rounded-2xl border border-white/[0.08] bg-[#070d18]/70 p-3 shadow-xl shadow-black/30">
+<div class="rounded-xl border border-white/[0.07] bg-white/[0.035] p-2">
+<p class="mb-2 text-[0.55rem] font-semibold uppercase tracking-wide text-slate-500 font-geist">Obra</p>
+<div class="space-y-2">
+<div class="h-8 rounded-lg bg-white/[0.06] p-2"><div class="h-1.5 w-12 rounded-full bg-slate-600"></div></div>
+<div class="h-8 rounded-lg bg-white/[0.04] p-2"><div class="h-1.5 w-9 rounded-full bg-slate-700"></div></div>
+</div>
+</div>
+<div class="rounded-xl border border-emerald-400/20 bg-emerald-500/[0.06] p-2">
+<p class="mb-2 text-[0.55rem] font-semibold uppercase tracking-wide text-emerald-200 font-geist">Instalação</p>
+<div class="space-y-2">
+<div class="h-8 rounded-lg border border-emerald-400/20 bg-emerald-500/10 p-2"><div class="h-1.5 w-10 rounded-full bg-emerald-300"></div></div>
+<div class="h-8 rounded-lg bg-white/[0.04] p-2"><div class="h-1.5 w-8 rounded-full bg-slate-700"></div></div>
+</div>
+</div>
+<div class="rounded-xl border border-white/[0.07] bg-white/[0.035] p-2">
+<p class="mb-2 text-[0.55rem] font-semibold uppercase tracking-wide text-slate-500 font-geist">Testes</p>
+<div class="space-y-2">
+<div class="h-8 rounded-lg bg-white/[0.05] p-2"><div class="h-1.5 w-11 rounded-full bg-orange-400/70"></div></div>
+<div class="h-8 rounded-lg bg-white/[0.035] p-2"><div class="h-1.5 w-7 rounded-full bg-slate-700"></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="group relative min-h-[280px] overflow-hidden rounded-3xl border border-emerald-300/20 bg-white/[0.035] p-5 shadow-[0_0_0_1px_rgba(110,231,183,0.08),0_18px_55px_rgba(15,23,42,0.22),inset_0_1px_0_rgba(255,255,255,0.08)] transition duration-300 hover:-translate-y-1 hover:border-emerald-300/40 hover:bg-white/[0.055] hover:shadow-[0_0_0_1px_rgba(110,231,183,0.18),0_0_46px_rgba(16,185,129,0.16),0_22px_70px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.12)]">
+<div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-orange-500/[0.10] via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100"></div>
+<div class="pointer-events-none absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/60 to-transparent"></div>
+<div class="pointer-events-none absolute inset-x-8 -top-px h-px bg-gradient-to-r from-transparent via-white/35 to-transparent opacity-70"></div>
+<div class="relative z-10 flex h-full flex-col">
+<p class="inline-flex w-fit rounded-full border border-emerald-400/20 bg-emerald-500/10 px-3 py-1 text-[0.68rem] font-medium uppercase tracking-[0.16em] text-emerald-200 font-geist">Passo 04 · Mês 3</p>
+<h3 class="mt-5 text-lg font-semibold text-white font-geist">Go-live e operação</h3>
+<p class="mt-2 text-sm leading-6 text-slate-300 font-geist">Comissionamento, testes de carga e início comercial. Daí em diante, NOC 24h e repasse mensal.</p>
+<div class="mt-auto rounded-2xl border border-white/[0.08] bg-[#070d18]/70 p-3 shadow-xl shadow-black/30">
+<div class="mb-3 flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="h-7 w-7 rounded-full border-2 border-[#070d18] bg-gradient-to-br from-orange-300 to-orange-500"></div>
+<div class="h-7 w-7 rounded-full border-2 border-[#070d18] bg-gradient-to-br from-amber-300 to-rose-500"></div>
+<div class="h-7 w-7 rounded-full border-2 border-[#070d18] bg-gradient-to-br from-emerald-300 to-teal-500"></div>
+</div>
+<div class="flex h-7 w-7 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.05] text-sm text-slate-300 font-geist">+</div>
+</div>
+<div class="space-y-2">
+<div class="rounded-xl border border-white/[0.07] bg-white/[0.04] p-3">
+<div class="flex items-center justify-between">
+<p class="text-xs font-medium text-white font-geist">NOC Eletrotyme</p>
+<p class="text-[0.65rem] text-slate-500 font-geist">há 2 min</p>
+</div>
+<p class="mt-1 text-xs leading-5 text-slate-400 font-geist">Teste de carga concluído. Uptime 98,4%.</p>
+</div>
+<div class="rounded-xl border border-white/[0.07] bg-white/[0.04] p-3">
+<div class="flex items-center justify-between">
+<p class="text-xs font-medium text-white font-geist">Posto Natureza</p>
+<p class="text-[0.65rem] text-slate-500 font-geist">há 5 min</p>
+</div>
+<p class="mt-1 text-xs leading-5 text-slate-400 font-geist">Primeira recarga já apareceu no app. 🚀</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</section>
+
+<!-- benefits -->
+<section class="border-white/[0.06] overflow-hidden sm:px-8 lg:px-10 font-sans border-t pt-24 pr-5 pb-24 pl-5 relative" id="benefits">
+<div class="relative mx-auto w-full max-w-[1280px] z-10">
+<div class="reveal grid w-full max-w-[1280px] gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-end">
+<div class="max-w-3xl">
+<p class="text-[13px] font-medium text-slate-400 font-geist">04 · O que o parceiro ganha</p>
+<h2 class="mt-4 text-4xl text-white sm:text-[56px] leading-[1.1] tracking-tight font-jakarta font-medium">Mais que recarga.<br/>Conexões para um amanhã melhor.</h2>
+</div>
+<div class="lg:ml-auto lg:max-w-md">
+<p class="text-[17px] leading-relaxed text-slate-400 font-geist">Enquanto o carro recarrega, o motorista e quem está com ele usam a sua loja. Esse ganho é real e não está somado em nenhuma tabela de proposta.</p>
+<div class="mt-7 flex flex-wrap gap-3">
+<a class="inline-flex h-11 items-center justify-center rounded-full bg-orange-500 px-5 text-sm font-medium text-white shadow-[0_0_0_1px_rgba(255,255,255,0.12),0_18px_50px_rgba(0,0,0,0.35)] transition hover:bg-orange-400 font-geist" href="#modelos">Ver modelos</a>
+<a class="inline-flex h-11 items-center justify-center rounded-full border border-white/[0.12] bg-white/[0.04] px-5 text-sm font-medium text-white backdrop-blur-xl transition hover:bg-white/[0.08] font-geist" href="#cta">Falar com a Eletrotyme</a>
+</div>
+</div>
+</div>
+<div class="mt-16 grid gap-6 lg:grid-cols-4">
+
+<div class="group relative flex flex-col rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-8 transition duration-300 ease-out hover:-translate-y-1">
+<div class="absolute inset-0 rounded-[2rem] border border-white/10 pointer-events-none group-hover:border-white/20 transition-colors"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<div class="relative h-40 w-full mb-8 flex items-center justify-center">
+<div class="absolute w-32 h-32 bg-orange-500/20 rounded-full blur-3xl"></div>
+<svg class="relative z-10" fill="none" height="120" viewbox="0 0 120 120" width="120" xmlns="http://www.w3.org/2000/svg"><defs><filter height="140%" id="glowClarity" width="140%" x="-20%" y="-20%"><fegaussianblur result="blur" stddeviation="4"></fegaussianblur><fecomposite in="SourceGraphic" in2="blur" operator="over"></fecomposite></filter></defs><path d="M60 30 C60 50, 50 60, 30 60 C50 60, 60 70, 60 90 C60 70, 70 60, 90 60 C70 60, 60 50, 60 30 Z" fill="#FDBA74" filter="url(#glowClarity)"></path><path d="M60 35 C60 50, 52 60, 35 60 C52 60, 60 70, 60 85 C60 70, 68 60, 85 60 C68 60, 60 50, 60 35 Z" fill="#FFFFFF"></path><path d="M85 40 C85 45, 82 48, 77 48 C82 48, 85 51, 85 56 C85 51, 88 48, 93 48 C88 48, 85 45, 85 40 Z" fill="#FFEDD5" filter="url(#glowClarity)"></path><path d="M35 75 C35 78, 33 80, 30 80 C33 80, 35 82, 35 85 C35 82, 37 80, 40 80 C37 80, 35 78, 35 75 Z" fill="#FED7AA" filter="url(#glowClarity)"></path><path d="M20 70 A 45 45 0 0 0 90 40" stroke="rgba(255,255,255,0.1)" stroke-dasharray="2 4" stroke-linecap="round" stroke-width="1.5"></path></svg>
+</div>
+<span class="text-[11px] font-semibold tracking-widest text-emerald-400 uppercase font-geist">Investimento</span>
+<h3 class="mt-3 text-[22px] text-white font-jakarta font-medium">R$ 0,00 para o parceiro</h3>
+<p class="mt-3 text-[15px] leading-relaxed text-slate-400 font-geist">Equipamento, obra, energia, operação e risco de utilização são da Eletrotyme. Você entra com a área.</p>
+</div>
+
+<div class="group relative flex flex-col rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-8 transition duration-300 ease-out hover:-translate-y-1">
+<div class="absolute inset-0 rounded-[2rem] border border-white/10 pointer-events-none group-hover:border-white/20 transition-colors"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<div class="relative h-40 w-full mb-8 flex items-center justify-center">
+<div class="absolute w-32 h-32 bg-orange-500/10 rounded-full blur-3xl"></div>
+<svg class="relative z-10" fill="none" height="120" viewbox="0 0 140 120" width="140" xmlns="http://www.w3.org/2000/svg"><defs><lineargradient id="gradSpeed" x1="0%" x2="100%" y1="0%" y2="100%"><stop offset="0%" stop-color="#7C2D12"></stop><stop offset="100%" stop-color="#0F172A"></stop></lineargradient><filter id="glowSpeed"><fegaussianblur result="blur" stddeviation="3"></fegaussianblur><fecomposite in="SourceGraphic" in2="blur" operator="over"></fecomposite></filter></defs><line stroke="rgba(253, 186, 116, 0.5)" stroke-linecap="round" stroke-width="2" x1="20" x2="70" y1="50" y2="50"></line><line filter="url(#glowSpeed)" stroke="rgba(253, 186, 116, 0.8)" stroke-linecap="round" stroke-width="2" x1="30" x2="65" y1="60" y2="60"></line><line stroke="rgba(253, 186, 116, 0.3)" stroke-linecap="round" stroke-width="2" x1="10" x2="75" y1="70" y2="70"></line><circle cx="90" cy="60" fill="url(#gradSpeed)" r="24" stroke="rgba(253, 186, 116, 0.4)" stroke-width="2"></circle><circle cx="90" cy="60" fill="none" filter="url(#glowSpeed)" opacity="0.5" r="24" stroke="#FDBA74" stroke-width="1"></circle><path d="M92 45 L82 62 L89 62 L87 75 L98 57 L91 57 Z" fill="#FFEDD5" filter="url(#glowSpeed)"></path><circle cx="50" cy="45" fill="#FDBA74" filter="url(#glowSpeed)" r="1.5"></circle><circle cx="40" cy="75" fill="#FDBA74" r="1"></circle></svg>
+</div>
+<span class="text-[11px] font-semibold tracking-widest text-emerald-400 uppercase font-geist">Recarga rápida</span>
+<h3 class="mt-3 text-[22px] text-white font-jakarta font-medium">DC 60 kW, 20 a 30 minutos</h3>
+<p class="mt-3 text-[15px] leading-relaxed text-slate-400 font-geist">O tempo de um café ou de uma passada na loja. Recarga rápida combina com posto; recarga lenta, não.</p>
+</div>
+
+<div class="group relative flex flex-col rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-8 transition duration-300 ease-out hover:-translate-y-1">
+<div class="absolute inset-0 rounded-[2rem] border border-white/10 pointer-events-none group-hover:border-white/20 transition-colors"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<div class="relative h-40 w-full mb-8 flex items-center justify-center">
+<div class="absolute w-24 h-24 bg-orange-400/20 rounded-full blur-2xl"></div>
+<svg class="relative z-10" fill="none" height="120" viewbox="0 0 120 120" width="120" xmlns="http://www.w3.org/2000/svg"><defs><filter id="glowFocus"><fegaussianblur result="blur" stddeviation="2.5"></fegaussianblur><fecomposite in="SourceGraphic" in2="blur" operator="over"></fecomposite></filter></defs><circle cx="60" cy="60" r="45" stroke="rgba(255,255,255,0.05)" stroke-width="1.5"></circle><circle cx="60" cy="60" r="32" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"></circle><circle cx="60" cy="60" r="18" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"></circle><circle cx="60" cy="60" fill="#FDBA74" filter="url(#glowFocus)" r="8"></circle><circle cx="60" cy="60" fill="#FFFFFF" r="4"></circle><circle cx="82" cy="38" fill="#FED7AA" filter="url(#glowFocus)" r="3"></circle><circle cx="28" cy="60" fill="#FFEDD5" r="2"></circle><circle cx="75" cy="99" fill="#FDBA74" r="1.5"></circle></svg>
+</div>
+<span class="text-[11px] font-semibold tracking-widest text-emerald-400 uppercase font-geist">Operação</span>
+<h3 class="mt-3 text-[22px] text-white font-jakarta font-medium">Sua equipe não opera nada</h3>
+<p class="mt-3 text-[15px] leading-relaxed text-slate-400 font-geist">O motorista libera e paga pelo app. Monitoramento remoto 24h, manutenção e cobrança são nossos.</p>
+</div>
+
+<div class="group relative flex flex-col rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-8 transition duration-300 ease-out hover:-translate-y-1">
+<div class="absolute inset-0 rounded-[2rem] border border-white/10 pointer-events-none group-hover:border-white/20 transition-colors"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<div class="relative h-40 w-full mb-8 flex items-center justify-center">
+<div class="absolute w-32 h-32 bg-orange-500/10 rounded-full blur-3xl"></div>
+<svg class="relative z-10" fill="none" height="120" viewbox="0 0 120 120" width="120" xmlns="http://www.w3.org/2000/svg"><defs><lineargradient id="shieldGrad" x1="50%" x2="50%" y1="0%" y2="100%"><stop offset="0%" stop-color="#1E293B" stop-opacity="0.8"></stop><stop offset="100%" stop-color="#0F172A" stop-opacity="0.9"></stop></lineargradient><filter id="glowTrust"><fegaussianblur result="blur" stddeviation="3"></fegaussianblur><fecomposite in="SourceGraphic" in2="blur" operator="over"></fecomposite></filter></defs><ellipse cx="60" cy="95" fill="none" rx="35" ry="10" stroke="rgba(253, 186, 116, 0.2)" stroke-width="1.5"></ellipse><ellipse cx="60" cy="95" fill="rgba(253, 186, 116, 0.1)" filter="url(#glowTrust)" rx="25" ry="6"></ellipse><path d="M20 20 L100 20 M20 40 L100 40 M20 60 L100 60 M20 80 L100 80" stroke="rgba(255,255,255,0.03)" stroke-width="1"></path><path d="M30 10 L30 90 M50 10 L50 90 M70 10 L70 90 M90 10 L90 90" stroke="rgba(255,255,255,0.03)" stroke-width="1"></path><path d="M60 25 L35 35 V55 C35 75 50 90 60 95 C70 90 85 75 85 55 V35 L60 25 Z" fill="url(#shieldGrad)" filter="url(#glowTrust)" stroke="#FB923C" stroke-linejoin="round" stroke-width="2"></path><path d="M60 30 L40 38 V55 C40 70 52 83 60 88 C68 83 80 70 80 55 V38 L60 30 Z" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"></path><path d="M50 58 L57 65 L70 50" filter="url(#glowTrust)" stroke="#FED7AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path></svg>
+</div>
+<span class="text-[11px] font-semibold tracking-widest text-emerald-400 uppercase font-geist">Confiança</span>
+<h3 class="mt-3 text-[22px] text-white font-jakarta font-medium">Repasse mensal, sem surpresa</h3>
+<p class="mt-3 text-[15px] leading-relaxed text-slate-400 font-geist">Sensores avisam de anomalia antes de virar falha. Se o equipamento parar, quem resolve somos nós.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- projects -->
+<section class="overflow-hidden border-white/[0.06] sm:px-8 lg:px-10 font-sans border-t pt-24 pr-5 pb-24 pl-5 relative" id="projetos">
+<div class="absolute top-1/2 left-[20%] -translate-y-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-orange-500/10 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="relative z-10 mx-auto grid w-full max-w-[1280px] gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+<div class="reveal lg:mt-10">
+<p class="text-[13px] font-medium text-slate-400 font-geist">05 · Projetos e resultados</p>
+<h2 class="mt-4 text-4xl text-white sm:text-[56px] leading-[1.1] tracking-tight font-jakarta font-medium">Nós construímos<br/>eletropostos.<br/>E o futuro da mobilidade.</h2>
+<p class="mt-6 text-[17px] leading-relaxed text-slate-400 max-w-[400px] font-geist">Proposta técnica, operação no aplicativo, painel de gestão e comunicação da marca: cada projeto da Eletrotyme sai completo, do projeto elétrico ao post no Instagram.</p>
+<div class="mt-7 flex flex-wrap gap-3">
+<a class="inline-flex h-11 items-center justify-center rounded-full bg-orange-500 px-5 text-sm font-medium text-white shadow-[0_0_0_1px_rgba(255,255,255,0.12),0_18px_50px_rgba(0,0,0,0.35)] transition hover:bg-orange-400 font-geist" href="#cta">Quero um ponto assim</a>
+<a class="inline-flex h-11 items-center justify-center rounded-full border border-white/[0.12] bg-white/[0.04] px-5 text-sm font-medium text-white backdrop-blur-xl transition hover:bg-white/[0.08] font-geist" href="#campanhas">Ver campanhas</a>
+</div>
+</div>
+<div class="flex flex-col gap-5">
+
+<div class="group relative flex flex-col sm:flex-row gap-6 rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-6 sm:p-8 border border-white/10">
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/5 bg-white/[0.02] text-orange-200 shadow-[inset_0_0_20px_rgba(253,186,116,0.05)]">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+</div>
+<div class="flex-1">
+<h3 class="text-[22px] text-white font-jakarta font-medium">Posto Natureza · Maiobão</h3>
+<p class="mt-2 text-[15px] leading-relaxed text-slate-400 font-geist">Proposta de eletroposto DC 60 kW na MA-201, km 7, a via que liga São Luís a Paço do Lumiar e São José de Ribamar. Fluxo de todo dia, não de estrada.</p>
+<div class="mt-6 flex items-center gap-4">
+<div class="flex -space-x-3">
+<img alt="Campanha Eletrotyme" class="w-8 h-8 rounded-full border-2 border-[#12161f] object-cover relative z-[4]" src="assets/brand/campanha-dia-do-cliente.jpg"/>
+<img alt="Campanha Eletrotyme" class="w-8 h-8 rounded-full border-2 border-[#12161f] object-cover relative z-[3]" src="assets/brand/campanha-o-futuro.jpg"/>
+<img alt="Campanha Eletrotyme" class="w-8 h-8 rounded-full border-2 border-[#12161f] object-cover relative z-[2]" src="assets/brand/campanha-cada-conexao.jpg"/>
+<img alt="Campanha Eletrotyme" class="w-8 h-8 rounded-full border-2 border-[#12161f] object-cover relative z-[1]" src="assets/brand/campanha-clientes-que-acreditam.jpg"/>
+<div class="w-8 h-8 rounded-full border-2 border-[#12161f] bg-[#1e293b] text-[#fdba74] text-[10px] font-medium flex items-center justify-center relative z-[0] font-geist">60kW</div>
+</div>
+<div class="h-[2px] flex-1 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjIiPjxjaXJjbGUgY3g9IjEiIGN5PSIxIiByPSIxIiBmaWxsPSJyZ2JhKDI1MywgMTg2LCAxMTYsIDAuMykiLz48L3N2Zz4=')] bg-repeat-x opacity-50"></div>
+</div>
+</div>
+</div>
+
+<div class="group relative flex flex-col sm:flex-row gap-6 rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-6 sm:p-8 border border-white/10 overflow-hidden">
+<div class="absolute bottom-0 right-0 w-1/2 h-full opacity-20 pointer-events-none">
+<svg class="absolute bottom-0 right-0 w-full h-full object-cover" viewbox="0 0 200 100"><path d="M0,100 C50,80 100,120 200,40 L200,100 Z" fill="none" stroke="#f26522" stroke-dasharray="2 4" stroke-width="0.5"></path><path d="M0,100 C60,70 120,110 200,20 L200,100 Z" fill="none" stroke="#f26522" stroke-dasharray="2 4" stroke-width="0.5"></path><path d="M0,100 C70,60 140,100 200,0 L200,100 Z" fill="none" stroke="#f26522" stroke-dasharray="2 4" stroke-width="0.5"></path></svg>
+</div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<div class="flex flex-col items-center gap-2 shrink-0">
+<div class="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/5 bg-white/[0.02] shadow-[inset_0_0_20px_rgba(253,186,116,0.05)]">
+<svg class="text-orange-400" fill="currentColor" height="24" viewbox="0 0 24 24" width="24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
+</div>
+<img alt="Eletrotyme" class="w-10 h-10 rounded-full border border-white/10 object-cover mt-2" src="assets/brand/campanha-nos-construimos.jpg"/>
+</div>
+<div class="flex-1 relative z-10 pt-2">
+<h3 class="text-[22px] text-white leading-tight font-jakarta font-medium">“Duas recargas por dia cobrem toda a operação. Tudo acima disso é resultado.”</h3>
+<p class="mt-4 text-[15px] leading-relaxed text-slate-400 font-geist"><span class="text-orange-400 font-medium font-geist">Ponto de equilíbrio</span> — energia, plataforma, manutenção, seguro e aluguel das vagas. No caminho do posto pronto, cai para 0,9 recarga por dia.</p>
+</div>
+</div>
+
+<div class="group relative flex flex-col sm:flex-row gap-6 rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-6 sm:p-8 border border-white/10">
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/5 bg-white/[0.02] text-orange-200 shadow-[inset_0_0_20px_rgba(253,186,116,0.05)]">
+<svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><rect height="18" rx="4" width="18" x="3" y="3"></rect><circle cx="12" cy="12" r="4"></circle><path d="M17 7h.01"></path></svg>
+</div>
+<div class="flex-1 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="max-w-[320px]">
+<h3 class="text-[22px] text-white font-jakarta font-medium">Instagram e Meta Ads · agosto 2026</h3>
+<p class="mt-2 text-[15px] leading-relaxed text-slate-400 font-geist">R$ 151 em 10 dias no ar colocaram o perfil na frente de 8.187 pessoas, a R$ 0,15 por interação e R$ 0,59 por visita ao perfil.</p>
+</div>
+<div class="relative w-[140px] h-[60px] shrink-0 self-start md:self-auto mt-4 md:mt-0">
+<div class="absolute -top-10 left-4 rounded-lg border border-white/10 bg-[#1e293b]/80 backdrop-blur-sm px-2.5 py-1.5 flex flex-col items-start shadow-xl">
+<span class="text-[11px] font-semibold text-emerald-400 flex items-center gap-1 font-geist">↑ 20,7%</span>
+<span class="text-[9px] text-slate-400 font-geist">Interações no mês</span>
+</div>
+<svg class="w-full h-full overflow-visible" viewbox="0 0 100 40"><path d="M0,35 L20,30 L40,32 L60,18 L80,22 L100,5" fill="none" stroke="#f26522" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M0,35 L20,30 L40,32 L60,18 L80,22 L100,5 L100,40 L0,40 Z" fill="url(#chartGradient)" opacity="0.3"></path><circle class="drop-shadow-[0_0_8px_rgba(251,146,60,0.8)]" cx="100" cy="5" fill="#fb923c" r="3"></circle><defs><lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#f26522"></stop><stop offset="100%" stop-color="transparent"></stop></lineargradient></defs></svg>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- campaigns gallery -->
+<div class="relative z-10 mx-auto w-full max-w-[1280px] mt-16" id="campanhas">
+<div class="reveal grid w-full max-w-[1280px] gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-end">
+<div class="max-w-3xl">
+<p class="text-[13px] font-medium text-slate-400 font-geist">Campanhas · Semana do Cliente 2026</p>
+<h2 class="mt-4 text-3xl text-white sm:text-4xl leading-[1.1] tracking-tight font-jakarta font-medium">A marca na rua, no feed e no Reels.</h2>
+</div>
+<div class="lg:ml-auto lg:max-w-md">
+<p class="text-[15px] leading-relaxed text-slate-400 font-geist">Criativos e vídeo produzidos para o perfil @eletrotyme: os formatos em vídeo entregaram interação a R$ 0,03, mais de dez vezes mais barato que os posts estáticos.</p>
+</div>
+</div>
+<div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+<div class="group relative flex flex-col rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-3 transition duration-300 ease-out hover:-translate-y-1">
+<div class="absolute inset-0 rounded-[2rem] border border-white/10 pointer-events-none group-hover:border-white/20 transition-colors"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<div class="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#08111f]/95 aspect-[4/5]">
+<img alt="Campanha Dia do Cliente" class="h-full w-full object-cover object-top transition duration-500 group-hover:scale-[1.03]" src="assets/brand/campanha-dia-do-cliente.jpg"/>
+</div>
+<p class="mt-4 px-3 text-xs font-medium text-white font-geist">Dia do Cliente</p>
+<p class="mt-1 mb-2 px-3 text-xs text-slate-500 font-geist">Post estático · feed</p>
+</div>
+<div class="group relative flex flex-col rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-3 transition duration-300 ease-out hover:-translate-y-1">
+<div class="absolute inset-0 rounded-[2rem] border border-white/10 pointer-events-none group-hover:border-white/20 transition-colors"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<div class="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#08111f]/95 aspect-[4/5]">
+<video class="h-full w-full object-cover" src="assets/brand/reels-posto-natureza.mp4" autoplay muted loop playsinline></video>
+</div>
+<p class="mt-4 px-3 text-xs font-medium text-white font-geist">Reels · Posto Natureza</p>
+<p class="mt-1 mb-2 px-3 text-xs text-slate-500 font-geist">Vídeo 9:16 · R$ 0,03 por interação</p>
+</div>
+<div class="group relative flex flex-col rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-3 transition duration-300 ease-out hover:-translate-y-1">
+<div class="absolute inset-0 rounded-[2rem] border border-white/10 pointer-events-none group-hover:border-white/20 transition-colors"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<div class="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#08111f]/95 aspect-[4/5]">
+<img alt="Campanha O futuro não começa quando um carro elétrico é ligado" class="h-full w-full object-cover object-top transition duration-500 group-hover:scale-[1.03]" src="assets/brand/campanha-o-futuro.jpg"/>
+</div>
+<p class="mt-4 px-3 text-xs font-medium text-white font-geist">O futuro não começa na tomada</p>
+<p class="mt-1 mb-2 px-3 text-xs text-slate-500 font-geist">Carrossel · capa</p>
+</div>
+<div class="group relative flex flex-col rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-3 transition duration-300 ease-out hover:-translate-y-1">
+<div class="absolute inset-0 rounded-[2rem] border border-white/10 pointer-events-none group-hover:border-white/20 transition-colors"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<div class="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#08111f]/95 aspect-[4/5]">
+<img alt="Campanha Conectado com você" class="h-full w-full object-cover object-top transition duration-500 group-hover:scale-[1.03]" src="assets/brand/campanha-conectado-com-voce.jpg"/>
+</div>
+<p class="mt-4 px-3 text-xs font-medium text-white font-geist">Conectado com você</p>
+<p class="mt-1 mb-2 px-3 text-xs text-slate-500 font-geist">Sorteio · Semana do Cliente</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- stations -->
+<section class="border-white/[0.06] overflow-hidden sm:px-8 lg:px-10 font-sans border-t pt-24 pr-5 pb-24 pl-5 relative" id="eletropostos">
+<div class="pointer-events-none absolute -right-32 top-20 h-80 w-80 rounded-full bg-emerald-500/10 blur-3xl"></div>
+<div class="relative mx-auto w-full max-w-[1280px] z-10">
+<div class="reveal grid w-full max-w-[1280px] gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-end">
+<div class="max-w-3xl">
+<p class="text-[13px] font-medium text-slate-400 font-geist">06 · Nossos eletropostos</p>
+<h2 class="mt-4 text-4xl text-white sm:text-[56px] leading-[1.1] tracking-tight font-jakarta font-medium">Já no mapa.<br/>E os próximos a inaugurar.</h2>
+</div>
+<div class="lg:ml-auto lg:max-w-md">
+<p class="text-[17px] leading-relaxed text-slate-400 font-geist">Estações operadas pela Eletrotyme na Grande São Luís, monitoradas 24h pelo NOC, com recarga liberada e paga pelo app. Novos pontos entram no mapa assim que o comissionamento termina.</p>
+<div class="mt-7 flex flex-wrap gap-3">
+<a class="inline-flex h-11 items-center justify-center rounded-full bg-orange-500 px-5 text-sm font-medium text-white shadow-[0_0_0_1px_rgba(255,255,255,0.12),0_18px_50px_rgba(0,0,0,0.35)] transition hover:bg-orange-400 font-geist" href="simulador.html">Simular meu ponto</a>
+<a class="inline-flex h-11 items-center justify-center rounded-full border border-white/[0.12] bg-white/[0.04] px-5 text-sm font-medium text-white backdrop-blur-xl transition hover:bg-white/[0.08] font-geist" href="#cta">Quero um ponto assim</a>
+</div>
+</div>
+</div>
+
+<p class="mt-14 text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Em operação</p>
+<div class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+<div class="group relative flex flex-col rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-3 transition duration-300 ease-out hover:-translate-y-1">
+<div class="absolute inset-0 rounded-[2rem] border border-white/10 pointer-events-none group-hover:border-white/20 transition-colors"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<div class="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#08111f]/95 aspect-[4/3]">
+<img alt="Eletroposto Eletrotyme em operação" class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" src="assets/brand/estacoes/f1.jpg"/>
+<div class="absolute left-3 top-3"><span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-400/[0.12] px-2.5 py-1 text-[10px] font-semibold text-emerald-300 font-geist"><span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>Em operação</span></div>
+</div>
+<div class="px-3 pt-4 pb-2">
+<p class="text-base font-medium text-white font-geist">Eletroposto Olho d'Água 01</p>
+<p class="mt-1 text-xs text-slate-400 font-geist">São Luís · MA</p>
+<p class="mt-3 text-xs text-slate-500 font-geist">Carregador DC 60 kW · 2 vagas · app Eletrotyme</p>
+</div>
+</div>
+<div class="group relative flex flex-col rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-3 transition duration-300 ease-out hover:-translate-y-1">
+<div class="absolute inset-0 rounded-[2rem] border border-white/10 pointer-events-none group-hover:border-white/20 transition-colors"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<div class="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#08111f]/95 aspect-[4/3]">
+<img alt="Eletroposto Eletrotyme em operação" class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" src="assets/brand/estacoes/f2.jpg"/>
+<div class="absolute left-3 top-3"><span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-400/[0.12] px-2.5 py-1 text-[10px] font-semibold text-emerald-300 font-geist"><span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>Em operação</span></div>
+</div>
+<div class="px-3 pt-4 pb-2">
+<p class="text-base font-medium text-white font-geist">Eletroposto Olho d'Água 02</p>
+<p class="mt-1 text-xs text-slate-400 font-geist">São Luís · MA</p>
+<p class="mt-3 text-xs text-slate-500 font-geist">Carregador DC 60 kW · 2 vagas · app Eletrotyme</p>
+</div>
+</div>
+<div class="group relative flex flex-col rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-3 transition duration-300 ease-out hover:-translate-y-1">
+<div class="absolute inset-0 rounded-[2rem] border border-white/10 pointer-events-none group-hover:border-white/20 transition-colors"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<div class="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#08111f]/95 aspect-[4/3]">
+<img alt="Eletroposto Eletrotyme em operação" class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" src="assets/brand/estacoes/p1.jpg"/>
+<div class="absolute left-3 top-3"><span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-400/[0.12] px-2.5 py-1 text-[10px] font-semibold text-emerald-300 font-geist"><span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse"></span>Em operação</span></div>
+</div>
+<div class="px-3 pt-4 pb-2">
+<p class="text-base font-medium text-white font-geist">Eletroposto 03</p>
+<p class="mt-1 text-xs text-slate-400 font-geist">Grande São Luís · MA</p>
+<p class="mt-3 text-xs text-slate-500 font-geist">Carregador DC 60 kW · monitoramento NOC 24h</p>
+</div>
+</div>
+</div>
+
+<p class="mt-14 text-[11px] font-semibold uppercase tracking-widest text-orange-300 font-geist">Inauguram em breve</p>
+<div class="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+<div class="group relative flex flex-col rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-3 transition duration-300 ease-out hover:-translate-y-1">
+<div class="absolute inset-0 rounded-[2rem] border border-white/10 pointer-events-none group-hover:border-white/20 transition-colors"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-orange-300/40 to-transparent"></div>
+<div class="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#08111f]/95 aspect-[4/3]">
+<img alt="Eletroposto Posto Natureza Maiobão, em breve" class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" src="assets/brand/estacoes/f3.jpg"/>
+<div class="absolute left-3 top-3"><span class="inline-flex items-center gap-1.5 rounded-full bg-orange-400/[0.15] px-2.5 py-1 text-[10px] font-semibold text-orange-200 shadow-[0_0_10px_rgba(242,101,34,0.15)] font-geist"><span class="h-1.5 w-1.5 rounded-full bg-orange-300"></span>Inaugura em breve</span></div>
+</div>
+<div class="px-3 pt-4 pb-2">
+<p class="text-base font-medium text-white font-geist">Posto Natureza · Maiobão</p>
+<p class="mt-1 text-xs text-slate-400 font-geist">MA-201, km 7 · Paço do Lumiar</p>
+<p class="mt-3 text-xs text-slate-500 font-geist">DC 60 kW · recarga rápida em 20 a 30 min</p>
+</div>
+</div>
+<div class="group relative flex flex-col rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-3 transition duration-300 ease-out hover:-translate-y-1">
+<div class="absolute inset-0 rounded-[2rem] border border-white/10 pointer-events-none group-hover:border-white/20 transition-colors"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-orange-300/40 to-transparent"></div>
+<div class="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#08111f]/95 aspect-[4/3]">
+<img alt="Novo eletroposto Eletrotyme, em breve" class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" src="assets/brand/estacoes/p3.jpg"/>
+<div class="absolute left-3 top-3"><span class="inline-flex items-center gap-1.5 rounded-full bg-orange-400/[0.15] px-2.5 py-1 text-[10px] font-semibold text-orange-200 shadow-[0_0_10px_rgba(242,101,34,0.15)] font-geist"><span class="h-1.5 w-1.5 rounded-full bg-orange-300"></span>Inaugura em breve</span></div>
+</div>
+<div class="px-3 pt-4 pb-2">
+<p class="text-base font-medium text-white font-geist">Ponto 05</p>
+<p class="mt-1 text-xs text-slate-400 font-geist">Grande São Luís · MA</p>
+<p class="mt-3 text-xs text-slate-500 font-geist">DC 60 kW · em comissionamento</p>
+</div>
+</div>
+<div class="group relative flex flex-col justify-between rounded-[2rem] bg-gradient-to-b from-orange-500/[0.12] via-white/[0.05] to-transparent p-8 shadow-2xl shadow-orange-950/20 transition duration-300 ease-out hover:-translate-y-1">
+<div class="pointer-events-none absolute inset-0 rounded-[2rem] border border-orange-300/25 transition-colors group-hover:border-orange-200/40"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-orange-200/70 to-transparent"></div>
+<div>
+<p class="text-[11px] font-semibold uppercase tracking-widest text-orange-300 font-geist">O próximo pode ser o seu</p>
+<h3 class="mt-3 text-[24px] tracking-tight text-white font-jakarta font-medium">Seu ponto no mapa em até 90 dias.</h3>
+<p class="mt-4 text-[15px] leading-relaxed text-slate-300 font-geist">Você entra com a área. Projeto, equipamento, obra, homologação e operação são nossos. Simule quantas recargas por dia a sua pista rende.</p>
+</div>
+<a class="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-orange-500 px-5 py-3 text-sm font-semibold text-white shadow-2xl shadow-orange-950/20 transition duration-300 ease-out hover:bg-orange-400 font-geist" href="simulador.html">Abrir simulador<iconify-icon height="18" icon="solar:arrow-right-linear" width="18"></iconify-icon></a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- models -->
+<section class="border-white/[0.06] overflow-hidden sm:px-8 lg:px-10 font-sans border-t pt-24 pr-5 pb-24 pl-5 relative" id="modelos">
+<div class="pointer-events-none absolute left-1/2 top-0 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-orange-500/10 blur-3xl"></div>
+<div class="pointer-events-none absolute inset-0 opacity-[0.035]" style="background-image: linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px); background-size: 28rem 28rem;"></div>
+<div class="z-10 w-full max-w-[1280px] mr-auto ml-auto relative">
+<div class="reveal grid w-full max-w-[1280px] gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-end">
+<div class="max-w-3xl">
+<p class="text-[13px] font-medium text-slate-400 font-geist">07 · Modelos de parceria</p>
+<h2 class="mt-4 text-4xl leading-[1.1] tracking-tight text-white sm:text-[56px] font-jakarta font-medium">Três caminhos para colocar seu ponto no mapa.</h2>
+</div>
+<div class="lg:ml-auto lg:max-w-md">
+<p class="text-[17px] leading-relaxed text-slate-400 font-geist">Em todos eles quem opera é a Eletrotyme. O que muda é quem é dono do ativo e como o resultado é dividido. Valores de referência da proposta Posto Natureza, cenário realista de 8 recargas por dia.</p>
+<div class="mt-7 flex flex-wrap gap-3">
+<a class="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-orange-500 px-5 text-sm font-medium text-white shadow-[0_0_0_1px_rgba(255,255,255,0.12),0_18px_50px_rgba(0,0,0,0.35)] transition hover:bg-orange-400 font-geist" href="simulador.html">Simular investimento<iconify-icon height="18" icon="solar:arrow-right-linear" width="18"></iconify-icon></a>
+<a class="inline-flex h-11 items-center justify-center rounded-full border border-white/[0.12] bg-white/[0.04] px-5 text-sm font-medium text-white backdrop-blur-xl transition hover:bg-white/[0.08] font-geist" href="#cta">Solicitar proposta</a>
+</div>
+</div>
+</div>
+<div class="mt-16 grid gap-6 lg:grid-cols-3">
+
+<article class="group relative flex flex-col rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-8 transition duration-300 ease-out hover:-translate-y-1">
+<div class="pointer-events-none absolute inset-0 rounded-[2rem] border border-white/10 transition-colors group-hover:border-white/20"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<div class="flex items-start justify-between gap-6">
+<div>
+<p class="text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Parceria</p>
+<h3 class="mt-3 text-[24px] tracking-tight text-white font-jakarta font-medium">Você entra com a área</h3>
+</div>
+<span class="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-medium text-slate-400 font-geist">Sem investimento</span>
+</div>
+<div class="mt-8">
+<div class="flex items-end gap-2">
+<span class="text-5xl tracking-tight text-white font-jakarta font-medium">R$ 0</span>
+<span class="pb-2 text-sm text-slate-500 font-geist">de investimento</span>
+</div>
+<p class="mt-4 text-[15px] leading-relaxed text-slate-400 font-geist">Equipamento, obra, energia e operação por conta da Eletrotyme. Você escolhe entre aluguel fixo das vagas ou participação no faturamento.</p>
+</div>
+<a class="mt-8 inline-flex items-center justify-center rounded-full border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-medium text-slate-200 transition duration-300 ease-out hover:border-white/20 hover:bg-white/[0.07] font-geist" href="simulador.html#parceria">Simular parceria</a>
+<div class="mt-8 h-px w-full bg-white/[0.08]"></div>
+<ul class="mt-8 space-y-4 text-[15px] leading-6 text-slate-400">
+<li class="flex gap-3 font-geist"><span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-300"><svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></span>Aluguel fixo de R$ 1.500/mês</li>
+<li class="flex gap-3 font-geist"><span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-300"><svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></span>Ou 10% do faturamento bruto</li>
+<li class="flex gap-3 font-geist"><span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-300"><svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></span>Carregador DC 60 kW instalado</li>
+<li class="flex gap-3 font-geist"><span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-300"><svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></span>Repasse mensal do que foi faturado</li>
+</ul>
+</article>
+
+<article class="group relative flex flex-col rounded-[2rem] bg-gradient-to-b from-orange-500/[0.16] via-white/[0.06] to-transparent p-8 shadow-2xl shadow-orange-950/20 transition duration-300 ease-out hover:-translate-y-1">
+<div class="pointer-events-none absolute inset-0 rounded-[2rem] border border-orange-300/30 transition-colors group-hover:border-orange-200/40"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-orange-200/70 to-transparent"></div>
+<div class="flex items-start justify-between gap-6">
+<div>
+<p class="text-[11px] font-semibold uppercase tracking-widest text-orange-300 font-geist">Posto pronto</p>
+<h3 class="mt-3 text-[24px] tracking-tight text-white font-jakarta font-medium">O ativo é seu</h3>
+</div>
+<span class="rounded-full border border-orange-300/20 bg-orange-400/10 px-3 py-1 text-xs font-medium text-orange-200 font-geist">Recomendado</span>
+</div>
+<div class="mt-8">
+<div class="flex items-end gap-2">
+<span class="text-5xl tracking-tight text-white font-jakarta font-medium">R$ 150k</span>
+<span class="pb-2 text-sm text-slate-400 font-geist">entregue e funcionando</span>
+</div>
+<p class="mt-4 text-[15px] leading-relaxed text-slate-300 font-geist">Equipamento de 60 kW, obra elétrica, projeto, homologação, sinalização e comissionamento. O resultado inteiro da operação passa a ser seu.</p>
+</div>
+<a class="mt-8 inline-flex items-center justify-center rounded-full bg-orange-500 px-5 py-3 text-sm font-semibold text-white shadow-2xl shadow-orange-950/20 transition duration-300 ease-out hover:bg-orange-400 font-geist" href="simulador.html#pronto">Simular posto pronto</a>
+<div class="mt-8 h-px w-full bg-orange-200/15"></div>
+<ul class="mt-8 space-y-4 text-[15px] leading-6 text-slate-300">
+<li class="flex gap-3 font-geist"><span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-orange-300/15 text-orange-200"><svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></span>R$ 9.672/mês no cenário realista</li>
+<li class="flex gap-3 font-geist"><span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-orange-300/15 text-orange-200"><svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></span>Retorno do aporte em 16 meses</li>
+<li class="flex gap-3 font-geist"><span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-orange-300/15 text-orange-200"><svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></span>Ponto de equilíbrio: 0,9 recarga/dia</li>
+<li class="flex gap-3 font-geist"><span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-orange-300/15 text-orange-200"><svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></span>Operação, NOC e manutenção continuam nossos</li>
+<li class="flex gap-3 font-geist"><span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-orange-300/15 text-orange-200"><svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></span>Sem aluguel de vagas a pagar</li>
+</ul>
+</article>
+
+<article class="group relative flex flex-col rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-8 transition duration-300 ease-out hover:-translate-y-1">
+<div class="pointer-events-none absolute inset-0 rounded-[2rem] border border-white/10 transition-colors group-hover:border-white/20"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<div class="flex items-start justify-between gap-6">
+<div>
+<p class="text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Investidor</p>
+<h3 class="mt-3 text-[24px] tracking-tight text-white font-jakarta font-medium">Yield com ativo real</h3>
+</div>
+<span class="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-medium text-slate-400 font-geist">Renda mensal</span>
+</div>
+<div class="mt-8">
+<div class="flex items-end gap-2">
+<span class="text-5xl tracking-tight text-white font-jakarta font-medium">R$ 50k</span>
+<span class="pb-2 text-sm text-slate-500 font-geist">por cota</span>
+</div>
+<p class="mt-4 text-[15px] leading-relaxed text-slate-400 font-geist">Aquisição de ativo e participação proporcional nas receitas do hub, com gestão 100% passiva pela Eletrotyme.</p>
+</div>
+<a class="mt-8 inline-flex items-center justify-center rounded-full border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-medium text-slate-200 transition duration-300 ease-out hover:border-white/20 hover:bg-white/[0.07] font-geist" href="simulador.html#investidor">Simular investimento</a>
+<div class="mt-8 h-px w-full bg-white/[0.08]"></div>
+<ul class="mt-8 space-y-4 text-[15px] leading-6 text-slate-400">
+<li class="flex gap-3 font-geist"><span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-300"><svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></span>Target yield de 2% ao mês</li>
+<li class="flex gap-3 font-geist"><span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-300"><svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></span>Distribuição mensal (D+30)</li>
+<li class="flex gap-3 font-geist"><span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-300"><svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></span>Lock-in inicial de 120 dias</li>
+<li class="flex gap-3 font-geist"><span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-300"><svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></span>Participação de até 50% por ponto</li>
+<li class="flex gap-3 font-geist"><span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-300"><svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></span>Acesso aos dados da operação</li>
+</ul>
+</article>
+
+</div>
+<div class="text-center border-white/10 border rounded-[2rem] mt-10 pt-6 pr-6 pb-6 pl-6">
+<p class="text-[15px] leading-relaxed text-slate-400 font-geist">Ponto de equilíbrio = custos fixos mensais ÷ (30 dias × 30 kWh por recarga × margem de R$ 1,51/kWh). Preço ao motorista de R$ 2,90/kWh, taxa de plataforma de 10% e custo de energia de R$ 1,10/kWh. Rentabilidade projetada não é garantia de resultado.</p>
+</div>
+</div>
+</section>
+
+<!-- faq -->
+<section class="border-white/[0.06] overflow-hidden sm:px-8 lg:px-10 font-sans border-t pt-24 pr-5 pb-24 pl-5 relative" id="faq">
+<div class="pointer-events-none absolute left-1/2 top-0 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-orange-500/10 blur-3xl"></div>
+<div class="pointer-events-none absolute inset-0 opacity-[0.035]" style="background-image: linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.06) 1px, transparent 1px); background-size: 28rem 28rem;"></div>
+<div class="relative z-10 mx-auto w-full max-w-[1280px]">
+<div class="reveal grid w-full max-w-[1280px] gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-end">
+<div class="max-w-3xl">
+<p class="text-[13px] font-medium text-slate-400 font-geist">08 · Perguntas frequentes</p>
+<h2 class="mt-4 text-4xl leading-[1.1] tracking-tight text-white sm:text-[56px] font-jakarta font-medium">O que todo dono de posto pergunta antes de fechar.</h2>
+</div>
+<div class="lg:ml-auto lg:max-w-md">
+<p class="text-[17px] leading-relaxed text-slate-400 font-geist">As respostas abaixo seguem exatamente o que está na proposta técnica da Eletrotyme. Se ficou alguma dúvida, a gente vai até o seu ponto.</p>
+<div class="mt-7 flex flex-wrap gap-3">
+<a class="inline-flex h-11 items-center justify-center rounded-full bg-white px-5 text-sm font-medium text-slate-950 shadow-[0_0_0_1px_rgba(255,255,255,0.12),0_18px_50px_rgba(0,0,0,0.35)] transition hover:bg-orange-50 font-geist" href="#cta">Falar com a Eletrotyme</a>
+<a class="inline-flex h-11 items-center justify-center rounded-full border border-white/[0.12] bg-white/[0.04] px-5 text-sm font-medium text-white backdrop-blur-xl transition hover:bg-white/[0.08] font-geist" href="#modelos">Ver modelos</a>
+</div>
+</div>
+</div>
+<div class="mt-16 grid gap-6 lg:grid-cols-2">
+
+<article class="group relative rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-8 transition duration-300 ease-out hover:-translate-y-1">
+<div class="pointer-events-none absolute inset-0 rounded-[2rem] border border-white/10 transition-colors group-hover:border-white/20"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<div class="relative flex gap-5">
+<span class="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border border-emerald-300/20 bg-emerald-400/10 text-emerald-200">
+<svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.82 1c0 2-3 2.25-3 4"></path><path d="M12 17h.01"></path></svg>
+</span>
+<div>
+<h3 class="text-[22px] tracking-tight text-white font-jakarta font-medium">Quem opera o equipamento?</h3>
+<p class="mt-4 text-[15px] leading-relaxed text-slate-400 font-geist">Em todos os caminhos, a Eletrotyme: instalação, monitoramento remoto 24 horas, manutenção e cobrança pelo aplicativo. Isso vale inclusive se você comprar o posto pronto.</p>
+</div>
+</div>
+</article>
+
+<article class="group relative rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-8 transition duration-300 ease-out hover:-translate-y-1">
+<div class="pointer-events-none absolute inset-0 rounded-[2rem] border border-white/10 transition-colors group-hover:border-white/20"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<div class="relative flex gap-5">
+<span class="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border border-emerald-300/20 bg-emerald-400/10 text-emerald-200">
+<svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+</span>
+<div>
+<h3 class="text-[22px] tracking-tight text-white font-jakarta font-medium">Minha equipe precisa fazer alguma coisa?</h3>
+<p class="mt-4 text-[15px] leading-relaxed text-slate-400 font-geist">Não. Sua equipe não opera o equipamento e não lida com pagamento: o motorista libera e paga pelo app. O repasse do que foi faturado é mensal.</p>
+</div>
+</div>
+</article>
+
+<article class="group relative rounded-[2rem] bg-gradient-to-b from-orange-500/[0.12] via-white/[0.05] to-transparent p-8 shadow-2xl shadow-orange-950/20 transition duration-300 ease-out hover:-translate-y-1">
+<div class="pointer-events-none absolute inset-0 rounded-[2rem] border border-orange-300/25 transition-colors group-hover:border-orange-200/40"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-orange-200/70 to-transparent"></div>
+<div class="relative flex gap-5">
+<span class="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border border-orange-300/25 bg-orange-300/15 text-orange-100">
+<svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3v18h18"></path><path d="m7 15 4-4 4 4 5-6"></path></svg>
+</span>
+<div>
+<h3 class="text-[22px] tracking-tight text-white font-jakarta font-medium">Quantas recargas por dia para não dar prejuízo?</h3>
+<p class="mt-4 text-[15px] leading-relaxed text-slate-300 font-geist">Duas. Duas recargas por dia cobrem energia, plataforma, manutenção, seguro e o aluguel das vagas. É o único número da proposta que você confere sozinho, olhando o movimento da pista.</p>
+</div>
+</div>
+</article>
+
+<article class="group relative rounded-[2rem] bg-gradient-to-b from-orange-500/[0.12] via-white/[0.05] to-transparent p-8 shadow-2xl shadow-orange-950/20 transition duration-300 ease-out hover:-translate-y-1">
+<div class="pointer-events-none absolute inset-0 rounded-[2rem] border border-orange-300/25 transition-colors group-hover:border-orange-200/40"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-orange-200/70 to-transparent"></div>
+<div class="relative flex gap-5">
+<span class="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border border-orange-300/25 bg-orange-300/15 text-orange-100">
+<svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+</span>
+<div>
+<h3 class="text-[22px] tracking-tight text-white font-jakarta font-medium">Quanto tempo leva a implantação?</h3>
+<p class="mt-4 text-[15px] leading-relaxed text-slate-300 font-geist">Até 90 dias em um cronograma padronizado: mês 1 de projetos e legal, mês 2 de obra e infraestrutura, mês 3 de comissionamento, testes de carga e início da operação comercial.</p>
+</div>
+</div>
+</article>
+
+<article class="group relative rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-8 transition duration-300 ease-out hover:-translate-y-1">
+<div class="pointer-events-none absolute inset-0 rounded-[2rem] border border-white/10 transition-colors group-hover:border-white/20"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<div class="relative flex gap-5">
+<span class="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border border-emerald-300/20 bg-emerald-400/10 text-emerald-200">
+<svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path><path d="m9 12 2 2 4-4"></path></svg>
+</span>
+<div>
+<h3 class="text-[22px] tracking-tight text-white font-jakarta font-medium">E se o equipamento parar?</h3>
+<p class="mt-4 text-[15px] leading-relaxed text-slate-400 font-geist">Sensores avisam de anomalia antes de virar falha, com manutenção preditiva e uptime acima de 98%. Se parar, quem resolve somos nós, sem custo e sem trabalho para você.</p>
+</div>
+</div>
+</article>
+
+<article class="group relative rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-8 transition duration-300 ease-out hover:-translate-y-1">
+<div class="pointer-events-none absolute inset-0 rounded-[2rem] border border-white/10 transition-colors group-hover:border-white/20"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<div class="relative flex gap-5">
+<span class="mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border border-emerald-300/20 bg-emerald-400/10 text-emerald-200">
+<svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 7h16"></path><path d="M4 12h10"></path><path d="M4 17h7"></path></svg>
+</span>
+<div>
+<h3 class="text-[22px] tracking-tight text-white font-jakarta font-medium">Aluguel fixo ou participação: qual escolher?</h3>
+<p class="mt-4 text-[15px] leading-relaxed text-slate-400 font-geist">O aluguel fixo costuma ganhar em ponto de movimento médio. A participação só passa à frente em ponto de alta performance, acima de 8 recargas por dia. Mostramos os dois lado a lado na proposta.</p>
+</div>
+</div>
+</article>
+
+</div>
+<div class="mt-10 rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 text-center">
+<p class="text-[15px] leading-relaxed text-slate-400 font-geist">Ainda tem dúvidas? Peça a proposta do seu ponto: a Eletrotyme monta os cenários conservador, realista e otimista com o movimento real da sua pista.</p>
+</div>
+</div>
+</section>
+
+<!-- cta -->
+<section class="sm:px-8 lg:px-10 lg:pt-24 pt-24 pr-5 pb-24 pl-5" id="cta">
+<div class="reveal overflow-hidden border-white/[0.08] shadow-orange-950/20 sm:px-10 sm:py-10 lg:px-12 lg:py-12 bg-[#0d1422]/70 w-full max-w-[1280px] border rounded-[2rem] mr-auto ml-auto pt-8 pr-6 pb-8 pl-6 relative shadow-2xl backdrop-blur-2xl">
+<div class="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-orange-300/10 blur-3xl"></div>
+<div class="pointer-events-none absolute -bottom-28 left-20 h-64 w-64 rounded-full bg-emerald-500/10 blur-3xl"></div>
+<div class="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+<div class="max-w-3xl">
+<div class="inline-flex items-center gap-2 rounded-full border border-orange-100/10 bg-orange-100/[0.04] px-3 py-1">
+<span class="h-1.5 w-1.5 rounded-full bg-orange-300"></span>
+<p class="text-xs font-medium tracking-wide text-orange-100 font-geist">Go-live em até 90 dias</p>
+</div>
+<h2 class="mt-5 text-3xl tracking-tighter text-white sm:text-4xl lg:text-5xl font-jakarta font-medium">Coloque seu ponto no mapa de quem dirige elétrico.</h2>
+<p class="mt-5 max-w-2xl text-sm leading-6 text-slate-400 sm:text-base font-geist">Sem investimento para o parceiro. Mande o endereço do seu ponto e receba a proposta com os três cenários de recarga por dia.</p>
+</div>
+<div class="flex shrink-0 flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
+<a class="inline-flex items-center justify-center gap-2 rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white shadow-2xl shadow-orange-950/30 transition duration-300 ease-out hover:scale-[1.03] hover:bg-orange-400 font-geist" href="mailto:invest@eletrotyme.com?subject=Proposta%20de%20eletroposto">
+Solicitar proposta
+<iconify-icon height="18" icon="solar:arrow-right-linear" width="18"></iconify-icon>
+</a>
+<a class="inline-flex items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.03] px-6 py-3 text-sm font-medium text-slate-200 transition duration-300 ease-out hover:bg-white/[0.06] hover:text-white font-geist" href="https://instagram.com/eletrotyme" target="_blank" rel="noopener">@eletrotyme no Instagram</a>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+
+<!-- footer -->
+<footer class="overflow-hidden border-white/[0.06] sm:px-8 sm:py-16 lg:pl-10 lg:pr-10 lg:pt-20 lg:pb-10 border-t pt-20 pr-10 pb-10 pl-10 relative">
+<div class="pointer-events-none absolute left-1/2 top-0 h-px w-[70%] -translate-x-1/2 bg-gradient-to-r from-transparent via-orange-100/20 to-transparent"></div>
+<div class="pointer-events-none absolute -right-32 top-20 h-80 w-80 rounded-full bg-orange-300/10 blur-3xl"></div>
+<div class="pointer-events-none absolute -left-32 bottom-10 h-80 w-80 rounded-full bg-emerald-500/10 blur-3xl"></div>
+<div class="relative mx-auto w-full max-w-[1280px]">
+<div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+<div>
+<p class="mb-5 inline-flex items-center gap-2 rounded-full border border-orange-100/10 bg-orange-100/[0.04] px-3 py-1 text-xs font-medium tracking-wide text-orange-100 font-geist">
+<span class="h-1.5 w-1.5 rounded-full bg-orange-300"></span>Mobilidade elétrica de verdade
+</p>
+<h2 class="max-w-5xl text-6xl leading-none tracking-tighter text-white sm:text-7xl lg:text-8xl font-jakarta font-medium">Vamos colocar seu ponto no mapa.</h2>
+</div>
+<div class="max-w-xl lg:justify-self-end">
+<p class="text-2xl leading-tight tracking-tight text-slate-400 sm:text-3xl font-jakarta font-medium">Energia que move um futuro melhor, começando pela sua vaga.</p>
+<div class="mt-8 flex flex-col gap-3 sm:flex-row">
+<a class="inline-flex items-center justify-center gap-3 rounded-full bg-orange-500 px-6 py-4 text-base font-medium text-white shadow-2xl shadow-orange-950/30 transition duration-300 ease-out hover:scale-[1.03] hover:bg-orange-400 font-geist" href="#cta">
+Solicitar proposta
+<svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+</a>
+<a class="inline-flex items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.03] px-6 py-4 text-base font-medium text-slate-200 transition duration-300 ease-out hover:bg-white/[0.06] hover:text-white font-geist" href="#how">Ver como funciona</a>
+</div>
+</div>
+</div>
+<div class="mt-16 grid gap-12 border-t border-white/[0.06] pt-12 sm:mt-20 sm:grid-cols-2 lg:mt-24 lg:grid-cols-[1.2fr_0.6fr_0.6fr_0.6fr] lg:gap-16">
+<div class="max-w-sm">
+<a class="inline-flex items-center gap-3" href="#">
+<span class="flex h-10 w-10 items-center justify-center rounded-2xl border border-orange-100/10 bg-orange-100/[0.06] text-orange-100">
+<img alt="" class="h-6 w-auto" src="assets/brand/logo-symbol.png"/>
+</span>
+<span class="text-xl tracking-tight text-white font-jakarta font-medium">ELETRO<span class="font-normal text-slate-300 font-jakarta">TYME</span></span>
+</a>
+<p class="mt-5 text-sm leading-6 text-slate-500 font-geist">Plataforma de infraestrutura energética para eletromobilidade. Hubs de recarga como ativos reais geradores de receita recorrente, em São Luís e Grande Ilha.</p>
+</div>
+<div>
+<p class="text-sm font-medium text-slate-500 font-geist">Páginas</p>
+<nav class="mt-5 flex flex-col gap-3">
+<a class="text-sm text-slate-300 transition hover:text-orange-100 font-geist" href="#how">Como funciona</a>
+<a class="text-sm text-slate-300 transition hover:text-orange-100 font-geist" href="#modelos">Modelos</a>
+<a class="text-sm text-slate-300 transition hover:text-orange-100 font-geist" href="#eletropostos">Eletropostos</a>
+<a class="text-sm text-slate-300 transition hover:text-orange-100 font-geist" href="simulador.html">Simulador</a>
+<a class="text-sm text-slate-300 transition hover:text-orange-100 font-geist" href="#problem">Por que agora</a>
+</nav>
+</div>
+<div>
+<p class="text-sm font-medium text-slate-500 font-geist">Contato</p>
+<nav class="mt-5 flex flex-col gap-3">
+<a class="text-sm text-slate-300 transition hover:text-orange-100 font-geist" href="mailto:invest@eletrotyme.com">invest@eletrotyme.com</a>
+<a class="text-sm text-slate-300 transition hover:text-orange-100 font-geist" href="https://www.eletrotyme.com" target="_blank" rel="noopener">www.eletrotyme.com</a>
+<a class="text-sm text-slate-300 transition hover:text-orange-100 font-geist" href="#cta">Solicitar proposta</a>
+<a class="text-sm text-slate-300 transition hover:text-orange-100 font-geist" href="#faq">Perguntas frequentes</a>
+</nav>
+</div>
+<div>
+<p class="text-sm font-medium text-slate-500 font-geist">Redes sociais</p>
+<nav class="mt-5 flex flex-col gap-3">
+<a class="text-sm text-slate-300 transition hover:text-orange-100 font-geist" href="https://instagram.com/eletrotyme" target="_blank" rel="noopener">Instagram</a>
+<a class="text-sm text-slate-300 transition hover:text-orange-100 font-geist" href="#">LinkedIn</a>
+<a class="text-sm text-slate-300 transition hover:text-orange-100 font-geist" href="#">WhatsApp</a>
+<a class="text-sm text-slate-300 transition hover:text-orange-100 font-geist" href="#">YouTube</a>
+</nav>
+</div>
+</div>
+<div class="mt-12 flex flex-col justify-between gap-5 border-t border-white/[0.06] pt-8 text-sm text-slate-500 sm:flex-row sm:items-center">
+<p class="font-geist">© 2026 Eletrotyme. Todos os direitos reservados.</p>
+<div class="flex flex-wrap gap-x-4 gap-y-2 font-geist">
+<a class="transition hover:text-slate-300 font-geist" href="#how">Mais que recarga</a>
+<a class="transition hover:text-slate-300 font-geist" href="#cta">Conexões para um amanhã melhor</a>
+<a class="transition hover:text-slate-300 font-geist" href="design-system.html">Design system</a>
+</div>
+</div>
+</div>
+</footer>
+
+</div>
+
+<!-- js -->
+<!-- scroll-reveal das seções + parallax 3D do mockup do herói -->
+<script src="assets/js/reveal-and-parallax.js"></script>
+<!-- fundo WebGL animado (Three.js) renderizado no #webgl-canvas do herói -->
+<script type="module" src="assets/js/webgl-background.js"></script>
+
+</body>
+</html>

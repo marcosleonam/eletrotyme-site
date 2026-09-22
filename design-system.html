@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="5000" name="preview-ready-after-ms"/>
+<title>Eletrotyme — Design System</title>
+<meta name="description" content="Design system vivo do site Eletrotyme: tipografia, cores, superfícies, componentes, layout, motion e ícones, reutilizando exatamente as classes, animações e assets do site."/>
+<link rel="icon" type="image/png" href="assets/brand/logo-symbol.png"/>
+
+<!-- fonts: Geist (corpo) e Plus Jakarta Sans (títulos) -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+<!-- css -->
+<!-- classes utilitárias .font-geist / .font-jakarta -->
+<link rel="stylesheet" href="assets/css/fonts.css"/>
+<!-- keyframes animationIn (entrada) e progress-shimmer (barras de progresso) -->
+<link rel="stylesheet" href="assets/css/animations.css"/>
+
+<!-- head-only js: runtime do Tailwind (gera as classes utilitárias em tempo de execução) -->
+<script src="assets/tailwind-3.4.17.js"></script>
+<!-- brand: laranja Eletrotyme (#f26522) substitui o orange-500 padrão do Tailwind -->
+<script>tailwind.config = { theme: { extend: { colors: { orange: { 500: '#f26522' } } } } };</script>
+<!-- head-only js: runtime do Iconify (renderiza os <iconify-icon>) -->
+<script src="assets/iconify-icon.min.js"></script>
+
+<!-- importmap: resolve os imports de three.js usados pelo fundo WebGL -->
+<script type="importmap">
+{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}
+</script>
+</head>
+<body class="min-h-screen overflow-x-hidden antialiased selection:bg-orange-300/20 selection:text-orange-100 text-slate-100 font-sans bg-[#080c14]" style="font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
+
+<!-- background-layers -->
+<div class="pointer-events-none fixed inset-0 -z-50" style="background: radial-gradient(circle at 50% -10%, rgba(242, 101, 34, 0.14), transparent 36%), radial-gradient(circle at 82% 18%, rgba(34, 197, 94, 0.07), transparent 28%), linear-gradient(180deg, #0b1020 0%, #080c14 42%, #0a0d13 100%);"></div>
+<div class="pointer-events-none fixed inset-0 -z-40 opacity-[0.035]" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 256 256%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.75%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+
+<div class="mx-auto min-h-screen w-full max-w-[1360px] border-x border-white/[0.06]">
+<div class="pointer-events-none fixed left-1/2 top-0 -z-30 hidden h-full w-full max-w-[1360px] -translate-x-1/2 grid-cols-4 md:grid">
+<div class="border-r border-white/[0.045]"></div>
+<div class="border-r border-white/[0.045]"></div>
+<div class="border-r border-white/[0.045]"></div>
+<div></div>
+</div>
+
+<!-- header: nav horizontal com âncoras para cada seção do design system -->
+<header class="sticky border-white/[0.06] [animation:animationIn_0.8s_ease-out_0.1s_both] z-50 bg-[#080c14]/70 border-b top-0 backdrop-blur-2xl">
+<nav class="mx-auto flex h-16 w-full max-w-[1280px] items-center justify-between px-5 sm:px-8 lg:px-10">
+<a class="group flex items-center gap-3" href="index.html">
+<img alt="Eletrotyme" class="h-8 w-auto" src="assets/brand/logo-symbol.png"/>
+<span class="text-base font-semibold text-white tracking-[-0.035em] font-geist">ELETRO<span class="font-normal text-slate-300 font-geist">TYME</span> <span class="font-normal text-slate-500 font-geist">/ Design System</span></span>
+</a>
+<div class="hidden items-center gap-8 md:flex">
+<a class="relative text-sm text-slate-400 transition duration-300 ease-out hover:text-white font-geist" href="#typography">Tipografia<span class="absolute -bottom-2 left-0 h-px w-0 bg-orange-300/70 transition-all duration-300 ease-out hover:w-full"></span></a>
+<a class="relative text-sm text-slate-400 transition duration-300 ease-out hover:text-white font-geist" href="#colors">Cores<span class="absolute -bottom-2 left-0 h-px w-0 bg-orange-300/70 transition-all duration-300 ease-out hover:w-full"></span></a>
+<a class="relative text-sm text-slate-400 transition duration-300 ease-out hover:text-white font-geist" href="#components">Componentes<span class="absolute -bottom-2 left-0 h-px w-0 bg-orange-300/70 transition-all duration-300 ease-out hover:w-full"></span></a>
+<a class="relative text-sm text-slate-400 transition duration-300 ease-out hover:text-white font-geist" href="#layout">Layout<span class="absolute -bottom-2 left-0 h-px w-0 bg-orange-300/70 transition-all duration-300 ease-out hover:w-full"></span></a>
+<a class="relative text-sm text-slate-400 transition duration-300 ease-out hover:text-white font-geist" href="#motion">Motion<span class="absolute -bottom-2 left-0 h-px w-0 bg-orange-300/70 transition-all duration-300 ease-out hover:w-full"></span></a>
+<a class="relative text-sm text-slate-400 transition duration-300 ease-out hover:text-white font-geist" href="#icons">Ícones<span class="absolute -bottom-2 left-0 h-px w-0 bg-orange-300/70 transition-all duration-300 ease-out hover:w-full"></span></a>
+</div>
+<a class="hidden rounded-full border border-orange-300/20 bg-orange-500 px-4 py-2 text-sm font-medium text-white shadow-lg shadow-orange-950/20 transition duration-300 ease-out hover:scale-[1.03] hover:border-orange-300/35 hover:bg-orange-400 hover:shadow-orange-900/25 sm:inline-flex font-geist" href="index.html">Ver o site</a>
+<button aria-label="Abrir menu" class="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-slate-300 md:hidden">
+<iconify-icon height="20" icon="solar:hamburger-menu-linear" width="20"></iconify-icon>
+</button>
+</nav>
+</header>
+
+<main>
+
+<!-- 0) hero: clone exato do herói do site, só o texto foi adaptado -->
+<section class="overflow-hidden sm:px-8 sm:pb-28 sm:pt-28 lg:px-10 lg:pt-24 lg:pb-24 pt-20 pr-5 pb-24 pl-5 relative" id="blueprint">
+<canvas class="absolute inset-0 z-0 pointer-events-none opacity-60 mix-blend-screen w-full h-full" id="webgl-canvas"></canvas>
+<div class="pointer-events-none absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full bg-orange-300/10 blur-3xl"></div>
+<div class="grid gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12 w-full max-w-[1280px] mr-auto ml-auto gap-x-14 gap-y-14 items-center">
+<div class="reveal [animation:animationIn_0.8s_ease-out_0.1s_both] z-10 relative">
+<div class="mb-6 inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.04] px-3 py-1.5 text-xs text-slate-300 shadow-2xl shadow-black/20 backdrop-blur-xl font-geist">
+<span class="h-1.5 w-1.5 rounded-full bg-orange-400 shadow-lg shadow-orange-400/40"></span>
+Design system vivo · Tailwind 3.4 · Geist + Plus Jakarta Sans
+</div>
+<h1 class="sm:text-6xl lg:text-7xl text-5xl font-medium text-white tracking-tighter font-jakarta max-w-4xl">O sistema de design da Eletrotyme.</h1>
+<p class="mt-7 max-w-2xl text-base leading-7 text-slate-400 sm:text-lg font-geist">Tipografia, cores, superfícies, componentes, layout e motion do site, documentados com o mesmo HTML, as mesmas classes e os mesmos assets. Cada seção abaixo é um exemplo canônico que pode ser copiado direto para uma nova página.</p>
+<div class="mt-9 flex flex-col gap-3 sm:flex-row">
+<a class="group inline-flex items-center justify-center gap-2 shadow-orange-950/30 transition duration-300 ease-out hover:scale-[1.03] hover:bg-orange-400 hover:shadow-orange-300/10 text-sm font-semibold text-white bg-orange-500 rounded-full pt-3 pr-5 pb-3 pl-5 shadow-2xl font-geist" href="#typography">
+Explorar o sistema
+<iconify-icon class="transition duration-300 ease-out group-hover:translate-x-0.5" height="18" icon="solar:arrow-right-linear" width="18"></iconify-icon>
+</a>
+<a class="inline-flex items-center justify-center gap-2 rounded-full border border-white/[0.1] bg-white/[0.04] px-5 py-3 text-sm font-medium text-slate-200 shadow-2xl shadow-black/20 backdrop-blur-xl transition duration-300 ease-out hover:scale-[1.02] hover:border-white/[0.18] hover:bg-white/[0.07] font-geist" href="index.html">
+Ver o site
+<iconify-icon height="18" icon="solar:bolt-linear" width="18"></iconify-icon>
+</a>
+</div>
+</div>
+<div class="reveal transition-all duration-700 ease-out lg:h-[43rem] group [animation:animationIn_0.8s_ease-out_0.1s_both] w-full h-[34rem] max-w-[42rem] mr-auto ml-auto relative" id="heroObject" style="perspective: 1200px;">
+<div aria-hidden="true" class="absolute left-1/2 top-1/2 h-[34rem] w-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-400/[0.08] blur-[100px] transition-all duration-500 group-hover:bg-orange-400/[0.12]"></div>
+<div aria-hidden="true" class="absolute left-[62%] top-[22%] h-44 w-44 -translate-x-1/2 rounded-full bg-emerald-400/[0.06] blur-[80px]"></div>
+<div aria-hidden="true" class="absolute left-1/2 top-[68%] h-48 w-[88%] -translate-x-1/2 rounded-full bg-black/60 blur-3xl"></div>
+<div aria-hidden="true" class="absolute left-1/2 top-[69%] h-28 w-[78%] -translate-x-1/2 rounded-full bg-orange-950/30 blur-2xl transition-all duration-700 group-hover:w-[82%]" style="transform-style: preserve-3d;"></div>
+<div class="absolute left-1/2 top-1/2 w-[98%] -translate-x-1/2 -translate-y-1/2 transition-transform duration-700 ease-out" style="transform-style: preserve-3d;">
+<div class="animate-float-3d floating-panel rounded-[2rem] border border-white/[0.15] bg-slate-950/70 p-3 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.1)] backdrop-blur-3xl transition duration-500 ease-out hover:border-orange-300/30">
+<div class="overflow-hidden rounded-[1.55rem] border border-white/[0.08] bg-[#0b1220]/95 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]">
+<div class="flex items-center justify-between border-b border-white/[0.07] bg-white/[0.02] px-5 py-4">
+<div class="flex items-center gap-3">
+<div>
+<p class="text-xs text-slate-400 font-geist">Design system · Eletrotyme</p>
+<p class="mt-0.5 text-sm font-medium text-slate-100 font-geist">Painel de tokens e componentes</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="hidden items-center gap-1.5 rounded-full border border-white/[0.1] bg-white/[0.04] px-3 py-1.5 text-xs text-slate-300 sm:flex transition-colors hover:bg-white/[0.08] font-geist">
+<span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>Ao vivo
+</div>
+<div class="flex -space-x-2 transition-transform hover:-space-x-1">
+<span class="h-7 w-7 rounded-full border-2 border-[#0b1220] bg-orange-400 shadow-sm"></span>
+<span class="h-7 w-7 rounded-full border-2 border-[#0b1220] bg-slate-300 shadow-sm"></span>
+<span class="h-7 w-7 rounded-full border-2 border-[#0b1220] bg-emerald-300 shadow-sm"></span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-[0.28fr_1fr]">
+<aside class="hidden border-r border-white/[0.07] bg-white/[0.01] p-4 sm:block">
+<div class="space-y-1">
+<div class="flex items-center gap-2 rounded-xl bg-orange-400/[0.1] px-3 py-2.5 text-xs font-medium text-orange-200 cursor-pointer transition-colors hover:bg-orange-400/[0.15] font-geist">
+<span class="h-1.5 w-1.5 rounded-full bg-orange-300 shadow-[0_0_8px_rgba(253,186,116,0.8)]"></span>Tipografia
+</div>
+<div class="flex items-center gap-2 rounded-xl px-3 py-2.5 text-xs text-slate-400 cursor-pointer transition-colors hover:bg-white/[0.05] hover:text-slate-200 font-geist">
+<span class="h-1.5 w-1.5 rounded-full bg-white/20"></span>Cores
+</div>
+<div class="flex items-center gap-2 rounded-xl px-3 py-2.5 text-xs text-slate-400 cursor-pointer transition-colors hover:bg-white/[0.05] hover:text-slate-200 font-geist">
+<span class="h-1.5 w-1.5 rounded-full bg-white/20"></span>Componentes
+</div>
+<div class="flex items-center gap-2 rounded-xl px-3 py-2.5 text-xs text-slate-400 cursor-pointer transition-colors hover:bg-white/[0.05] hover:text-slate-200 font-geist">
+<span class="h-1.5 w-1.5 rounded-full bg-white/20"></span>Motion
+</div>
+</div>
+<div class="mt-8 rounded-2xl border border-white/[0.05] bg-white/[0.02] p-4 backdrop-blur-sm">
+<p class="text-[10px] uppercase tracking-[0.16em] text-slate-500 font-semibold font-geist">Cobertura</p>
+<div class="mt-4 space-y-3">
+<div class="group/progress">
+<div class="mb-1.5 flex justify-between text-[10px] text-slate-400 group-hover/progress:text-slate-300 transition-colors">
+<span class="font-geist">Tokens</span><span class="text-orange-200 font-geist">100%</span>
+</div>
+<div class="h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
+<div class="h-full w-full rounded-full bg-orange-300/70 transition-all duration-1000 group-hover/progress:bg-orange-300"></div>
+</div>
+</div>
+<div class="group/progress">
+<div class="mb-1.5 flex justify-between text-[10px] text-slate-400 group-hover/progress:text-slate-300 transition-colors">
+<span class="font-geist">Componentes</span><span class="text-emerald-200 font-geist">82%</span>
+</div>
+<div class="h-1.5 overflow-hidden rounded-full bg-white/[0.06]">
+<div class="h-full w-5/6 rounded-full bg-emerald-300/60 transition-all duration-1000 group-hover/progress:bg-emerald-300"></div>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<main class="p-5">
+<div class="grid gap-3 sm:grid-cols-3">
+<div class="group/stat rounded-2xl border border-orange-200/20 bg-orange-400/[0.05] p-4 transition-all hover:bg-orange-400/[0.08] hover:border-orange-200/30 cursor-pointer">
+<p class="text-[10px] uppercase tracking-[0.16em] text-orange-200/80 font-semibold font-geist">Estilos de texto</p>
+<p class="mt-2 text-2xl text-white tracking-tighter transition-transform group-hover/stat:-translate-y-0.5 font-jakarta font-medium">10</p>
+<p class="mt-1 text-xs text-slate-400 font-geist">2 famílias tipográficas</p>
+</div>
+<div class="group/stat rounded-2xl border border-white/[0.07] bg-white/[0.02] p-4 transition-all hover:bg-white/[0.05] cursor-pointer">
+<p class="text-[10px] uppercase tracking-[0.16em] text-slate-500 font-semibold font-geist">Superfícies</p>
+<p class="mt-2 text-2xl text-white tracking-tighter transition-transform group-hover/stat:-translate-y-0.5 font-jakarta font-medium">6</p>
+<p class="mt-1 text-xs text-emerald-300/80 font-geist">vidro + blur em todas</p>
+</div>
+<div class="group/stat rounded-2xl border border-white/[0.07] bg-white/[0.02] p-4 transition-all hover:bg-white/[0.05] cursor-pointer">
+<p class="text-[10px] uppercase tracking-[0.16em] text-slate-500 font-semibold font-geist">Animações</p>
+<p class="mt-2 text-2xl text-white tracking-tighter transition-transform group-hover/stat:-translate-y-0.5 font-jakarta font-medium">5</p>
+<p class="mt-1 text-xs text-orange-200/80 font-geist">2 keyframes + 3 via JS</p>
+</div>
+</div>
+<div class="mt-4 grid gap-3 lg:grid-cols-[1fr_0.42fr]">
+<div class="rounded-2xl border border-white/[0.07] bg-white/[0.02] p-4">
+<div class="mb-4 flex items-center justify-between">
+<div>
+<p class="text-xs font-medium text-white font-geist">Seções documentadas</p>
+<p class="mt-1 text-[11px] text-slate-400 font-geist">Cada seção é um exemplo canônico</p>
+</div>
+<span class="rounded-full bg-white/[0.08] px-2.5 py-1 text-[10px] text-slate-300 font-medium font-geist">6 seções</span>
+</div>
+<div class="space-y-2.5">
+<div class="group/task rounded-xl border border-orange-200/15 bg-orange-400/[0.05] p-3 transition-colors hover:bg-orange-400/[0.08] cursor-pointer">
+<div class="flex items-center justify-between gap-3">
+<div>
+<p class="text-xs font-medium text-white group-hover/task:text-orange-100 transition-colors font-geist">Tipografia</p>
+<p class="mt-1 text-[10px] text-slate-400 font-geist">Escala, ritmo e hierarquia</p>
+</div>
+<span class="rounded-full bg-orange-400/[0.15] px-2 py-1 text-[10px] font-semibold text-orange-200 shadow-[0_0_10px_rgba(242,101,34,0.15)] font-geist">Base</span>
+</div>
+</div>
+<div class="group/task rounded-xl border border-white/[0.06] bg-white/[0.03] p-3 transition-colors hover:bg-white/[0.06] cursor-pointer">
+<div class="flex items-center justify-between gap-3">
+<div>
+<p class="text-xs font-medium text-slate-200 group-hover/task:text-white transition-colors font-geist">Componentes</p>
+<p class="mt-1 text-[10px] text-slate-500 font-geist">Botões, badges, cards, toggle</p>
+</div>
+<span class="rounded-full bg-white/[0.08] px-2 py-1 text-[10px] text-slate-300 font-geist">UI</span>
+</div>
+</div>
+<div class="group/task rounded-xl border border-white/[0.06] bg-white/[0.03] p-3 transition-colors hover:bg-white/[0.06] cursor-pointer">
+<div class="flex items-center justify-between gap-3">
+<div>
+<p class="text-xs font-medium text-slate-200 group-hover/task:text-white transition-colors font-geist">Motion</p>
+<p class="mt-1 text-[10px] text-slate-500 font-geist">Entrada, reveal, hover, shimmer</p>
+</div>
+<span class="rounded-full bg-emerald-400/[0.12] px-2 py-1 text-[10px] font-semibold text-emerald-300 font-geist">Pronta</span>
+</div>
+</div>
+</div>
+</div>
+<div class="hidden rounded-2xl border border-white/[0.07] bg-white/[0.02] p-4 lg:flex lg:flex-col lg:justify-between">
+<div>
+<div class="mb-4 flex items-center justify-between">
+<p class="text-xs font-medium text-white font-geist">Uso por seção</p>
+<p class="text-xs font-semibold text-orange-300 font-geist">100%</p>
+</div>
+<div class="flex h-24 items-end gap-1.5">
+<span class="h-8 flex-1 rounded-t-md bg-orange-400/20 transition-all hover:bg-orange-400/40 cursor-crosshair"></span>
+<span class="h-12 flex-1 rounded-t-md bg-orange-400/30 transition-all hover:bg-orange-400/50 cursor-crosshair"></span>
+<span class="h-10 flex-1 rounded-t-md bg-orange-400/25 transition-all hover:bg-orange-400/45 cursor-crosshair"></span>
+<span class="h-16 flex-1 rounded-t-md bg-orange-400/50 transition-all hover:bg-orange-400/70 cursor-crosshair shadow-[0_0_15px_rgba(242,101,34,0.2)]"></span>
+<span class="h-14 flex-1 rounded-t-md bg-emerald-400/40 transition-all hover:bg-emerald-400/60 cursor-crosshair"></span>
+<span class="h-20 flex-1 rounded-t-md bg-orange-400/60 transition-all hover:bg-orange-400/80 cursor-crosshair"></span>
+</div>
+</div>
+<div class="mt-4 space-y-2">
+<div class="flex items-center justify-between text-[10px] text-slate-400">
+<span class="font-geist">Fidelidade</span><span class="font-geist">Exata</span>
+</div>
+<div class="h-1.5 overflow-hidden rounded-full bg-white/[0.08]">
+<div class="h-full w-3/4 rounded-full bg-orange-300/80"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</div>
+</div>
+<div class="animate-float-3d absolute right-[2%] top-[10%] hidden w-44 rounded-2xl border border-orange-200/20 bg-[#0b1220]/80 p-4 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] backdrop-blur-xl sm:block transition-transform hover:-translate-y-2 cursor-pointer" style="animation-delay: -1s;">
+<div class="flex items-center justify-between">
+<p class="text-[10px] font-medium uppercase tracking-[0.16em] text-orange-200/80 font-geist">Tokens</p>
+<span class="h-2 w-2 rounded-full bg-orange-300 shadow-[0_0_12px_rgba(253,186,116,0.8)] animate-pulse"></span>
+</div>
+<p class="mt-3 text-2xl tracking-tighter text-white font-jakarta font-medium">100%</p>
+<div class="mt-3 h-1.5 overflow-hidden rounded-full bg-white/[0.08]">
+<div class="h-full w-full rounded-full bg-orange-300/80 shadow-[0_0_10px_rgba(253,186,116,0.5)]"></div>
+</div>
+</div>
+<div class="animate-float-3d absolute left-[-2%] bottom-[10%] hidden w-52 rounded-2xl border border-emerald-300/20 bg-[#0b1220]/80 p-4 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] backdrop-blur-xl md:block transition-transform hover:-translate-y-2 cursor-pointer" style="animation-delay: -3s;">
+<div class="flex items-center gap-3">
+<span class="flex h-9 w-9 items-center justify-center rounded-xl border border-emerald-300/20 bg-emerald-400/[0.1] text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.15)]">
+<svg fill="none" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="17" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg>
+</span>
+<div>
+<p class="text-xs font-medium text-white font-geist">Mesmas classes do site</p>
+<p class="mt-0.5 text-[10px] text-slate-400 font-geist">Nada foi redesenhado</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 1) typography -->
+<section class="border-white/[0.06] sm:px-8 lg:px-10 border-t pt-24 pr-5 pb-24 pl-5" id="typography">
+<div class="w-full max-w-[1280px] mr-auto ml-auto">
+<div class="reveal grid gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-end w-full max-w-[1280px] gap-x-8 gap-y-8">
+<div class="max-w-3xl">
+<p class="text-sm font-medium text-orange-200 font-geist">01 · Tipografia</p>
+<h2 class="mt-4 text-4xl text-white sm:text-5xl lg:text-6xl tracking-tighter leading-[0.95] font-jakarta font-medium">Plus Jakarta Sans para títulos, Geist para o resto.</h2>
+</div>
+<div class="lg:ml-auto lg:max-w-md">
+<p class="text-base leading-7 text-slate-400 font-geist">Títulos usam <span class="text-white font-geist">.font-jakarta</span> em peso 500 com tracking negativo. Corpo, rótulos e botões usam <span class="text-white font-geist">.font-geist</span>. Os tamanhos abaixo são os do breakpoint desktop; cada linha mostra o elemento e as classes originais.</p>
+</div>
+</div>
+<div class="mt-12 rounded-[2rem] border border-white/10 bg-white/[0.03] backdrop-blur-xl divide-y divide-white/[0.06]">
+
+<div class="grid items-center gap-4 p-6 sm:p-8 lg:grid-cols-[140px_1fr_140px]">
+<p class="text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Heading 1</p>
+<h1 class="sm:text-6xl lg:text-7xl text-5xl font-medium text-white tracking-tighter font-jakarta max-w-4xl">Eletropostos que viram ativos.</h1>
+<p class="text-sm text-slate-500 font-geist lg:text-right">72px / 72px</p>
+</div>
+
+<div class="grid items-center gap-4 p-6 sm:p-8 lg:grid-cols-[140px_1fr_140px]">
+<p class="text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Heading 2</p>
+<h2 class="text-4xl text-white sm:text-5xl lg:text-6xl tracking-tighter leading-[0.95] font-jakarta font-medium">Cada recarga em um único painel.</h2>
+<p class="text-sm text-slate-500 font-geist lg:text-right">60px / 57px</p>
+</div>
+
+<div class="grid items-center gap-4 p-6 sm:p-8 lg:grid-cols-[140px_1fr_140px]">
+<p class="text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Heading 2 · alt</p>
+<h2 class="text-4xl text-white sm:text-[56px] leading-[1.1] tracking-tight font-jakarta font-medium">Mais que recarga.</h2>
+<p class="text-sm text-slate-500 font-geist lg:text-right">56px / 62px</p>
+</div>
+
+<div class="grid items-center gap-4 p-6 sm:p-8 lg:grid-cols-[140px_1fr_140px]">
+<p class="text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Heading 3</p>
+<h3 class="text-2xl text-white tracking-tight font-jakarta font-medium">Vagas paradas não rendem</h3>
+<p class="text-sm text-slate-500 font-geist lg:text-right">24px / 32px</p>
+</div>
+
+<div class="grid items-center gap-4 p-6 sm:p-8 lg:grid-cols-[140px_1fr_140px]">
+<p class="text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Heading 3 · card</p>
+<h3 class="text-[22px] text-white font-jakarta font-medium">R$ 0,00 para o parceiro</h3>
+<p class="text-sm text-slate-500 font-geist lg:text-right">22px / 28px</p>
+</div>
+
+<div class="grid items-center gap-4 p-6 sm:p-8 lg:grid-cols-[140px_1fr_140px]">
+<p class="text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Heading 4</p>
+<h3 class="text-lg font-semibold text-white font-geist">Diagnóstico do ponto</h3>
+<p class="text-sm text-slate-500 font-geist lg:text-right">18px / 28px</p>
+</div>
+
+<div class="grid items-center gap-4 p-6 sm:p-8 lg:grid-cols-[140px_1fr_140px]">
+<p class="text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Display · número</p>
+<span class="text-5xl tracking-tight text-white font-jakarta font-medium">R$ 150k</span>
+<p class="text-sm text-slate-500 font-geist lg:text-right">48px / 48px</p>
+</div>
+
+<div class="grid items-center gap-4 p-6 sm:p-8 lg:grid-cols-[140px_1fr_140px]">
+<p class="text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Bold M</p>
+<p class="text-sm font-semibold text-white font-geist">Solicitar proposta</p>
+<p class="text-sm text-slate-500 font-geist lg:text-right">14px / 20px</p>
+</div>
+
+<div class="grid items-center gap-4 p-6 sm:p-8 lg:grid-cols-[140px_1fr_140px]">
+<p class="text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Bold S · eyebrow</p>
+<span class="text-[11px] font-semibold tracking-widest text-emerald-400 uppercase font-geist">Recarga rápida</span>
+<p class="text-sm text-slate-500 font-geist lg:text-right">11px / 16px</p>
+</div>
+
+<div class="grid items-center gap-4 p-6 sm:p-8 lg:grid-cols-[140px_1fr_140px]">
+<p class="text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Paragraph</p>
+<p class="text-lg leading-8 text-slate-400 font-geist">Motorista de elétrico não passa e vê: ele abre o app e decide onde parar.</p>
+<p class="text-sm text-slate-500 font-geist lg:text-right">18px / 32px</p>
+</div>
+
+<div class="grid items-center gap-4 p-6 sm:p-8 lg:grid-cols-[140px_1fr_140px]">
+<p class="text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Regular L</p>
+<p class="text-[17px] leading-relaxed text-slate-400 font-geist">Enquanto o carro recarrega, o motorista e quem está com ele usam a sua loja.</p>
+<p class="text-sm text-slate-500 font-geist lg:text-right">17px / 28px</p>
+</div>
+
+<div class="grid items-center gap-4 p-6 sm:p-8 lg:grid-cols-[140px_1fr_140px]">
+<p class="text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Regular M</p>
+<p class="text-[15px] leading-relaxed text-slate-400 font-geist">Equipamento, obra, energia, operação e risco de utilização são da Eletrotyme.</p>
+<p class="text-sm text-slate-500 font-geist lg:text-right">15px / 24px</p>
+</div>
+
+<div class="grid items-center gap-4 p-6 sm:p-8 lg:grid-cols-[140px_1fr_140px]">
+<p class="text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Regular S</p>
+<p class="text-sm leading-6 text-slate-300 font-geist">Analisamos fluxo, frota elétrica da região, concorrência e potência disponível.</p>
+<p class="text-sm text-slate-500 font-geist lg:text-right">14px / 24px</p>
+</div>
+
+<div class="grid items-center gap-4 p-6 sm:p-8 lg:grid-cols-[140px_1fr_140px]">
+<p class="text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Label · caps</p>
+<p class="text-[10px] uppercase tracking-[0.16em] text-slate-500 font-semibold font-geist">Saúde da operação</p>
+<p class="text-sm text-slate-500 font-geist lg:text-right">10px / 15px</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- 2) colors & surfaces -->
+<section class="overflow-hidden border-white/[0.06] sm:px-8 lg:px-10 border-t pt-24 pr-5 pb-24 pl-5 relative" id="colors">
+<div class="pointer-events-none absolute inset-0 -z-10" style="background: radial-gradient(circle at 50% 12%, rgba(242, 101, 34, 0.1), transparent 34%), linear-gradient(180deg, rgba(8, 12, 20, 0.16), rgba(8, 12, 20, 0.56));"></div>
+<div class="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(255,255,255,0.055)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:30rem_30rem]"></div>
+<div class="w-full max-w-[1280px] mr-auto ml-auto">
+<div class="reveal grid gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-end w-full max-w-[1280px] gap-x-8 gap-y-8">
+<div class="max-w-4xl">
+<p class="text-base font-medium text-orange-300 font-geist">02 · Cores e superfícies</p>
+<h2 class="mt-5 text-5xl text-white sm:text-6xl tracking-tighter leading-tight font-jakarta font-medium">Fundo quase preto, laranja da marca, verde da folha.</h2>
+</div>
+<div class="lg:ml-auto lg:max-w-md">
+<p class="text-lg leading-8 text-slate-400 font-geist">O laranja Eletrotyme (#f26522) é o <span class="text-white font-geist">orange-500</span> do Tailwind, sobrescrito na config. O verde usa a escala <span class="text-white font-geist">emerald</span>. Superfícies são branco com opacidade baixíssima sobre o fundo, sempre com borda e blur.</p>
+</div>
+</div>
+
+<p class="mt-14 text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Marca e acentos</p>
+<div class="mt-5 grid gap-4 sm:grid-cols-3 lg:grid-cols-6">
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+<div class="h-20 rounded-xl bg-orange-500"></div>
+<p class="mt-3 text-xs font-medium text-white font-geist">Laranja Eletrotyme</p>
+<p class="mt-1 text-xs text-slate-500 font-geist">bg-orange-500 · #f26522</p>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+<div class="h-20 rounded-xl bg-orange-400"></div>
+<p class="mt-3 text-xs font-medium text-white font-geist">Laranja hover</p>
+<p class="mt-1 text-xs text-slate-500 font-geist">bg-orange-400 · #fb923c</p>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+<div class="h-20 rounded-xl bg-orange-300"></div>
+<p class="mt-3 text-xs font-medium text-white font-geist">Laranja claro</p>
+<p class="mt-1 text-xs text-slate-500 font-geist">bg-orange-300 · barras, pontos</p>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+<div class="h-20 rounded-xl bg-orange-200"></div>
+<p class="mt-3 text-xs font-medium text-white font-geist">Laranja texto</p>
+<p class="mt-1 text-xs text-slate-500 font-geist">text-orange-200 · eyebrows</p>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+<div class="h-20 rounded-xl bg-emerald-400"></div>
+<p class="mt-3 text-xs font-medium text-white font-geist">Verde folha</p>
+<p class="mt-1 text-xs text-slate-500 font-geist">bg-emerald-400 · status, ao vivo</p>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+<div class="h-20 rounded-xl bg-emerald-300"></div>
+<p class="mt-3 text-xs font-medium text-white font-geist">Verde claro</p>
+<p class="mt-1 text-xs text-slate-500 font-geist">text-emerald-300 · deltas +</p>
+</div>
+</div>
+
+<p class="mt-14 text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Neutros e texto</p>
+<div class="mt-5 grid gap-4 sm:grid-cols-3 lg:grid-cols-6">
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+<div class="h-20 rounded-xl bg-[#080c14] border border-white/10"></div>
+<p class="mt-3 text-xs font-medium text-white font-geist">Fundo da página</p>
+<p class="mt-1 text-xs text-slate-500 font-geist">bg-[#080c14]</p>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+<div class="h-20 rounded-xl bg-[#0b1220] border border-white/10"></div>
+<p class="mt-3 text-xs font-medium text-white font-geist">Fundo do mockup</p>
+<p class="mt-1 text-xs text-slate-500 font-geist">bg-[#0b1220] · bg-[#08111f]</p>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+<div class="h-20 rounded-xl bg-white"></div>
+<p class="mt-3 text-xs font-medium text-white font-geist">Título</p>
+<p class="mt-1 text-xs text-slate-500 font-geist">text-white</p>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+<div class="h-20 rounded-xl bg-slate-300"></div>
+<p class="mt-3 text-xs font-medium text-white font-geist">Texto forte</p>
+<p class="mt-1 text-xs text-slate-500 font-geist">text-slate-300</p>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+<div class="h-20 rounded-xl bg-slate-400"></div>
+<p class="mt-3 text-xs font-medium text-white font-geist">Corpo</p>
+<p class="mt-1 text-xs text-slate-500 font-geist">text-slate-400</p>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+<div class="h-20 rounded-xl bg-slate-500"></div>
+<p class="mt-3 text-xs font-medium text-white font-geist">Rótulo apagado</p>
+<p class="mt-1 text-xs text-slate-500 font-geist">text-slate-500</p>
+</div>
+</div>
+
+<p class="mt-14 text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Superfícies</p>
+<div class="mt-5 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+<div class="rounded-3xl border border-white/[0.08] bg-white/[0.035] p-8 shadow-2xl shadow-black/50 backdrop-blur-xl">
+<p class="text-xs font-medium text-white font-geist">Card vidro (padrão)</p>
+<p class="mt-2 text-xs text-slate-500 font-geist">rounded-3xl border-white/[0.08] bg-white/[0.035] backdrop-blur-xl shadow-2xl shadow-black/50</p>
+</div>
+<div class="relative rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-8">
+<div class="pointer-events-none absolute inset-0 rounded-[2rem] border border-white/10"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<p class="text-xs font-medium text-white font-geist">Card gradiente com fio de luz</p>
+<p class="mt-2 text-xs text-slate-500 font-geist">rounded-[2rem] from-white/[0.05] to-transparent + h-px via-emerald-300/40</p>
+</div>
+<div class="relative rounded-[2rem] bg-gradient-to-b from-orange-500/[0.16] via-white/[0.06] to-transparent p-8 shadow-2xl shadow-orange-950/20">
+<div class="pointer-events-none absolute inset-0 rounded-[2rem] border border-orange-300/30"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-orange-200/70 to-transparent"></div>
+<p class="text-xs font-medium text-white font-geist">Card destaque (laranja)</p>
+<p class="mt-2 text-xs text-slate-500 font-geist">from-orange-500/[0.16] via-white/[0.06] + border-orange-300/30</p>
+</div>
+<div class="rounded-[2rem] border border-white/[0.15] bg-slate-950/70 p-8 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.1)] backdrop-blur-3xl">
+<p class="text-xs font-medium text-white font-geist">Moldura do mockup</p>
+<p class="mt-2 text-xs text-slate-500 font-geist">bg-slate-950/70 backdrop-blur-3xl + sombra profunda com inset</p>
+</div>
+<div class="rounded-2xl border border-orange-200/20 bg-orange-400/[0.05] p-8">
+<p class="text-xs font-medium text-white font-geist">Card estatístico ativo</p>
+<p class="mt-2 text-xs text-slate-500 font-geist">border-orange-200/20 bg-orange-400/[0.05]</p>
+</div>
+<div class="rounded-[2rem] border border-white/[0.08] bg-[#0d1422]/70 p-8 shadow-2xl shadow-orange-950/20 backdrop-blur-2xl">
+<p class="text-xs font-medium text-white font-geist">Painel CTA</p>
+<p class="mt-2 text-xs text-slate-500 font-geist">bg-[#0d1422]/70 backdrop-blur-2xl shadow-orange-950/20</p>
+</div>
+</div>
+
+<p class="mt-14 text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Bordas, divisores e sobreposições</p>
+<div class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+<div class="h-16 rounded-xl border border-white/[0.06]"></div>
+<p class="mt-3 text-xs text-slate-500 font-geist">border-white/[0.06] · seções e moldura</p>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+<div class="h-16 rounded-xl border border-white/10"></div>
+<p class="mt-3 text-xs text-slate-500 font-geist">border-white/10 · cards</p>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+<div class="flex h-16 items-center"><div class="h-px w-full bg-white/[0.08]"></div></div>
+<p class="mt-3 text-xs text-slate-500 font-geist">h-px bg-white/[0.08] · divisor de card</p>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+<div class="flex h-16 items-center"><div class="h-[2px] w-full bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjIiPjxjaXJjbGUgY3g9IjEiIGN5PSIxIiByPSIxIiBmaWxsPSJyZ2JhKDI1MywgMTg2LCAxMTYsIDAuMykiLz48L3N2Zz4=')] bg-repeat-x opacity-50"></div></div>
+<p class="mt-3 text-xs text-slate-500 font-geist">linha pontilhada SVG · cards de projeto</p>
+</div>
+</div>
+
+<p class="mt-14 text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Gradientes e glows</p>
+<div class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+<div class="h-24 rounded-xl" style="background: radial-gradient(circle at 50% -10%, rgba(242, 101, 34, 0.14), transparent 36%), radial-gradient(circle at 82% 18%, rgba(34, 197, 94, 0.07), transparent 28%), linear-gradient(180deg, #0b1020 0%, #080c14 42%, #0a0d13 100%);"></div>
+<p class="mt-3 text-xs font-medium text-white font-geist">Fundo da página</p>
+<p class="mt-1 text-xs text-slate-500 font-geist">radial laranja + radial verde + linear</p>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+<div class="relative h-24 overflow-hidden rounded-xl bg-[#080c14]"><div class="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange-300/10 blur-3xl"></div></div>
+<p class="mt-3 text-xs font-medium text-white font-geist">Glow laranja</p>
+<p class="mt-1 text-xs text-slate-500 font-geist">rounded-full bg-orange-300/10 blur-3xl</p>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+<div class="relative h-24 overflow-hidden rounded-xl bg-[#080c14]"><div class="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-500/20 blur-3xl"></div></div>
+<p class="mt-3 text-xs font-medium text-white font-geist">Glow verde</p>
+<p class="mt-1 text-xs text-slate-500 font-geist">rounded-full bg-emerald-500/20 blur-3xl</p>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-3">
+<div class="h-24 rounded-xl bg-[linear-gradient(to_right,rgba(255,255,255,0.055)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:3rem_3rem]"></div>
+<p class="mt-3 text-xs font-medium text-white font-geist">Grade de fundo</p>
+<p class="mt-1 text-xs text-slate-500 font-geist">linhas 1px brancas · bg-[size:30rem_30rem]</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 3) components -->
+<section class="relative overflow-hidden border-t border-white/[0.06] px-5 pt-24 pb-24 sm:px-8 lg:px-10" id="components">
+<div class="mx-auto w-full max-w-[1280px]">
+<div class="reveal grid w-full max-w-[1280px] gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-end">
+<div class="max-w-3xl">
+<p class="text-sm font-medium text-orange-200 font-geist">03 · Componentes</p>
+<h2 class="mt-4 max-w-2xl text-4xl tracking-tighter text-white sm:text-5xl lg:text-6xl font-jakarta font-medium">Botões, badges, cards e o painel.</h2>
+</div>
+<div class="lg:ml-auto lg:max-w-md">
+<p class="text-base leading-7 text-slate-400 font-geist">O site não tem inputs nem estados de foco ou desabilitado. Os estados abaixo são default e hover: o hover está reproduzido de forma estática aplicando as mesmas utilidades que o <span class="text-white font-geist">hover:</span> ativa.</p>
+</div>
+</div>
+
+<p class="mt-14 text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Botão primário</p>
+<div class="mt-5 rounded-3xl border border-white/[0.08] bg-white/[0.035] p-8 backdrop-blur-xl">
+<div class="flex flex-wrap items-center gap-6">
+<div>
+<a class="group inline-flex items-center justify-center gap-2 shadow-orange-950/30 transition duration-300 ease-out hover:scale-[1.03] hover:bg-orange-400 hover:shadow-orange-300/10 text-sm font-semibold text-white bg-orange-500 rounded-full pt-3 pr-5 pb-3 pl-5 shadow-2xl font-geist" href="#">Solicitar proposta<iconify-icon class="transition duration-300 ease-out group-hover:translate-x-0.5" height="18" icon="solar:arrow-right-linear" width="18"></iconify-icon></a>
+<p class="mt-3 text-xs text-slate-500 font-geist">default</p>
+</div>
+<div>
+<a class="group inline-flex items-center justify-center gap-2 shadow-orange-300/10 scale-[1.03] text-sm font-semibold text-white bg-orange-400 rounded-full pt-3 pr-5 pb-3 pl-5 shadow-2xl font-geist" href="#">Solicitar proposta<iconify-icon class="translate-x-0.5" height="18" icon="solar:arrow-right-linear" width="18"></iconify-icon></a>
+<p class="mt-3 text-xs text-slate-500 font-geist">hover (estático)</p>
+</div>
+<div>
+<a class="inline-flex h-11 items-center justify-center rounded-full bg-orange-500 px-5 text-sm font-medium text-white shadow-[0_0_0_1px_rgba(255,255,255,0.12),0_18px_50px_rgba(0,0,0,0.35)] transition hover:bg-orange-400 font-geist" href="#">Ver a solução</a>
+<p class="mt-3 text-xs text-slate-500 font-geist">variante h-11 (cabeçalhos de seção)</p>
+</div>
+<div>
+<a class="rounded-full border border-orange-300/20 bg-orange-500 px-4 py-2 text-sm font-medium text-white shadow-lg shadow-orange-950/20 transition duration-300 ease-out hover:scale-[1.03] hover:border-orange-300/35 hover:bg-orange-400 hover:shadow-orange-900/25 inline-flex font-geist" href="#">Solicitar proposta</a>
+<p class="mt-3 text-xs text-slate-500 font-geist">variante header</p>
+</div>
+<div>
+<a class="inline-flex h-11 items-center justify-center rounded-full bg-white px-5 text-sm font-medium text-slate-950 shadow-[0_0_0_1px_rgba(255,255,255,0.12),0_18px_50px_rgba(0,0,0,0.35)] transition hover:bg-orange-50 font-geist" href="#">Falar com a Eletrotyme</a>
+<p class="mt-3 text-xs text-slate-500 font-geist">variante branca (FAQ)</p>
+</div>
+</div>
+</div>
+
+<p class="mt-14 text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Botão secundário (vidro)</p>
+<div class="mt-5 rounded-3xl border border-white/[0.08] bg-white/[0.035] p-8 backdrop-blur-xl">
+<div class="flex flex-wrap items-center gap-6">
+<div>
+<a class="inline-flex items-center justify-center gap-2 rounded-full border border-white/[0.1] bg-white/[0.04] px-5 py-3 text-sm font-medium text-slate-200 shadow-2xl shadow-black/20 backdrop-blur-xl transition duration-300 ease-out hover:scale-[1.02] hover:border-white/[0.18] hover:bg-white/[0.07] font-geist" href="#">Ver projetos<iconify-icon height="18" icon="solar:bolt-linear" width="18"></iconify-icon></a>
+<p class="mt-3 text-xs text-slate-500 font-geist">default</p>
+</div>
+<div>
+<a class="inline-flex items-center justify-center gap-2 rounded-full border border-white/[0.18] bg-white/[0.07] px-5 py-3 text-sm font-medium text-slate-200 shadow-2xl shadow-black/20 backdrop-blur-xl scale-[1.02] font-geist" href="#">Ver projetos<iconify-icon height="18" icon="solar:bolt-linear" width="18"></iconify-icon></a>
+<p class="mt-3 text-xs text-slate-500 font-geist">hover (estático)</p>
+</div>
+<div>
+<a class="inline-flex h-11 items-center justify-center rounded-full border border-white/[0.12] bg-white/[0.04] px-5 text-sm font-medium text-white backdrop-blur-xl transition hover:bg-white/[0.08] font-geist" href="#">Saiba mais</a>
+<p class="mt-3 text-xs text-slate-500 font-geist">variante h-11</p>
+</div>
+<div>
+<a class="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/[0.04] px-5 py-3 text-sm font-medium text-slate-200 transition duration-300 ease-out hover:border-white/20 hover:bg-white/[0.07] font-geist" href="#">Quero ser parceiro</a>
+<p class="mt-3 text-xs text-slate-500 font-geist">variante card de modelo</p>
+</div>
+<div>
+<button class="inline-flex items-center justify-center gap-2 rounded-xl border border-orange-400/30 bg-orange-400/10 px-3 py-2 text-xs font-medium text-orange-50 shadow-[0_0_15px_rgba(242,101,34,0.15)] transition hover:bg-orange-400/20 font-geist"><span class="flex h-5 w-5 items-center justify-center rounded-full bg-orange-400 text-slate-900"><svg class="h-3 w-3" fill="currentColor" viewbox="0 0 24 24"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l10.42-6.86a1 1 0 0 0 0-1.72L9.5 4.28A1 1 0 0 0 8 5.14Z"></path></svg></span>R$ 0,00</button>
+<p class="mt-3 text-xs text-slate-500 font-geist">botão de mockup (xs)</p>
+</div>
+</div>
+</div>
+
+<p class="mt-14 text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Toggle segmentado</p>
+<div class="mt-5 rounded-3xl border border-white/[0.08] bg-white/[0.035] p-8 backdrop-blur-xl">
+<div class="flex flex-wrap items-center gap-6">
+<div>
+<div class="inline-flex rounded-full border border-white/[0.12] bg-white/[0.04] p-1 backdrop-blur-xl">
+<button class="h-10 rounded-full bg-orange-500 px-5 text-sm font-medium text-white shadow-[0_12px_35px_rgba(0,0,0,0.28)] transition font-geist">Parceiro</button>
+<button class="h-10 rounded-full px-5 text-sm font-medium text-slate-300 transition hover:text-white font-geist">Investidor</button>
+</div>
+<p class="mt-3 text-xs text-slate-500 font-geist">ativo à esquerda (default)</p>
+</div>
+<div>
+<div class="inline-flex rounded-full border border-white/[0.12] bg-white/[0.04] p-1 backdrop-blur-xl">
+<button class="h-10 rounded-full px-5 text-sm font-medium text-slate-300 transition hover:text-white font-geist">Parceiro</button>
+<button class="h-10 rounded-full bg-orange-500 px-5 text-sm font-medium text-white shadow-[0_12px_35px_rgba(0,0,0,0.28)] transition font-geist">Investidor</button>
+</div>
+<p class="mt-3 text-xs text-slate-500 font-geist">ativo à direita</p>
+</div>
+</div>
+</div>
+
+<p class="mt-14 text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Badges, pills e status</p>
+<div class="mt-5 rounded-3xl border border-white/[0.08] bg-white/[0.035] p-8 backdrop-blur-xl">
+<div class="flex flex-wrap items-center gap-4">
+<div class="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.04] px-3 py-1.5 text-xs text-slate-300 shadow-2xl shadow-black/20 backdrop-blur-xl font-geist"><span class="h-1.5 w-1.5 rounded-full bg-orange-400 shadow-lg shadow-orange-400/40"></span>Badge do herói</div>
+<p class="inline-flex w-fit rounded-full border border-emerald-400/20 bg-emerald-500/10 px-3 py-1 text-[0.68rem] font-medium uppercase tracking-[0.16em] text-emerald-200 font-geist">Passo 01</p>
+<div class="inline-flex items-center gap-2 rounded-full border border-orange-100/10 bg-orange-100/[0.04] px-3 py-1"><span class="h-1.5 w-1.5 rounded-full bg-orange-300"></span><p class="text-xs font-medium tracking-wide text-orange-100 font-geist">Go-live em até 90 dias</p></div>
+<span class="rounded-full border border-orange-300/20 bg-orange-400/10 px-3 py-1 text-xs font-medium text-orange-200 font-geist">Recomendado</span>
+<span class="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-medium text-slate-400 font-geist">Sem investimento</span>
+<span class="rounded-full bg-orange-400/[0.15] px-2 py-1 text-[10px] font-semibold text-orange-200 shadow-[0_0_10px_rgba(242,101,34,0.15)] font-geist">Carregando</span>
+<span class="rounded-full bg-white/[0.08] px-2 py-1 text-[10px] text-slate-300 font-geist">Disponível</span>
+<span class="rounded-full bg-emerald-400/[0.12] px-2 py-1 text-[10px] font-semibold text-emerald-300 font-geist">OK</span>
+<div class="inline-flex items-center gap-1.5 rounded-full border border-white/[0.1] bg-white/[0.04] px-3 py-1.5 text-xs text-slate-300 transition-colors hover:bg-white/[0.08] font-geist"><span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>Ao vivo</div>
+<span class="rounded-full bg-white/[0.08] px-2.5 py-1 text-[10px] text-slate-300 font-medium font-geist">2 vagas</span>
+</div>
+</div>
+
+<p class="mt-14 text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Links de navegação</p>
+<div class="mt-5 rounded-3xl border border-white/[0.08] bg-white/[0.035] p-8 backdrop-blur-xl">
+<div class="flex flex-wrap items-center gap-8">
+<a class="relative text-sm text-slate-400 transition duration-300 ease-out hover:text-white font-geist" href="#">Como funciona<span class="absolute -bottom-2 left-0 h-px w-0 bg-orange-300/70 transition-all duration-300 ease-out hover:w-full"></span></a>
+<a class="relative text-sm text-white font-geist" href="#">Como funciona (hover)<span class="absolute -bottom-2 left-0 h-px w-full bg-orange-300/70"></span></a>
+<a class="text-sm text-slate-300 transition hover:text-orange-100 font-geist" href="#">Link de rodapé</a>
+<a class="text-sm text-orange-100 font-geist" href="#">Link de rodapé (hover)</a>
+<a class="text-sm text-slate-500 transition hover:text-slate-300 font-geist" href="#">Link legal</a>
+</div>
+</div>
+
+<p class="mt-14 text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Cards</p>
+<div class="mt-5 grid gap-6 lg:grid-cols-3">
+<article class="group relative overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.035] p-8 shadow-2xl shadow-black/50 backdrop-blur-xl transition duration-300 ease-out hover:-translate-y-1 hover:border-emerald-400/30 hover:bg-white/[0.055]">
+<div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-500/[0.10] via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100"></div>
+<div class="pointer-events-none absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<h3 class="relative z-10 text-2xl text-white tracking-tight font-jakarta font-medium">Card de problema</h3>
+<p class="relative z-10 mt-4 text-sm sm:text-base leading-relaxed text-slate-400 font-geist">Vidro, sombra pesada, sobe 4px e ganha borda verde no hover. Contém um mini-mockup de 16rem.</p>
+</article>
+<div class="group relative min-h-[200px] overflow-hidden rounded-3xl border border-emerald-300/20 bg-white/[0.035] p-5 shadow-[0_0_0_1px_rgba(110,231,183,0.08),0_18px_55px_rgba(15,23,42,0.22),inset_0_1px_0_rgba(255,255,255,0.08)] transition duration-300 hover:-translate-y-1 hover:border-emerald-300/40 hover:bg-white/[0.055] hover:shadow-[0_0_0_1px_rgba(110,231,183,0.18),0_0_46px_rgba(16,185,129,0.16),0_22px_70px_rgba(0,0,0,0.32),inset_0_1px_0_rgba(255,255,255,0.12)]">
+<div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-emerald-500/[0.10] via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100"></div>
+<div class="pointer-events-none absolute inset-x-5 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/60 to-transparent"></div>
+<div class="pointer-events-none absolute inset-x-8 -top-px h-px bg-gradient-to-r from-transparent via-white/35 to-transparent opacity-70"></div>
+<div class="relative z-10 flex h-full flex-col">
+<p class="inline-flex w-fit rounded-full border border-emerald-400/20 bg-emerald-500/10 px-3 py-1 text-[0.68rem] font-medium uppercase tracking-[0.16em] text-emerald-200 font-geist">Passo 01</p>
+<h3 class="mt-5 text-lg font-semibold text-white font-geist">Card de passo</h3>
+<p class="mt-2 text-sm leading-6 text-slate-300 font-geist">Borda verde, fio duplo no topo e glow verde no hover.</p>
+</div>
+</div>
+<div class="group relative flex flex-col rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-8 transition duration-300 ease-out hover:-translate-y-1">
+<div class="absolute inset-0 rounded-[2rem] border border-white/10 pointer-events-none group-hover:border-white/20 transition-colors"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<span class="text-[11px] font-semibold tracking-widest text-emerald-400 uppercase font-geist">Benefício</span>
+<h3 class="mt-3 text-[22px] text-white font-jakarta font-medium">Card de benefício / FAQ / modelo</h3>
+<p class="mt-3 text-[15px] leading-relaxed text-slate-400 font-geist">Gradiente vertical, raio de 2rem e fio de luz. A borda vive num pseudo-elemento absoluto.</p>
+</div>
+</div>
+
+<p class="mt-14 text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Peças do painel</p>
+<div class="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+<div class="group/stat rounded-2xl border border-orange-200/20 bg-orange-400/[0.05] p-4 transition-all hover:bg-orange-400/[0.08] hover:border-orange-200/30 cursor-pointer">
+<p class="text-[10px] uppercase tracking-[0.16em] text-orange-200/80 font-semibold font-geist">Recargas hoje</p>
+<p class="mt-2 text-2xl text-white tracking-tighter transition-transform group-hover/stat:-translate-y-0.5 font-jakarta font-medium">8</p>
+<p class="mt-1 text-xs text-slate-400 font-geist">2 em andamento</p>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+<p class="text-xs font-medium uppercase tracking-[0.14rem] text-slate-500 font-geist">Recargas no mês</p>
+<p class="mt-2 text-2xl text-white tracking-tighter font-jakarta font-medium">248</p>
+<p class="mt-1 text-xs text-emerald-300 font-geist">+12% vs mês passado</p>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.035] p-4">
+<div class="mb-3 flex items-center justify-between"><p class="text-xs font-medium text-white font-geist">Implantação</p><p class="text-xs text-orange-200 font-geist">78%</p></div>
+<div class="h-1.5 overflow-hidden rounded-full bg-white/10"><div class="h-full w-[78%] rounded-full bg-orange-300 relative overflow-hidden"><div class="absolute inset-0 h-full w-full bg-gradient-to-r from-transparent via-white/50 to-transparent" style="animation: progress-shimmer 2s infinite linear;"></div></div></div>
+<p class="mt-3 text-xs text-slate-500 font-geist">barra com shimmer</p>
+</div>
+<div class="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+<p class="mb-4 text-xs font-medium text-white font-geist">Recargas por dia</p>
+<div class="flex h-16 items-end gap-2">
+<span class="h-8 flex-1 rounded-t-lg bg-orange-400/80"></span>
+<span class="h-14 flex-1 rounded-t-lg bg-orange-400"></span>
+<span class="h-10 flex-1 rounded-t-lg bg-orange-400/70"></span>
+<span class="h-14 flex-1 rounded-t-lg bg-orange-400/90"></span>
+<span class="h-9 flex-1 rounded-t-lg bg-orange-400/60"></span>
+<span class="h-11 flex-1 rounded-t-lg bg-orange-400/70"></span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 4) layout & spacing -->
+<section class="border-white/[0.06] overflow-hidden sm:px-8 lg:px-10 font-sans border-t pt-24 pr-5 pb-24 pl-5 relative" id="layout">
+<div class="relative mx-auto w-full max-w-[1280px] z-10">
+<div class="reveal grid w-full max-w-[1280px] gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-end">
+<div class="max-w-3xl">
+<p class="text-[13px] font-medium text-slate-400 font-geist">04 · Layout e espaçamento</p>
+<h2 class="mt-4 text-4xl text-white sm:text-[56px] leading-[1.1] tracking-tight font-jakarta font-medium">Moldura de 1360px, conteúdo de 1280px.</h2>
+</div>
+<div class="lg:ml-auto lg:max-w-md">
+<p class="text-[17px] leading-relaxed text-slate-400 font-geist">A página inteira vive numa moldura <span class="text-white font-geist">max-w-[1360px]</span> com bordas laterais e 4 colunas-guia fixas. Cada seção usa <span class="text-white font-geist">max-w-[1280px]</span>, padding vertical de 6rem e horizontal de 1.25rem / 2rem / 2.5rem por breakpoint.</p>
+</div>
+</div>
+
+<p class="mt-14 text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Padrão A · cabeçalho de seção (split 1fr / 0.72fr)</p>
+<div class="mt-5 rounded-3xl border border-dashed border-white/20 p-6">
+<div class="grid gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-end w-full">
+<div class="rounded-2xl border border-orange-300/30 bg-orange-400/[0.05] p-6 max-w-3xl">
+<p class="text-sm font-medium text-orange-200 font-geist">0N · Eyebrow</p>
+<p class="mt-4 text-2xl text-white tracking-tighter font-jakarta font-medium">Título grande à esquerda (max-w-3xl)</p>
+</div>
+<div class="rounded-2xl border border-emerald-300/30 bg-emerald-400/[0.05] p-6 lg:ml-auto lg:max-w-md w-full">
+<p class="text-sm text-slate-300 font-geist">Parágrafo à direita (lg:max-w-md) alinhado à base, seguido de dois botões com gap-3.</p>
+</div>
+</div>
+<p class="mt-4 text-xs text-slate-500 font-geist">grid gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-end · usado em todas as seções internas</p>
+</div>
+
+<p class="mt-14 text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Padrão B · herói (split 0.95fr / 1.05fr, centrado)</p>
+<div class="mt-5 rounded-3xl border border-dashed border-white/20 p-6">
+<div class="grid gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12 w-full items-center">
+<div class="rounded-2xl border border-orange-300/30 bg-orange-400/[0.05] p-6 h-40 flex items-center"><p class="text-sm text-slate-300 font-geist">Texto: badge, h1, parágrafo, 2 botões</p></div>
+<div class="rounded-2xl border border-emerald-300/30 bg-emerald-400/[0.05] p-6 h-64 flex items-center justify-center"><p class="text-sm text-slate-300 font-geist">Mockup 3D (h-[34rem] / lg:h-[43rem], max-w-[42rem]) + 2 cards flutuantes</p></div>
+</div>
+<p class="mt-4 text-xs text-slate-500 font-geist">grid gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12 items-center · canvas WebGL absoluto atrás</p>
+</div>
+
+<p class="mt-14 text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Padrão C · grades de cards</p>
+<div class="mt-5 grid gap-6 lg:grid-cols-2">
+<div class="rounded-3xl border border-dashed border-white/20 p-6">
+<div class="grid gap-6 lg:grid-cols-3">
+<div class="h-20 rounded-2xl border border-white/10 bg-white/[0.035]"></div>
+<div class="h-20 rounded-2xl border border-white/10 bg-white/[0.035]"></div>
+<div class="h-20 rounded-2xl border border-white/10 bg-white/[0.035]"></div>
+</div>
+<p class="mt-4 text-xs text-slate-500 font-geist">grid gap-6 lg:grid-cols-3 · problema, modelos</p>
+</div>
+<div class="rounded-3xl border border-dashed border-white/20 p-6">
+<div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+<div class="h-20 rounded-2xl border border-white/10 bg-white/[0.035]"></div>
+<div class="h-20 rounded-2xl border border-white/10 bg-white/[0.035]"></div>
+<div class="h-20 rounded-2xl border border-white/10 bg-white/[0.035]"></div>
+<div class="h-20 rounded-2xl border border-white/10 bg-white/[0.035]"></div>
+</div>
+<p class="mt-4 text-xs text-slate-500 font-geist">grid gap-4 md:grid-cols-2 xl:grid-cols-4 · passos, benefícios (gap-6), campanhas</p>
+</div>
+<div class="rounded-3xl border border-dashed border-white/20 p-6">
+<div class="grid gap-6 lg:grid-cols-2">
+<div class="h-20 rounded-2xl border border-white/10 bg-white/[0.035]"></div>
+<div class="h-20 rounded-2xl border border-white/10 bg-white/[0.035]"></div>
+</div>
+<p class="mt-4 text-xs text-slate-500 font-geist">grid gap-6 lg:grid-cols-2 · FAQ</p>
+</div>
+<div class="rounded-3xl border border-dashed border-white/20 p-6">
+<div class="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+<div class="h-20 rounded-2xl border border-orange-300/30 bg-orange-400/[0.05]"></div>
+<div class="grid gap-3"><div class="h-8 rounded-xl border border-white/10 bg-white/[0.035]"></div><div class="h-8 rounded-xl border border-white/10 bg-white/[0.035]"></div></div>
+</div>
+<p class="mt-4 text-xs text-slate-500 font-geist">grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 · projetos (texto fixo + cards empilhados)</p>
+</div>
+</div>
+
+<p class="mt-14 text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Escala de espaçamento em uso</p>
+<div class="mt-5 rounded-3xl border border-white/[0.08] bg-white/[0.035] p-8 backdrop-blur-xl">
+<div class="flex flex-wrap items-end gap-6">
+<div><div class="h-3 w-3 rounded-sm bg-orange-400"></div><p class="mt-2 text-xs text-slate-500 font-geist">gap-3 · 12px</p></div>
+<div><div class="h-4 w-4 rounded-sm bg-orange-400"></div><p class="mt-2 text-xs text-slate-500 font-geist">gap-4 / p-4 · 16px</p></div>
+<div><div class="h-5 w-5 rounded-sm bg-orange-400"></div><p class="mt-2 text-xs text-slate-500 font-geist">px-5 / p-5 · 20px</p></div>
+<div><div class="h-6 w-6 rounded-sm bg-orange-400"></div><p class="mt-2 text-xs text-slate-500 font-geist">gap-6 · 24px</p></div>
+<div><div class="h-8 w-8 rounded-sm bg-orange-400"></div><p class="mt-2 text-xs text-slate-500 font-geist">gap-8 / p-8 · 32px</p></div>
+<div><div class="h-12 w-12 rounded-sm bg-orange-400"></div><p class="mt-2 text-xs text-slate-500 font-geist">mt-12 · 48px</p></div>
+<div><div class="h-16 w-16 rounded-sm bg-orange-400"></div><p class="mt-2 text-xs text-slate-500 font-geist">mt-16 · 64px</p></div>
+<div><div class="h-24 w-24 rounded-sm bg-orange-400"></div><p class="mt-2 text-xs text-slate-500 font-geist">pt-24 / pb-24 · 96px</p></div>
+</div>
+<p class="mt-6 text-xs text-slate-500 font-geist">Raios: rounded-xl (12px) nos itens internos · rounded-2xl (16px) nos cards do painel · rounded-3xl (24px) nos cards de seção · rounded-[2rem] (32px) nos cards gradiente, CTA e moldura do mockup · rounded-full em botões e badges.</p>
+</div>
+</div>
+</section>
+
+<!-- 5) motion & interaction -->
+<section class="overflow-hidden border-white/[0.06] sm:px-8 lg:px-10 font-sans border-t pt-24 pr-5 pb-24 pl-5 relative" id="motion">
+<div class="absolute top-1/2 left-[20%] -translate-y-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-orange-500/10 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="relative z-10 mx-auto w-full max-w-[1280px]">
+<div class="reveal grid w-full max-w-[1280px] gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-end">
+<div class="max-w-3xl">
+<p class="text-[13px] font-medium text-slate-400 font-geist">05 · Motion e interação</p>
+<h2 class="mt-4 text-4xl text-white sm:text-[56px] leading-[1.1] tracking-tight font-jakarta font-medium">Entrada com blur, reveal no scroll, hover que sobe.</h2>
+</div>
+<div class="lg:ml-auto lg:max-w-md">
+<p class="text-[17px] leading-relaxed text-slate-400 font-geist">Dois keyframes em CSS (<span class="text-white font-geist">animationIn</span> e <span class="text-white font-geist">progress-shimmer</span>) e três comportamentos em JS: scroll-reveal por IntersectionObserver, flutuação 3D do mockup do herói e o fundo WebGL de trilhas de luz. Tudo com <span class="text-white font-geist">ease-out</span> e 300 ms nos hovers.</p>
+</div>
+</div>
+
+<div class="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+<div class="group relative flex flex-col rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-8">
+<div class="absolute inset-0 rounded-[2rem] border border-white/10 pointer-events-none"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<span class="text-[11px] font-semibold tracking-widest text-emerald-400 uppercase font-geist">Entrada</span>
+<h3 class="mt-3 text-[22px] text-white font-jakarta font-medium">animationIn</h3>
+<p class="mt-3 text-[15px] leading-relaxed text-slate-400 font-geist">Opacidade 0 → 1, translateY 30px → 0, blur 8px → 0. 0.8s ease-out, delay 0.1s, both. Aplicada no header e nas duas colunas do herói.</p>
+<div class="mt-6 rounded-2xl border border-white/[0.08] bg-[#070d18]/70 p-4 [animation:animationIn_0.8s_ease-out_0.1s_both]">
+<p class="text-xs text-slate-300 font-geist">[animation:animationIn_0.8s_ease-out_0.1s_both]</p>
+</div>
+<button class="mt-4 inline-flex w-fit items-center justify-center rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-medium text-slate-200 transition duration-300 ease-out hover:border-white/20 hover:bg-white/[0.07] font-geist" onclick="var e=this.previousElementSibling;e.style.animation='none';void e.offsetWidth;e.style.animation='';">Repetir</button>
+</div>
+
+<div class="group relative flex flex-col rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-8">
+<div class="absolute inset-0 rounded-[2rem] border border-white/10 pointer-events-none"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<span class="text-[11px] font-semibold tracking-widest text-emerald-400 uppercase font-geist">Scroll</span>
+<h3 class="mt-3 text-[22px] text-white font-jakarta font-medium">.reveal (IntersectionObserver)</h3>
+<p class="mt-3 text-[15px] leading-relaxed text-slate-400 font-geist">Todo <span class="text-white font-geist">.reveal</span> e todo h1–h4, p e li dentro de main e footer começa com opacidade 0 e translateY 18px. Ao entrar 12% na viewport, anima em 900 ms ease-out com delay escalonado de 75 ms (até 4 passos).</p>
+<div class="mt-6 rounded-2xl border border-white/[0.08] bg-[#070d18]/70 p-4">
+<p class="text-xs text-slate-300 font-geist">Este parágrafo entrou com o reveal. Recarregue a página e role até aqui para ver de novo.</p>
+</div>
+</div>
+
+<div class="group relative flex flex-col rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-8">
+<div class="absolute inset-0 rounded-[2rem] border border-white/10 pointer-events-none"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<span class="text-[11px] font-semibold tracking-widest text-emerald-400 uppercase font-geist">Loop</span>
+<h3 class="mt-3 text-[22px] text-white font-jakarta font-medium">progress-shimmer</h3>
+<p class="mt-3 text-[15px] leading-relaxed text-slate-400 font-geist">Um gradiente branco translúcido atravessa a barra da esquerda para a direita a cada 2 s, linear e infinito. Segunda barra com 1 s de atraso.</p>
+<div class="mt-6 space-y-3 rounded-2xl border border-white/[0.08] bg-[#070d18]/70 p-4">
+<div class="h-1.5 overflow-hidden rounded-full bg-white/10"><div class="h-full w-[78%] rounded-full bg-orange-300 relative overflow-hidden"><div class="absolute inset-0 h-full w-full bg-gradient-to-r from-transparent via-white/50 to-transparent" style="animation: progress-shimmer 2s infinite linear;"></div></div></div>
+<div class="h-1.5 overflow-hidden rounded-full bg-white/10"><div class="h-full w-[62%] rounded-full bg-emerald-400 relative overflow-hidden"><div class="absolute inset-0 h-full w-full bg-gradient-to-r from-transparent via-white/50 to-transparent" style="animation: progress-shimmer 2s infinite linear 1s;"></div></div></div>
+</div>
+</div>
+
+<div class="group relative flex flex-col rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-8 transition duration-300 ease-out hover:-translate-y-1">
+<div class="absolute inset-0 rounded-[2rem] border border-white/10 pointer-events-none group-hover:border-white/20 transition-colors"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<span class="text-[11px] font-semibold tracking-widest text-emerald-400 uppercase font-geist">Hover</span>
+<h3 class="mt-3 text-[22px] text-white font-jakarta font-medium">Lift de card</h3>
+<p class="mt-3 text-[15px] leading-relaxed text-slate-400 font-geist">Passe o mouse: <span class="text-white font-geist">hover:-translate-y-1</span> com transition duration-300 ease-out e a borda clareia de white/10 para white/20. Cards de passo somam um glow verde na sombra.</p>
+</div>
+
+<div class="group relative flex flex-col rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-8">
+<div class="absolute inset-0 rounded-[2rem] border border-white/10 pointer-events-none"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<span class="text-[11px] font-semibold tracking-widest text-emerald-400 uppercase font-geist">Hover</span>
+<h3 class="mt-3 text-[22px] text-white font-jakarta font-medium">Botões</h3>
+<p class="mt-3 text-[15px] leading-relaxed text-slate-400 font-geist">Primário: scale 1.03, fundo orange-500 → orange-400, sombra clareia; a seta desliza 2px (group-hover:translate-x-0.5). Secundário: scale 1.02 e vidro mais denso. Link de nav: sublinhado cresce de w-0 a w-full.</p>
+<div class="mt-6 flex flex-wrap gap-3">
+<a class="group inline-flex items-center justify-center gap-2 shadow-orange-950/30 transition duration-300 ease-out hover:scale-[1.03] hover:bg-orange-400 hover:shadow-orange-300/10 text-sm font-semibold text-white bg-orange-500 rounded-full pt-3 pr-5 pb-3 pl-5 shadow-2xl font-geist" href="#">Passe o mouse<iconify-icon class="transition duration-300 ease-out group-hover:translate-x-0.5" height="18" icon="solar:arrow-right-linear" width="18"></iconify-icon></a>
+<a class="inline-flex items-center justify-center gap-2 rounded-full border border-white/[0.1] bg-white/[0.04] px-5 py-3 text-sm font-medium text-slate-200 shadow-2xl shadow-black/20 backdrop-blur-xl transition duration-300 ease-out hover:scale-[1.02] hover:border-white/[0.18] hover:bg-white/[0.07] font-geist" href="#">E aqui</a>
+</div>
+</div>
+
+<div class="group relative flex flex-col rounded-[2rem] bg-gradient-to-b from-white/[0.05] to-transparent p-8">
+<div class="absolute inset-0 rounded-[2rem] border border-white/10 pointer-events-none"></div>
+<div class="absolute inset-x-4 top-0 h-px bg-gradient-to-r from-transparent via-emerald-300/40 to-transparent"></div>
+<span class="text-[11px] font-semibold tracking-widest text-emerald-400 uppercase font-geist">JS</span>
+<h3 class="mt-3 text-[22px] text-white font-jakarta font-medium">Flutuação 3D e WebGL</h3>
+<p class="mt-3 text-[15px] leading-relaxed text-slate-400 font-geist"><span class="text-white font-geist">#heroObject</span> recebe translateY senoidal (±10px) mais rotateX/rotateY pela posição do mouse e recua até 34px com o scroll. Cada <span class="text-white font-geist">.floating-panel</span> ganha sombra laranja pulsante. O canvas <span class="text-white font-geist">#webgl-canvas</span> desenha 100 trilhas de luz (laranja #f26522, #ff8a3d, branco e verde #16a34a) com bloom e SMAA em Three.js r160.</p>
+<div class="mt-6 flex items-center gap-3 rounded-2xl border border-white/[0.08] bg-[#070d18]/70 p-4">
+<span class="h-2 w-2 rounded-full bg-orange-300 shadow-[0_0_12px_rgba(253,186,116,0.8)] animate-pulse"></span>
+<p class="text-xs text-slate-300 font-geist">animate-pulse · pontos de status "ao vivo"</p>
+</div>
+</div>
+
+</div>
+
+<p class="mt-14 text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Galeria de motion · transições de estado</p>
+<div class="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+<div class="group/stat rounded-2xl border border-white/[0.07] bg-white/[0.02] p-4 transition-all hover:bg-white/[0.05] cursor-pointer">
+<p class="text-[10px] uppercase tracking-[0.16em] text-slate-500 font-semibold font-geist">group-hover/stat</p>
+<p class="mt-2 text-2xl text-white tracking-tighter transition-transform group-hover/stat:-translate-y-0.5 font-jakarta font-medium">240</p>
+<p class="mt-1 text-xs text-slate-400 font-geist">número sobe 2px</p>
+</div>
+<div class="group/task rounded-xl border border-white/[0.06] bg-white/[0.03] p-3 transition-colors hover:bg-white/[0.06] cursor-pointer">
+<p class="text-xs font-medium text-slate-200 group-hover/task:text-white transition-colors font-geist">group-hover/task</p>
+<p class="mt-1 text-[10px] text-slate-500 font-geist">texto clareia + fundo</p>
+</div>
+<div class="group/progress rounded-2xl border border-white/[0.05] bg-white/[0.02] p-4">
+<div class="mb-1.5 flex justify-between text-[10px] text-slate-400 group-hover/progress:text-slate-300 transition-colors"><span class="font-geist">group-hover/progress</span><span class="text-orange-200 font-geist">68%</span></div>
+<div class="h-1.5 overflow-hidden rounded-full bg-white/[0.06]"><div class="h-full w-2/3 rounded-full bg-orange-300/70 transition-all duration-1000 group-hover/progress:bg-orange-300"></div></div>
+</div>
+<div class="rounded-2xl border border-white/[0.05] bg-white/[0.02] p-4">
+<div class="flex -space-x-2 transition-transform hover:-space-x-1">
+<span class="h-7 w-7 rounded-full border-2 border-[#0b1220] bg-orange-400 shadow-sm"></span>
+<span class="h-7 w-7 rounded-full border-2 border-[#0b1220] bg-slate-300 shadow-sm"></span>
+<span class="h-7 w-7 rounded-full border-2 border-[#0b1220] bg-emerald-300 shadow-sm"></span>
+</div>
+<p class="mt-3 text-[10px] text-slate-500 font-geist">hover:-space-x-1 · avatares abrem</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 6) icons -->
+<section class="border-white/[0.06] overflow-hidden sm:px-8 lg:px-10 font-sans border-t pt-24 pr-5 pb-24 pl-5 relative" id="icons">
+<div class="pointer-events-none absolute left-1/2 top-0 h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-orange-500/10 blur-3xl"></div>
+<div class="z-10 w-full max-w-[1280px] mr-auto ml-auto relative">
+<div class="reveal grid w-full max-w-[1280px] gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-end">
+<div class="max-w-3xl">
+<p class="text-[13px] font-medium text-slate-400 font-geist">06 · Ícones</p>
+<h2 class="mt-4 text-4xl leading-[1.1] tracking-tight text-white sm:text-[56px] font-jakarta font-medium">Iconify Solar nos botões, SVG inline no resto.</h2>
+</div>
+<div class="lg:ml-auto lg:max-w-md">
+<p class="text-[17px] leading-relaxed text-slate-400 font-geist">Botões e o menu usam <span class="text-white font-geist">&lt;iconify-icon icon="solar:…"&gt;</span> (linear, 18–20px). Cards e mockups usam SVG inline de traço 1.5–2 com <span class="text-white font-geist">stroke="currentColor"</span>, herdando a cor do texto do contêiner.</p>
+</div>
+</div>
+
+<p class="mt-14 text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Iconify · conjunto Solar</p>
+<div class="mt-5 rounded-3xl border border-white/[0.08] bg-white/[0.035] p-8 backdrop-blur-xl">
+<div class="flex flex-wrap items-center gap-8 text-slate-200">
+<div class="flex flex-col items-center gap-2"><iconify-icon height="18" icon="solar:arrow-right-linear" width="18"></iconify-icon><p class="text-xs text-slate-500 font-geist">arrow-right-linear · 18</p></div>
+<div class="flex flex-col items-center gap-2"><iconify-icon height="18" icon="solar:bolt-linear" width="18"></iconify-icon><p class="text-xs text-slate-500 font-geist">bolt-linear · 18</p></div>
+<div class="flex flex-col items-center gap-2"><iconify-icon height="20" icon="solar:hamburger-menu-linear" width="20"></iconify-icon><p class="text-xs text-slate-500 font-geist">hamburger-menu-linear · 20</p></div>
+<div class="flex flex-col items-center gap-2 text-orange-300"><iconify-icon height="24" icon="solar:bolt-linear" width="24"></iconify-icon><p class="text-xs text-slate-500 font-geist">herda text-orange-300 · 24</p></div>
+<div class="flex flex-col items-center gap-2 text-emerald-300"><iconify-icon height="32" icon="solar:arrow-right-linear" width="32"></iconify-icon><p class="text-xs text-slate-500 font-geist">herda text-emerald-300 · 32</p></div>
+</div>
+</div>
+
+<p class="mt-14 text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">SVG inline · stroke currentColor</p>
+<div class="mt-5 rounded-3xl border border-white/[0.08] bg-white/[0.035] p-8 backdrop-blur-xl">
+<div class="flex flex-wrap items-center gap-6">
+<span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border border-emerald-300/20 bg-emerald-400/10 text-emerald-200"><svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.82 1c0 2-3 2.25-3 4"></path><path d="M12 17h.01"></path></svg></span>
+<span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border border-orange-300/25 bg-orange-300/15 text-orange-100"><svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3v18h18"></path><path d="m7 15 4-4 4 4 5-6"></path></svg></span>
+<span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border border-emerald-300/20 bg-emerald-400/10 text-emerald-200"><svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path><path d="m9 12 2 2 4-4"></path></svg></span>
+<span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border border-emerald-300/20 bg-emerald-400/10 text-emerald-200"><svg class="h-4.5 w-4.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg></span>
+<span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/5 bg-white/[0.02] text-orange-200 shadow-[inset_0_0_20px_rgba(253,186,116,0.05)]"><svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg></span>
+<span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/5 bg-white/[0.02] shadow-[inset_0_0_20px_rgba(253,186,116,0.05)]"><svg class="text-orange-400" fill="currentColor" height="24" viewbox="0 0 24 24" width="24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg></span>
+<span class="flex h-9 w-9 items-center justify-center rounded-xl border border-emerald-300/20 bg-emerald-400/[0.1] text-emerald-300 shadow-[0_0_15px_rgba(52,211,153,0.15)]"><svg fill="none" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" viewbox="0 0 24 24" width="17" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></span>
+<span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/10 text-emerald-300"><svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5"></path></svg></span>
+<span class="flex h-9 w-9 items-center justify-center rounded-full bg-orange-500 text-white"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></span>
+</div>
+<p class="mt-6 text-xs text-slate-500 font-geist">Tamanhos: h-3.5 (check em lista) · h-4 / h-4.5 (nav e FAQ) · 17px (card flutuante) · 24px (cards de projeto). Contêineres: rounded-full em 20px, rounded-xl em 36px, rounded-2xl em 36–56px.</p>
+</div>
+
+<p class="mt-14 text-[11px] font-semibold uppercase tracking-widest text-emerald-400 font-geist">Marca</p>
+<div class="mt-5 grid gap-6 md:grid-cols-3">
+<div class="rounded-3xl border border-white/[0.08] bg-white/[0.035] p-8 backdrop-blur-xl">
+<a class="group flex items-center gap-3" href="#"><img alt="Eletrotyme" class="h-8 w-auto" src="assets/brand/logo-symbol.png"/><span class="text-base font-semibold text-white tracking-[-0.035em] font-geist">ELETRO<span class="font-normal text-slate-300 font-geist">TYME</span></span></a>
+<p class="mt-5 text-xs text-slate-500 font-geist">Header · símbolo h-8 + wordmark (ELETRO semibold, TYME regular)</p>
+</div>
+<div class="rounded-3xl border border-white/[0.08] bg-white/[0.035] p-8 backdrop-blur-xl">
+<a class="inline-flex items-center gap-3" href="#"><span class="flex h-10 w-10 items-center justify-center rounded-2xl border border-orange-100/10 bg-orange-100/[0.06] text-orange-100"><img alt="" class="h-6 w-auto" src="assets/brand/logo-symbol.png"/></span><span class="text-xl tracking-tight text-white font-jakarta font-medium">ELETRO<span class="font-normal text-slate-300 font-jakarta">TYME</span></span></a>
+<p class="mt-5 text-xs text-slate-500 font-geist">Rodapé · símbolo em caixa 40px + wordmark Jakarta</p>
+</div>
+<div class="rounded-3xl border border-white/[0.08] bg-white/[0.035] p-8 backdrop-blur-xl">
+<img alt="Símbolo Eletrotyme" class="h-20 w-auto" src="assets/brand/logo-symbol.png"/>
+<p class="mt-5 text-xs text-slate-500 font-geist">Símbolo isolado · assets/brand/logo-symbol.png (PNG com transparência)</p>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+
+<!-- footer -->
+<footer class="overflow-hidden border-white/[0.06] sm:px-8 sm:py-16 lg:pl-10 lg:pr-10 lg:pt-20 lg:pb-10 border-t pt-20 pr-10 pb-10 pl-10 relative">
+<div class="pointer-events-none absolute left-1/2 top-0 h-px w-[70%] -translate-x-1/2 bg-gradient-to-r from-transparent via-orange-100/20 to-transparent"></div>
+<div class="pointer-events-none absolute -right-32 top-20 h-80 w-80 rounded-full bg-orange-300/10 blur-3xl"></div>
+<div class="relative mx-auto w-full max-w-[1280px]">
+<div class="flex flex-col justify-between gap-5 text-sm text-slate-500 sm:flex-row sm:items-center">
+<p class="font-geist">© 2026 Eletrotyme · Design system gerado a partir de index.html</p>
+<div class="flex flex-wrap gap-x-4 gap-y-2 font-geist">
+<a class="transition hover:text-slate-300 font-geist" href="index.html">Ver o site</a>
+<a class="transition hover:text-slate-300 font-geist" href="#typography">Tipografia</a>
+<a class="transition hover:text-slate-300 font-geist" href="#components">Componentes</a>
+</div>
+</div>
+</div>
+</footer>
+
+</div>
+
+<!-- js -->
+<!-- scroll-reveal das seções + parallax 3D do mockup do herói -->
+<script src="assets/js/reveal-and-parallax.js"></script>
+<!-- fundo WebGL animado (Three.js) renderizado no #webgl-canvas do herói -->
+<script type="module" src="assets/js/webgl-background.js"></script>
+
+</body>
+</html>

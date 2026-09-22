@@ -142,7 +142,7 @@ function atualizarLinkProposta() {
     "",
     `Resultado: ${$("k1").textContent} (${$("k1-label").textContent})`,
   ].filter(Boolean).join("\n");
-  const wa = `https://wa.me/?text=${encodeURIComponent("Simulação Eletrotyme\n\n" + linhas + "\n\nQuero receber a proposta do meu ponto.")}`;
+  const wa = `https://wa.me/5598991653290?text=${encodeURIComponent("Simulação Eletrotyme\n\n" + linhas + "\n\nQuero receber a proposta do meu ponto.")}`;
   a.href = wa;
 }
 

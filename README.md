@@ -6,7 +6,7 @@ Site institucional da Eletrotyme construído sobre o design de referência `puls
 
 - `index.html` — o site (herói, plataforma, por que agora, como funciona, benefícios, projetos, campanhas, modelos, FAQ, CTA, rodapé).
 - `simulador.html` + `assets/js/simulador.js` — aba de simulação de investimento (parceria, posto pronto, investidor) com as premissas da proposta Posto Natureza.
-- `assets/brand/estacoes/` — imagens da seção "Nossos eletropostos". **Placeholders**: frames do Reels e recortes das artes. Trocar pelas fotos reais e ajustar nomes/endereços dos cards em `index.html` (seção `id="eletropostos"`).
+- `assets/brand/estacoes/` — seção "Nossos eletropostos": e1 e e2 vêm do Instagram @eletrotyme (estação inaugurada no Posto Natureza Cohab; carro recarregando); e3 a e5 ainda são frames do Reels e recorte de arte, trocar por fotos reais quando houver. `hero-recarga.jpg` (herói) também é do Instagram.
 - `design-system.html` — pattern library: herói clonado, tipografia, cores e superfícies, componentes, layout, motion, ícones e marca.
 - `assets/brand/` — símbolo do logo (recortado das artes, PNG transparente), 7 criativos da Semana do Cliente e o Reels do Posto Natureza.
 - `assets/js/webgl-background.js` — fundo Three.js do herói; cores das trilhas em `config.color1..4`.
